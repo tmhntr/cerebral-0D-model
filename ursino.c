@@ -160,7 +160,7 @@ cerebral = fopen(str,"w+"); free(str);
 str = malloc(32*sizeof(char)); sprintf(str,"pressures_%d_%d_%d.dat", atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
 cardiac_output_file = fopen(str,"w+"); free(str);
 
-str = malloc(128*sizeof(char)); sprintf(str,"/home/pm3user/projects_TH/2020_0D-cerebral_TH/inputs/samples/pinkNoise_%05d.dat", atoi(argv[1]));
+str = malloc(128*sizeof(char)); sprintf(str,"samples/pinkNoise_%05d.dat", atoi(argv[1]));
 pinkFile = fopen(str, "r");
 free(str);
 
@@ -173,7 +173,7 @@ for (int i = 0; i < numBeats; i++){
 fclose(pinkFile);
 
 if (atoi(argv[2]) == 1){
-	str = malloc(128*sizeof(char)); sprintf(str,"/home/pm3user/projects_TH/2020_0D-cerebral_TH/inputs/samples/expRand_%05d.dat", atoi(argv[1]));
+	str = malloc(128*sizeof(char)); sprintf(str,"samples/expRand_%05d.dat", atoi(argv[1]));
 	expFile = fopen(str, "r");
 	free(str);
 
