@@ -246,7 +246,7 @@ while(cardiac_iter<numBeats){
 
   // data->p_ursino[11] = (60.0/HR);
 
-  printf("heart rate calculations");
+  // printf("heart rate calculations");
   // Timing Parameters
   if(data->p_ursino[1] >= data->p_ursino[106] + data->RR[0]){
 
