@@ -160,6 +160,7 @@ cerebral = fopen(str,"w+"); free(str);
 str = malloc(32*sizeof(char)); sprintf(str,"pressures_%d_%d_%d.dat", atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
 cardiac_output_file = fopen(str,"w+"); free(str);
 
+printf("Reading noise files...")
 str = malloc(128*sizeof(char)); sprintf(str,"samples/pinkNoise_%05d.dat", atoi(argv[1]));
 pinkFile = fopen(str, "r");
 free(str);
@@ -184,6 +185,8 @@ if (atoi(argv[2]) == 1){
 	fclose(expFile);
 }
 
+printf("Read complete.")
+
 
 // JJ TH Nov 3
 // calculate length of each buffer
@@ -206,6 +209,7 @@ double deltaHR;
 
 // NOUT = (int)(SIMTIME/DELTAT);
 
+
 iout = 0; tout = DELTAT;
 int cardiac_iter = 0;
 double cardiac_output = 0.0; // this is time integral of Qlo (LV output flow) over one heart period. for now, it is p11 as the reflex is switched off 10 Oct 2020.
@@ -219,6 +223,7 @@ double maxFlows[7] 					= {0.0};
 double FlowsToCompare[7] 		= {0.0};
 double minFlows[7] 					= {0.0};
 
+printf("Starting solver loop...")
 // TIME LOOP STARTS HERE
 while(cardiac_iter<numBeats){
 
@@ -241,6 +246,7 @@ while(cardiac_iter<numBeats){
 
   // data->p_ursino[11] = (60.0/HR);
 
+  printf("heart rate calculations")
   // Timing Parameters
   if(data->p_ursino[1] >= data->p_ursino[106] + data->RR[0]){
 
@@ -274,6 +280,7 @@ while(cardiac_iter<numBeats){
   }
   // END OF BAROREFLEX OPERATIONS
   // ***************************************************************************************************
+
 
 	// CEREBRAL AUTOREGULATION
 	// ***************************************************************************************************
