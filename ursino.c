@@ -38,58 +38,58 @@ data 		= (UserData) malloc(sizeof *data); // now it is created. // allocated mem
 /* Create serial vector of length NEQ for I.C. and abstol */
 N_Vector 	y_ursino = N_VNew_Serial(NEQ); // allocated memory to pointer.
 
-Ith(y_ursino, 1)   = 25;    		// % Vic, 	units: L
-Ith(y_ursino, 2)   = 11;    		// % Vis, 	units: L
-Ith(y_ursino, 3)   = 3.25;  		// % Vpl, 	units: L
-Ith(y_ursino, 4)   = 13.7;  		// % Pup, 	units: mmHg
-Ith(y_ursino, 5)   = 8.0;  		// % Pk, 		units: mmHg. This is now 12 variables.
-Ith(y_ursino, 6)   = 8.3;     // % Psp, 	units: mmHg
-Ith(y_ursino, 7)   = 8.3;  		// % Pll, 	units: mmHg
-Ith(y_ursino, 8)   = 6.2;  		// % Pab, 	units: mmHg
-Ith(y_ursino, 9)   = -5;    		// % Pth, 	units: mmHg. // % is pth a variable, or a constant? 5 Sept. 2020.
-Ith(y_ursino, 10)  = 10.0;  		// % Cl, 	units: ml/mmHg
-Ith(y_ursino, 11)  = 20.0;  		// % Cr, 		units: ml/mmHg
-Ith(y_ursino, 12)  = 12.78;  		// % Pl, left ventricular pressure, units: mmHg
-Ith(y_ursino, 13)  = 80.0;  			// % Pa, aortic pressure, units: mmHg.
-Ith(y_ursino, 14)  = 5.0;     	// % Psup, 		units: mmHg
-Ith(y_ursino, 15)  = 5.0;     	// % Pinf, 		units: mmHg
-Ith(y_ursino, 16)  = 5.60;   		// % Pr, 			units: mmHg. right ventricle pressure.
-Ith(y_ursino, 17)  = 25.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
-Ith(y_ursino, 18)  = 10.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
-Ith(y_ursino, 19)  = 100.0;   		// % Muic, 		units: mmol
-Ith(y_ursino, 20)  = 250.0; 		// % Mnaic, 	units: mmol
-Ith(y_ursino, 21)  = 3535.0; 		// % Mkic, 		units: mmol
-Ith(y_ursino, 22)  = 84.0;  		// % Mclic, 	units: mmol
-Ith(y_ursino, 23)  = 10.0;  		// % MHco3ic, units: mmol
-Ith(y_ursino, 24)  = 100.0; 		// % Mhic,	 	units: mmol
-Ith(y_ursino, 25)  = 0.0;   		// % Mpic, 		units: mmol
-Ith(y_ursino, 26)  = 55.0;  		// % Muex, 		units: mmol
-Ith(y_ursino, 27)  = 2130.0; 		// % Mnaex, 	units: mmol
-Ith(y_ursino, 28)  = 75.0;  		// % Mkex, 		units: mmol
-Ith(y_ursino, 29)  = 1470.0; 		// % Mclex, 	units: mmol
-Ith(y_ursino, 30)  = 100.0; 		// % Mhco3ex, units: mmol
-Ith(y_ursino, 31)  = 100.0; 		// % Mhex, 		units: mmol
-Ith(y_ursino, 32)  = 0.0;   		// % Mpex, 		units: mmol
+// Ith(y_ursino, 1)   = 25;    		// % Vic, 	units: L
+// Ith(y_ursino, 2)   = 11;    		// % Vis, 	units: L
+// Ith(y_ursino, 3)   = 3.25;  		// % Vpl, 	units: L
+Ith(y_ursino, 0 + 1)   = 13.7;  		// % Pup, 	units: mmHg
+Ith(y_ursino, 1 + 1)   = 8.0;  		// % Pk, 		units: mmHg. This is now 12 variables.
+Ith(y_ursino, 2 + 1)   = 8.3;     // % Psp, 	units: mmHg
+Ith(y_ursino, 3 + 1)   = 8.3;  		// % Pll, 	units: mmHg
+Ith(y_ursino, 4 + 1)   = 6.2;  		// % Pab, 	units: mmHg
+Ith(y_ursino, 5 + 1)   = -5;    		// % Pth, 	units: mmHg. // % is pth a variable, or a constant? 5 Sept. 2020.
+Ith(y_ursino, 6 + 1)  = 10.0;  		// % Cl, 	units: ml/mmHg
+Ith(y_ursino, 7 + 1)  = 20.0;  		// % Cr, 		units: ml/mmHg
+Ith(y_ursino, 8 + 1)  = 12.78;  		// % Pl, left ventricular pressure, units: mmHg
+Ith(y_ursino, 9 + 1)  = 80.0;  			// % Pa, aortic pressure, units: mmHg.
+Ith(y_ursino, 10 + 1)  = 5.0;     	// % Psup, 		units: mmHg
+Ith(y_ursino, 11 + 1)  = 5.0;     	// % Pinf, 		units: mmHg
+Ith(y_ursino, 12 + 1)  = 5.60;   		// % Pr, 			units: mmHg. right ventricle pressure.
+Ith(y_ursino, 13 + 1)  = 25.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
+Ith(y_ursino, 14 + 1)  = 10.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
+// Ith(y_ursino, 19)  = 100.0;   		// % Muic, 		units: mmol
+// Ith(y_ursino, 20)  = 250.0; 		// % Mnaic, 	units: mmol
+// Ith(y_ursino, 21)  = 3535.0; 		// % Mkic, 		units: mmol
+// Ith(y_ursino, 22)  = 84.0;  		// % Mclic, 	units: mmol
+// Ith(y_ursino, 23)  = 10.0;  		// % MHco3ic, units: mmol
+// Ith(y_ursino, 24)  = 100.0; 		// % Mhic,	 	units: mmol
+// Ith(y_ursino, 25)  = 0.0;   		// % Mpic, 		units: mmol
+// Ith(y_ursino, 26)  = 55.0;  		// % Muex, 		units: mmol
+// Ith(y_ursino, 27)  = 2130.0; 		// % Mnaex, 	units: mmol
+// Ith(y_ursino, 28)  = 75.0;  		// % Mkex, 		units: mmol
+// Ith(y_ursino, 29)  = 1470.0; 		// % Mclex, 	units: mmol
+// Ith(y_ursino, 30)  = 100.0; 		// % Mhco3ex, units: mmol
+// Ith(y_ursino, 31)  = 100.0; 		// % Mhex, 		units: mmol
+// Ith(y_ursino, 32)  = 0.0;   		// % Mpex, 		units: mmol
 
-// new
-Ith(y_ursino, 33)  = 1.0; 			// Cla variable, left atrial elastance.
-Ith(y_ursino, 34)  = 2.0;   		//  Cra variable, right atrial elastance.
+// l/r atria
+Ith(y_ursino, 15 + 1)  = 1.0; 			// Cla variable, left atrial elastance.
+Ith(y_ursino, 16 + 1)  = 2.0;   		//  Cra variable, right atrial elastance.
 
-Ith(y_ursino, 35)  = 8.0;   		//  left atrial pressure initial condition, mmHg.
-Ith(y_ursino, 36)  = 1.0;   		//  right atrial pressure initial condition, mmHg.
+Ith(y_ursino, 17 + 1)  = 8.0;   		//  left atrial pressure initial condition, mmHg.
+Ith(y_ursino, 18 + 1)  = 1.0;   		//  right atrial pressure initial condition, mmHg.
 
 
 /**** detailed kidney not currently in use ********/
 // all kidney pressures, including inlet right and left pressures.
-for(i=37;i<=48;i++) Ith(y_ursino, i) = 8.0;
-Ith(y_ursino, 49)  = 70.0;   //  Right Kidnet Inlet Pressure, mmHg.
-Ith(y_ursino, 50)  = 65.0;   //  Left Kidnet Inlet Pressure, mmHg.
+// for(i=37;i<=48;i++) Ith(y_ursino, i) = 8.0;
+// Ith(y_ursino, 49)  = 70.0;   //  Right Kidnet Inlet Pressure, mmHg.
+// Ith(y_ursino, 50)  = 65.0;   //  Left Kidnet Inlet Pressure, mmHg.
 /********************************************************/
 
-
-Ith(y_ursino, 51)  = 80.0;   //  Brachiocephalic Aortic Pressure
-Ith(y_ursino, 52)  = 80.0;   //  Thoracic Aortic Pressure
-Ith(y_ursino, 53)  = 92.0;   //  Abdominal Aortic Pressure
+//
+// Ith(y_ursino, 51)  = 80.0;   //  Brachiocephalic Aortic Pressure
+// Ith(y_ursino, 52)  = 80.0;   //  Thoracic Aortic Pressure
+// Ith(y_ursino, 53)  = 92.0;   //  Abdominal Aortic Pressure
 
 //*******************************************************************************************************************************
 // Cerebral Pressures
