@@ -52,7 +52,7 @@ data->p_ursino[105]   = loc_t; // passed back to main to calculate cardiac outpu
 // double ckd       = data->p_ursino[8]; // % potassium concentration in dialysate. placeholder. p207 of Ursino 2000.
 // double ccld      = data->p_ursino[9]; // % chlorine concentration in dialysate. placeholder. p207 of Ursino 2000.
 // double chco3d    = data->p_ursino[10]; // % carbonate concentration in dialysate. placeholder. p207 of Ursino 2000.
-// double respRate  = data->p_ursino[12]; // % respiratory rate; units: (breaths/s)
+double respRate  = data->p_ursino[12]; // % respiratory rate; units: (breaths/s)
 // // %
 // // % from ursino 2008
 // double cuinf     = data->p_ursino[13]; // % , units: mmol/L
