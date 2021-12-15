@@ -40,7 +40,7 @@ double k4 =  data->p_ursino[117+19];
 double k5 =  data->p_ursino[118+19];
 
 // P_aff
-dY[83] = (-Y[83] + G_aff * (MAP))/tau_aff;
+dY[49] = (-Y[49] + G_aff * (MAP))/tau_aff;
 
 
 //  Central Compartment
@@ -56,9 +56,9 @@ else if ((Pbco2 > 40.0) && (Pbo2 >= 104.0))
 double P_demand = 90.0 + deltaMAP/100.0; //  Desrcibed in fig. 2 and on page 793
 
 // for P_error
-dY[84] = (-Y[84] + 1.0 * (P_demand))/tau_c; // second term in the P_error eq.
+dY[50] = (-Y[50] + 1.0 * (P_demand))/tau_c; // second term in the P_error eq.
 
-double P_error = Y[83] - Y[84] ;//  eq. 13
+double P_error = Y[49] - Y[50] ;//  eq. 13
 
 
 //  Efferent Compartment:
@@ -122,7 +122,7 @@ double G_s = 1.0 * (1.0 - exp(-k_s2 * data->SNA)); // eq. 21 EDIT gain value cha
 
 
 // deltaHR_s
-dY[85] = (-Y[85] + G_s * (data->SNA_buffer[(int)(T_s/DELTAT)-1]))/tau_s;
+dY[51] = (-Y[51] + G_s * (data->SNA_buffer[(int)(T_s/DELTAT)-1]))/tau_s;
 
 double tau_v;
 if (data->PNA > data->PNA_buffer[0]){
@@ -135,7 +135,7 @@ double k_v2 = G_v0 / k_v0; // eq. 27
 double G_v = 1.0 * (1.0 - exp(-k_v2 * data->PNA)); // eq. 26, EDIT gain value changed to 1 for more accurate description of HR used in
 
 // deltaHR_v
-dY[86] = (-Y[86] + G_v * (data->PNA_buffer[(int)(T_v/DELTAT)-1]))/tau_v;
+dY[52] = (-Y[52] + G_v * (data->PNA_buffer[(int)(T_v/DELTAT)-1]))/tau_v;
 
 // // SNA Effector Sites
 // again the paper uses inconsistent notation
@@ -147,16 +147,16 @@ double T_sigma_R = T_e_R;
 // The following are all described by eq. 29
 // Left ventricular contractility
 // sigma_lv
-dY[87] = (-Y[87] + G_eff_lv * (data->SNA_buffer[(int)(T_sigma_lv/DELTAT)-1]))/tau_sigma_lv;
+dY[53] = (-Y[53] + G_eff_lv * (data->SNA_buffer[(int)(T_sigma_lv/DELTAT)-1]))/tau_sigma_lv;
 
 // Right ventricular contractility
 // sigma_rv
-dY[88] = (-Y[88] + G_eff_rv * (data->SNA_buffer[(int)(T_sigma_rv/DELTAT)-1]))/tau_sigma_rv;
+dY[54] = (-Y[54] + G_eff_rv * (data->SNA_buffer[(int)(T_sigma_rv/DELTAT)-1]))/tau_sigma_rv;
 
 // Venous tone
 // sigma_V
-dY[89] = (-Y[89] + G_eff_V * (data->SNA_buffer[(int)(T_sigma_V/DELTAT)-1]))/tau_sigma_V;
+dY[55] = (-Y[55] + G_eff_V * (data->SNA_buffer[(int)(T_sigma_V/DELTAT)-1]))/tau_sigma_V;
 
 // Arterial resistance
 // sigma_R
-dY[90] = (-Y[90] + G_eff_R * (data->SNA_buffer[(int)(T_sigma_R/DELTAT)-1]))/tau_sigma_R;
+dY[56] = (-Y[56] + G_eff_R * (data->SNA_buffer[(int)(T_sigma_R/DELTAT)-1]))/tau_sigma_R;

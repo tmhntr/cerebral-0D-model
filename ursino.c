@@ -94,18 +94,18 @@ Ith(y_ursino, 18 + 1)  = 1.0;   		//  right atrial pressure initial condition, m
 //*******************************************************************************************************************************
 // Cerebral Pressures
 // for(i=54;i<=65;i++) Ith(y_ursino, i) = 5.0;
-Ith(y_ursino, 54)  = 9.5; // eq 1: dP_ic
-Ith(y_ursino, 55)  = 25.0; // P_c
-Ith(y_ursino, 56)  = 14.0; // eq. 11 : dP_v
-Ith(y_ursino, 57)  = 58.5; // dP_djs
-Ith(y_ursino, 58)  = 58.5; // dP_djs
-Ith(y_ursino, 59)  = 58.5; // dP_djs
-Ith(y_ursino, 60)  = 58.5; // dP_djs
-Ith(y_ursino, 61)  = 58.5; // dP_djs
-Ith(y_ursino, 62)  = 58.5; // dP_djs
-Ith(y_ursino, 63)  = 92.5; // P_ICAl
-Ith(y_ursino, 64)  = 92.5; // P_ICAr
-Ith(y_ursino, 65)  = 92.5; // P_BA
+Ith(y_ursino, 19 + 1)  = 9.5; // eq 1: dP_ic
+Ith(y_ursino, 20 + 1)  = 25.0; // P_c
+Ith(y_ursino, 21 + 1)  = 14.0; // eq. 11 : dP_v
+Ith(y_ursino, 22 + 1)  = 58.5; // dP_djs
+Ith(y_ursino, 23 + 1)  = 58.5; // dP_djs
+Ith(y_ursino, 24 + 1)  = 58.5; // dP_djs
+Ith(y_ursino, 25 + 1)  = 58.5; // dP_djs
+Ith(y_ursino, 26 + 1)  = 58.5; // dP_djs
+Ith(y_ursino, 27 + 1)  = 58.5; // dP_djs
+Ith(y_ursino, 28 + 1)  = 92.5; // P_ICAl
+Ith(y_ursino, 29 + 1)  = 92.5; // P_ICAr
+Ith(y_ursino, 30 + 1)  = 92.5; // P_BA
 //
 // Ith(y_ursino, 66)  = 10.1 * 0.30; // V_djs
 // Ith(y_ursino, 67)  = 10.1 * 0.12; // V_djs
@@ -115,22 +115,22 @@ Ith(y_ursino, 65)  = 92.5; // P_BA
 // Ith(y_ursino, 71)  = 10.1 * 0.08; // V_djs
 // Ith(y_ursino, 72)  = 4.5; // V_vi
 
-for(i=66;i<=77;i++) {
-	Ith(y_ursino, i) = 0.0; // X_aut_djs
+for(i=31;i<=42;i++) {
+	Ith(y_ursino, i + 1) = 0.0; // X_aut_djs + X_
 }
 
-for(i=78;i<=83;i++) {
-	Ith(y_ursino, i) = 0.004; // C_djs
+for(i=43;i<=48;i++) {
+	Ith(y_ursino, i + 1) = 0.004; // C_djs
 }
 
-Ith(y_ursino, 84)  = 90.0; // P_aff
-Ith(y_ursino, 85)  = 90.0; // X0 for P_error
-Ith(y_ursino, 86)  = 0.0; // deltaHR_s
-Ith(y_ursino, 87)  = 0.0; // deltaHR_v
-Ith(y_ursino, 88)  = 1.0; // sigma_lv
-Ith(y_ursino, 89)  = 1.0; // sigma_rv
-Ith(y_ursino, 90)  = 0.0; // sigma_V
-Ith(y_ursino, 91)  = 1.0; // sigma_R
+Ith(y_ursino, 49 + 1)  = 90.0; // P_aff
+Ith(y_ursino, 50 + 1)  = 90.0; // X0 for P_error
+Ith(y_ursino, 51 + 1)  = 0.0; // deltaHR_s
+Ith(y_ursino, 52 + 1)  = 0.0; // deltaHR_v
+Ith(y_ursino, 53 + 1)  = 1.0; // sigma_lv
+Ith(y_ursino, 54 + 1)  = 1.0; // sigma_rv
+Ith(y_ursino, 55 + 1)  = 0.0; // sigma_V
+Ith(y_ursino, 56 + 1)  = 1.0; // sigma_R
 
 //*******************************************************************************************************************************
 
