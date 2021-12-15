@@ -46,7 +46,7 @@ Ith(y_ursino, 1 + 1)   = 8.0;  		// % Pk, 		units: mmHg. This is now 12 variable
 Ith(y_ursino, 2 + 1)   = 8.3;     // % Psp, 	units: mmHg
 Ith(y_ursino, 3 + 1)   = 8.3;  		// % Pll, 	units: mmHg
 Ith(y_ursino, 4 + 1)   = 6.2;  		// % Pab, 	units: mmHg
-Ith(y_ursino, 5 + 1)   = -5;    		// % Pth, 	units: mmHg. // % is pth a variable, or a constant? 5 Sept. 2020.
+Ith(y_ursino, 5 + 1)   = -5.0;    		// % Pth, 	units: mmHg. // % is pth a variable, or a constant? 5 Sept. 2020.
 Ith(y_ursino, 6 + 1)  = 10.0;  		// % Cl, 	units: ml/mmHg
 Ith(y_ursino, 7 + 1)  = 20.0;  		// % Cr, 		units: ml/mmHg
 Ith(y_ursino, 8 + 1)  = 12.78;  		// % Pl, left ventricular pressure, units: mmHg
@@ -254,7 +254,7 @@ while(cardiac_iter<numBeats){
 		data->RR[2] 						= data->RR[1];
 		data->RR[1] 						= data->RR[0];
 
-		deltaHR = (19.64*Ith(y_ursino, 86)) - (17.95*Ith(y_ursino, 87)) - (1.225*pow(Ith(y_ursino, 86),2)) + (1.357*pow(Ith(y_ursino, 87),2)) - (1.523*Ith(y_ursino, 86)*Ith(y_ursino, 87));
+		deltaHR = (19.64*Ith(y_ursino, 51 + 1)) - (17.95*Ith(y_ursino, 52 + 1)) - (1.225*pow(Ith(y_ursino, 51 + 1),2)) + (1.357*pow(Ith(y_ursino, 52 + 1),2)) - (1.523*Ith(y_ursino, 51 + 1)*Ith(y_ursino, 52 + 1));
 		data->RR[0] = 60.0/(data->p_ursino[148+19]/* + deltaHR*/);
 
 		if (atoi(argv[2]) < 1){
