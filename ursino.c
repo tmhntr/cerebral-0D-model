@@ -160,7 +160,9 @@ cerebral = fopen(str,"w+"); free(str);
 str = malloc(32*sizeof(char)); sprintf(str,"pressures_%d_%d_%d.dat", atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
 cardiac_output_file = fopen(str,"w+"); free(str);
 
-printf("Reading noise files...");
+bool headersPrinted = false;
+
+// printf("Reading noise files...");
 str = malloc(128*sizeof(char)); sprintf(str,"samples/pinkNoise_%05d.dat", atoi(argv[1]));
 pinkFile = fopen(str, "r");
 free(str);
@@ -185,7 +187,7 @@ if (atoi(argv[2]) == 1){
 	fclose(expFile);
 }
 
-printf("Read complete.");
+// printf("Read complete.");
 
 
 // JJ TH Nov 3
@@ -223,7 +225,7 @@ double maxFlows[7] 					= {0.0};
 double FlowsToCompare[7] 		= {0.0};
 double minFlows[7] 					= {0.0};
 
-printf("Starting solver loop...");
+// printf("Starting solver loop...");
 // TIME LOOP STARTS HERE
 while(cardiac_iter<numBeats){
 
