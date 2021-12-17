@@ -121,8 +121,8 @@ double respRate  = data->p_ursino[12]; // % respiratory rate; units: (breaths/s)
 // %
 // JJ TH NOV 3
 #include "baroreflex.c"
-double sigma_lv     				= 1.0 // Y[53];///1.5; //data->p_ursino[113]; // % units: mmHg/ml
-double sigma_rv     				= 1.0 // Y[54];///0.935; //data->p_ursino[114]; //  units: mmHg/ml
+double sigma_lv     				= Y[53];///1.5; //data->p_ursino[113]; // % units: mmHg/ml
+double sigma_rv     				= Y[54];///0.935; //data->p_ursino[114]; //  units: mmHg/ml
 // double delta_sigma_V 				= data->p_ursino[115]; //  units: ml
 double V_gain 							= 0.0; //dY[89]/2785.0; //delta_sigma_V / 2785; //  This is the change in venous volume / total venous volume
 double sigma_R 							= 1.0; //Y[90]; //data->p_ursino[116]; //  units: mmHg/(ml/s)
