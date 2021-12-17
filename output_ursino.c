@@ -51,9 +51,9 @@
 	21) P_B
 	*/
 // if ((int)(tout*1000) % 10 == 0){
-if (headersPrinted == false){
+if (headersPrinted == 0){
   fprintf(cerebral, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "time", "q_ml", "q_al", "q_pl", "q_mr", "q_ar", "q_pr");
-  headersPrinted = true;
+  headersPrinted = 1;
 }
 	fprintf(cerebral, "%f\t", tout);
 

@@ -160,7 +160,7 @@ cerebral = fopen(str,"w+"); free(str);
 str = malloc(32*sizeof(char)); sprintf(str,"pressures_%d_%d_%d.dat", atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
 cardiac_output_file = fopen(str,"w+"); free(str);
 
-bool headersPrinted = false;
+int headersPrinted = 0;
 
 // printf("Reading noise files...");
 str = malloc(128*sizeof(char)); sprintf(str,"samples/pinkNoise_%05d.dat", atoi(argv[1]));
