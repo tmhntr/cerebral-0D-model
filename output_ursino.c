@@ -52,10 +52,14 @@
 	*/
 // if ((int)(tout*1000) % 10 == 0){
 if (headersPrinted == 0){
-  fprintf(cerebral, "%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", "time", "q_ml", "q_al", "q_pl", "q_mr", "q_ar", "q_pr");
+  fprintf(cerebral, "%s\t", "time");
+  fprintf(cerebral, "%s\t", "P_a");
+  fprintf(cerebral, "%s\t%s\t%s\t%s\t%s\t%s\n", "q_ml", "q_al", "q_pl", "q_mr", "q_ar", "q_pr");
+  fprintf(cerebral, "\n");
   headersPrinted = 1;
 }
 	fprintf(cerebral, "%f\t", tout);
+  fprintf(cerebral, "%s\n", Ith(y_ursino, 10));
 
 	fprintf(cerebral, "%f\t%f\t%f\t%f\t%f\t%f\t",data->q_ml, data->q_al, data->q_pl, data->q_mr, data->q_ar, data->q_pr);
 	// fprintf(cerebral, "%f\t",data->q_ICAl);
