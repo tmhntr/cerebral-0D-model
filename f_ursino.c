@@ -121,8 +121,8 @@ double respRate  = data->p_ursino[12]; // % respiratory rate; units: (breaths/s)
 // %
 // JJ TH NOV 3
 #include "baroreflex.c"
-double sigma_lv     				= Y[53];///1.5; //data->p_ursino[113]; // % units: mmHg/ml
-double sigma_rv     				= Y[54];///0.935; //data->p_ursino[114]; //  units: mmHg/ml
+double sigma_lv     				= 1.0 // Y[53];///1.5; //data->p_ursino[113]; // % units: mmHg/ml
+double sigma_rv     				= 1.0 // Y[54];///0.935; //data->p_ursino[114]; //  units: mmHg/ml
 // double delta_sigma_V 				= data->p_ursino[115]; //  units: ml
 double V_gain 							= 0.0; //dY[89]/2785.0; //delta_sigma_V / 2785; //  This is the change in venous volume / total venous volume
 double sigma_R 							= 1.0; //Y[90]; //data->p_ursino[116]; //  units: mmHg/(ml/s)
@@ -235,7 +235,7 @@ Rav is the atrio-ventricular value resistance. */
 // Y[18] is P_ra , Y[12] is P_rv
 if(Y[18] > Y[12]){
   data->Qrao = (Y[18] - Y[12])/data->p_R[4];
-}	else{
+}	else {
   data->Qrao = 0;
 }
 
@@ -296,7 +296,7 @@ Qupi is the inlet flow through the upper body,
 Qupo is the outlet flow through the upper body,
 Rup1 & Rup2, are the resistances of each. */
 // Y[9] is P_a , Y[0] is P_up
-data->Qupi	= (Y[9] - Y[0])	/(data->p_R[13]* sigma_R)	;
+data->Qupi	= (Y[9] - Y[0])	/(data->p_R[13] * sigma_R)	;
 
 // Y[0] is P_up, Y[10] is P_sup
 if (Y[0] > Y[10]){
@@ -473,21 +473,21 @@ dY[5]     = (2*M_PI*respRate)*cos(2*M_PI*respRate*data->p_ursino[1]); // % This 
 /***************************** ODEs for Compliances **************************/
 dY[6] = (Clv - Y[9])/DELTAT;    // Left Ventricle Compliance
 dY[7] = (Crv - Y[10])/DELTAT;  // Right Ventricle Compliance
-dY[15] = (Cla - Y[32])/DELTAT;  // Left Atrial Compliance
-dY[16] = (Cra - Y[33])/DELTAT;  // Right Atrial Compliance
+dY[15] = (Cla - Y[15])/DELTAT;  // Left Atrial Compliance
+dY[16] = (Cra - Y[16])/DELTAT;  // Right Atrial Compliance
 
 /****************************************************************************************************************************/
 // % Y[11] is LV pressure.
-dY[8]    = (1.0 / Y[9])  * ((Y[8] - Y[11]) * dY[9] + data->Qlao - data->Qlo ) + dY[8];
+dY[8]    = (1.0 / Y[9])  * ((Y[5] - Y[11]) * dY[9] + data->Qlao - data->Qlo ) + dY[5];
 
 // Y34 is left atrial pressure.
-dY[17]    = (1.0 / Y[32]) * ((Y[8] - Y[34]) * dY[32] + data->Qli - data->Qlao) + dY[8];
+dY[17]    = (1.0 / Y[15]) * ((Y[5] - Y[17]) * dY[15] + data->Qli - data->Qlao) + dY[5];
 
 // Y[15] is Right Ventricle Pressure
-dY[12]    = (1.0 / Y[10]) * ((Y[8] - Y[15]) * dY[10] + data->Qrao - data->Qro) + dY[8];
+dY[12]    = (1.0 / Y[10]) * ((Y[5] - Y[15]) * dY[10] + data->Qrao - data->Qro) + dY[5];
 
 // Y[35] is right atrial pressure
-dY[18]    = (1.0 / Y[33]) * ((Y[8] - Y[35]) * dY[33] + data->Qinf + data->Qsup - data->Qrao) + dY[8];
+dY[18]    = (1.0 / Y[16]) * ((Y[5] - Y[18]) * dY[16] + data->Qinf + data->Qsup - data->Qrao) + dY[5];
 
 // % Y[12] is Pa, ascending aorta pressure.
 // if(data->argv[3] == 1.0){
@@ -496,18 +496,18 @@ dY[18]    = (1.0 / Y[33]) * ((Y[8] - Y[35]) * dY[33] + data->Qinf + data->Qsup -
 //   dY[12]    = (1.0/data->p_C[6]) * (data->Qlo - (data->Q_ao_bra + data->Q_ao_tho)) + 0.333*dY[8];
 // }
 // Y[12] is systemic arterial pressure (aorta)
-dY[9]    = (1.0/data->p_C[6]) * (data->Qlo - (data->Qupi + data->Qsp1 + data->Qk1 + data->Qll1 + Q_Ceri)) + 0.333*dY[8];
+dY[9]    = (1.0/data->p_C[6]) * (data->Qlo - (data->Qupi + data->Qsp1 + data->Qk1 + data->Qll1 + Q_Ceri)) + 0.333*dY[5];
 
 // % Y[13] is Psup, eq. 27 appendix 2.
-dY[10]    = ((data->Qupo + Q_Cero) - data->Qsup) / data->p_C[1] + dY[8];
+dY[10]    = ((data->Qupo + Q_Cero) - data->Qsup) / data->p_C[1] + dY[5];
 // % Y[14] is Pinf, eq. 28 appendix 2.
-dY[11]    = (data->Qab - data->Qinf) / data->p_C[3] + dY[8];
+dY[11]    = (data->Qab - data->Qinf) / data->p_C[3] + dY[5];
 
 // % Y[16] is Ppa. Pulmonary circulation inlet pressure.
-dY[13]    = (data->Qro - data->Qpa) / data->p_C[4] + dY[8]; // % Y[17-1] is Ppa, eq. 30 appendix 2.
+dY[13]    = (data->Qro - data->Qpa) / data->p_C[4] + dY[5]; // % Y[17-1] is Ppa, eq. 30 appendix 2.
 
 // % Y[17] is Ppv. Left ventricle inlet pressure.
-dY[14]    = (data->Qpa - data->Qli) / data->p_C[5] + dY[8]; // % Y[18-1] is Ppv, eq. 31 appendix 2.
+dY[14]    = (data->Qpa - data->Qli) / data->p_C[5] + dY[5]; // % Y[18-1] is Ppv, eq. 31 appendix 2.
 
 // //  Brachiocephalic Aortic Pressure
 // dY[50] = (data->Q_ao_bra - (data->Qupi + Q_Ceri))/data->p_C[7] + dY[8]; //  Brachiocephalic Aortic Pressure
