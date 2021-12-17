@@ -54,7 +54,7 @@
 if (headersPrinted == 0){
   fprintf(cerebral, "%s\t", "time");
   fprintf(cerebral, "%s\t", "P_a");
-  fprintf(cerebral, "%s\t%s\t%s\t%s\t%s\t%s\n", "q_ml", "q_al", "q_pl", "q_mr", "q_ar", "q_pr");
+  fprintf(cerebral, "%s\t%s\t%s\t%s\t%s\t%s", "q_ml", "q_al", "q_pl", "q_mr", "q_ar", "q_pr");
   fprintf(cerebral, "\n");
   headersPrinted = 1;
 }
