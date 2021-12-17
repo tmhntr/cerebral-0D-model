@@ -59,7 +59,7 @@ if (headersPrinted == 0){
   headersPrinted = 1;
 }
 	fprintf(cerebral, "%f\t", tout);
-  fprintf(cerebral, "%s\n", Ith(y_ursino, 10));
+  fprintf(cerebral, "%f\n", Ith(y_ursino, 10));
 
 	fprintf(cerebral, "%f\t%f\t%f\t%f\t%f\t%f\t",data->q_ml, data->q_al, data->q_pl, data->q_mr, data->q_ar, data->q_pr);
 	// fprintf(cerebral, "%f\t",data->q_ICAl);
