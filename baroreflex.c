@@ -11,7 +11,7 @@
 // This model contains 8 ODEs
 
 
-double MAP =  Y[12];                        // this is the aortic pressure, carotid pressures may be taken instead.
+double MAP =  Y[9];                        // this is the aortic pressure, carotid pressures may be taken instead.
 double Pbco2 =  data->p_ursino[90+19];      // this is the blood CO2 concentration
 double Pbo2 =  data->p_ursino[91+19];       // this is the blood O2 concentration
 

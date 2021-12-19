@@ -124,17 +124,17 @@ double respRate  = data->p_ursino[12]; // % respiratory rate; units: (breaths/s)
 double sigma_lv     				= Y[53];///1.5; //data->p_ursino[113]; // % units: mmHg/ml
 double sigma_rv     				= Y[54];///0.935; //data->p_ursino[114]; //  units: mmHg/ml
 // double delta_sigma_V 				= data->p_ursino[115]; //  units: ml
-double V_gain 							= 0.0; //dY[89]/2785.0; //delta_sigma_V / 2785; //  This is the change in venous volume / total venous volume
+// double V_gain 							= 0.0; //dY[89]/2785.0; //delta_sigma_V / 2785; //  This is the change in venous volume / total venous volume
 double sigma_R 							= 1.0; //Y[90]; //data->p_ursino[116]; //  units: mmHg/(ml/s)
 
 // Zero Pressure Filling Volumes ZPFV
-double ZPFV_up  = data->p_ursino[117]; //  : zero-pressure filling volume upper body veins; units: ml;
-double ZPFV_kid = data->p_ursino[118]; //  ;
-double ZPFV_sp  = data->p_ursino[119]; //  ;
-double ZPFV_ll  = data->p_ursino[120]; //  ZPFV_ll
-double ZPFV_ab  = data->p_ursino[121]; //
-double ZPFV_inf = data->p_ursino[122]; //
-double ZPFV_sup = data->p_ursino[123]; //
+// double ZPFV_up  = data->p_ursino[117]; //  : zero-pressure filling volume upper body veins; units: ml;
+// double ZPFV_kid = data->p_ursino[118]; //  ;
+// double ZPFV_sp  = data->p_ursino[119]; //  ;
+// double ZPFV_ll  = data->p_ursino[120]; //  ZPFV_ll
+// double ZPFV_ab  = data->p_ursino[121]; //
+// double ZPFV_inf = data->p_ursino[122]; //
+// double ZPFV_sup = data->p_ursino[123]; //
 
 /*****Equations.************************************************************************************************************/
 // %
@@ -468,11 +468,11 @@ dY[3]     = (data->Qll1 - data->Qll2) / data->p_C[26];
 dY[4]     = (data->Qk2 + data->Qsp2 + data->Qll2 - data->Qab) / data->p_C[2] ;
 
 // % Y[8] is Pth: thoracic pressure. aka Y8 is Pbias. p1241, Heldt 2002 paper.
-dY[5]     = (2*M_PI*respRate)*cos(2*M_PI*respRate*data->p_ursino[1]); // % This varies with respiratory variation, mean value taken from Heldt thesis 2.3 p.47 resprate units are (breath/s).
+dY[5]     = (2.0*M_PI*respRate)*cos(2.0*M_PI*respRate*data->p_ursino[1]); // % This varies with respiratory variation, mean value taken from Heldt thesis 2.3 p.47 resprate units are (breath/s).
 
 /***************************** ODEs for Compliances **************************/
-dY[6] = (Clv - Y[9])/DELTAT;    // Left Ventricle Compliance
-dY[7] = (Crv - Y[10])/DELTAT;  // Right Ventricle Compliance
+dY[6] = (Clv - Y[6])/DELTAT;    // Left Ventricle Compliance
+dY[7] = (Crv - Y[7])/DELTAT;  // Right Ventricle Compliance
 dY[15] = (Cla - Y[15])/DELTAT;  // Left Atrial Compliance
 dY[16] = (Cra - Y[16])/DELTAT;  // Right Atrial Compliance
 
