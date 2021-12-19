@@ -51,17 +51,34 @@
 	21) P_B
 	*/
 // if ((int)(tout*1000) % 10 == 0){
-if (headersPrinted == 0){
-  fprintf(cerebral, "%s\t", "time");
-  fprintf(cerebral, "%s\t", "P_a");
-  fprintf(cerebral, "%s\t%s\t%s\t%s\t%s\t%s", "q_ml", "q_al", "q_pl", "q_mr", "q_ar", "q_pr");
-  fprintf(cerebral, "\n");
-  headersPrinted = 1;
-}
-	fprintf(cerebral, "%f\t", tout);
-  fprintf(cerebral, "%f\t", Ith(y_ursino, 10));
 
-	fprintf(cerebral, "%f\t%f\t%f\t%f\t%f\t%f\t",data->q_ml, data->q_al, data->q_pl, data->q_mr, data->q_ar, data->q_pr);
+	fprintf(cerebral, "%f", tout);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "time");
+
+  fprintf(cerebral, "\t%f", Ith(y_ursino, 10));
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "P_a");
+
+	fprintf(cerebral, "\t%f", data->q_ml);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_ml");
+
+  fprintf(cerebral, "\t%f", data->q_al);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_al");
+
+  fprintf(cerebral, "\t%f", data->q_pl);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_pl");
+
+  fprintf(cerebral, "\t%f", data->q_mr);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_mr");
+
+  fprintf(cerebral, "\t%f", data->q_ar);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_ar");
+
+  fprintf(cerebral, "\t%f", data->q_pr);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_pr");
+
+  fprintf(cerebral,"\n");
+  headersPrinted = 1;
+
 	// fprintf(cerebral, "%f\t",data->q_ICAl);
 	// fprintf(cerebral, "%f\t",data->temp); // currently P_PCAl
 	// fprintf(cerebral, "%f\t",Ith(y_ursino, 55));
@@ -78,6 +95,5 @@ if (headersPrinted == 0){
 	// fprintf(cerebral, "%f\t",data->q_PCoAl);
 	// fprintf(cerebral, "%f\t",data->q_PCoAr);
 
-	fprintf(cerebral,"\n");
 // }
 // }
