@@ -333,6 +333,12 @@ while(cardiac_iter<numBeats){
   fprintf(stateFile, "\t%f", deltaHR);
   if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "deltaHR");
 
+  fprintf(stateFile, "\t%f", Ith(y_ursino, 49 + 1));
+  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_aff");
+
+  fprintf(stateFile, "\t%f", Ith(y_ursino, 50 + 1));
+  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_demand");
+
   fprintf(stateFile,"\n");
   if (headersPrinted == 0) headersPrinted = 1;
 // *****************************************************************************
