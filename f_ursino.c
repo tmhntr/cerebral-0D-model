@@ -478,13 +478,13 @@ dY[16] = (Cra - Y[16])/DELTAT;  // Right Atrial Compliance
 
 /****************************************************************************************************************************/
 // % Y[11] is LV pressure.
-dY[8]    = (1.0 / Y[9])  * ((Y[5] - Y[11]) * dY[9] + data->Qlao - data->Qlo ) + dY[5];
+dY[8]    = (1.0 / Y[6])  * ((Y[5] - Y[8]) * dY[6] + data->Qlao - data->Qlo ) + dY[5];
 
 // Y34 is left atrial pressure.
 dY[17]    = (1.0 / Y[15]) * ((Y[5] - Y[17]) * dY[15] + data->Qli - data->Qlao) + dY[5];
 
 // Y[15] is Right Ventricle Pressure
-dY[12]    = (1.0 / Y[10]) * ((Y[5] - Y[15]) * dY[10] + data->Qrao - data->Qro) + dY[5];
+dY[12]    = (1.0 / Y[7]) * ((Y[5] - Y[12]) * dY[7] + data->Qrao - data->Qro) + dY[5];
 
 // Y[35] is right atrial pressure
 dY[18]    = (1.0 / Y[16]) * ((Y[5] - Y[18]) * dY[16] + data->Qinf + data->Qsup - data->Qrao) + dY[5];
