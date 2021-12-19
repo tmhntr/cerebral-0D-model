@@ -61,8 +61,8 @@ Ith(y_ursino, 9 + 1)  = 80.0;  		// % Pa, aortic pressure, units: mmHg.
 Ith(y_ursino, 10 + 1)  = 5.0;     	// % Psup, 		units: mmHg
 Ith(y_ursino, 11 + 1)  = 5.0;     	// % Pinf, 		units: mmHg
 Ith(y_ursino, 12 + 1)  = 5.60;   		// % Pr, 			units: mmHg. right ventricle pressure.
-Ith(y_ursino, 13 + 1)  = 30.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
-Ith(y_ursino, 14 + 1)  = 15.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
+Ith(y_ursino, 13 + 1)  = 25.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
+Ith(y_ursino, 14 + 1)  = 10.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
 
 // Atrial states (BP and compliances)
 Ith(y_ursino, 15 + 1)  = 1.0; 			// Cla variable, left atrial elastance.
@@ -81,15 +81,15 @@ Ith(y_ursino, 18 + 1)  = 1.0;   		//  right atrial pressure initial condition, m
 Ith(y_ursino, 19 + 1)  = 9.5; // eq 1: dP_ic
 Ith(y_ursino, 20 + 1)  = 25.0; // P_c
 Ith(y_ursino, 21 + 1)  = 14.0; // eq. 11 : dP_v
-Ith(y_ursino, 22 + 1)  = 58.5; // P_djs
-Ith(y_ursino, 23 + 1)  = 58.5; // P_djs
-Ith(y_ursino, 24 + 1)  = 58.5; // P_djs
-Ith(y_ursino, 25 + 1)  = 58.5; // P_djs
-Ith(y_ursino, 26 + 1)  = 58.5; // P_djs
-Ith(y_ursino, 27 + 1)  = 58.5; // P_djs
-Ith(y_ursino, 28 + 1)  = 92.5; // P_ICAl
-Ith(y_ursino, 29 + 1)  = 92.5; // P_ICAr
-Ith(y_ursino, 30 + 1)  = 92.5; // P_BA
+Ith(y_ursino, 22 + 1)  = 50.5; // P_djs
+Ith(y_ursino, 23 + 1)  = 50.5; // P_djs
+Ith(y_ursino, 24 + 1)  = 50.5; // P_djs
+Ith(y_ursino, 25 + 1)  = 50.5; // P_djs
+Ith(y_ursino, 26 + 1)  = 50.5; // P_djs
+Ith(y_ursino, 27 + 1)  = 50.5; // P_djs
+Ith(y_ursino, 28 + 1)  = 85.5; // P_ICAl
+Ith(y_ursino, 29 + 1)  = 85.5; // P_ICAr
+Ith(y_ursino, 30 + 1)  = 85.5; // P_BA
 
 // Cerebral autoregulation states
 for(i=31;i<=42;i++) {
