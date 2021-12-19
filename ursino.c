@@ -42,11 +42,11 @@ N_Vector 	y_ursino = N_VNew_Serial(NEQ); // allocated memory to pointer.
 //******************************************************************************
 
 // Blood pressure states
-Ith(y_ursino, 0 + 1)   = 60.7;  		// % Pup, 	units: mmHg
-Ith(y_ursino, 1 + 1)   = 60.0;  		// % Pk, 		units: mmHg.=
-Ith(y_ursino, 2 + 1)   = 60.0;     // % Psp, 	units: mmHg
-Ith(y_ursino, 3 + 1)   = 60.0;  		// % Pll, 	units: mmHg
-Ith(y_ursino, 4 + 1)   = 10.2;  		// % Pab, 	units: mmHg
+Ith(y_ursino, 0 + 1)   = 30.7;  		// % Pup, 	units: mmHg
+Ith(y_ursino, 1 + 1)   = 30.0;  		// % Pk, 		units: mmHg.=
+Ith(y_ursino, 2 + 1)   = 30.0;     // % Psp, 	units: mmHg
+Ith(y_ursino, 3 + 1)   = 30.0;  		// % Pll, 	units: mmHg
+Ith(y_ursino, 4 + 1)   = 5.2;  		// % Pab, 	units: mmHg
 
 // Thoracic pressure (pressure in thoracic cavity NOT blood pressure)
 Ith(y_ursino, 5 + 1)   = -5.0;    		// % Pth, 	units: mmHg.
@@ -57,12 +57,12 @@ Ith(y_ursino, 7 + 1)  = 20.0;  		  // % Cr, 		units: ml/mmHg
 Ith(y_ursino, 8 + 1)  = 12.78;  		// % Pl, left ventricular pressure, units: mmHg
 
 // More blood pressure states
-Ith(y_ursino, 9 + 1)  = 100.0;  		// % Pa, aortic pressure, units: mmHg.
-Ith(y_ursino, 10 + 1)  = 10.0;     	// % Psup, 		units: mmHg
-Ith(y_ursino, 11 + 1)  = 10.0;     	// % Pinf, 		units: mmHg
+Ith(y_ursino, 9 + 1)  = 80.0;  		// % Pa, aortic pressure, units: mmHg.
+Ith(y_ursino, 10 + 1)  = 5.0;     	// % Psup, 		units: mmHg
+Ith(y_ursino, 11 + 1)  = 5.0;     	// % Pinf, 		units: mmHg
 Ith(y_ursino, 12 + 1)  = 5.60;   		// % Pr, 			units: mmHg. right ventricle pressure.
-Ith(y_ursino, 13 + 1)  = 50.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
-Ith(y_ursino, 14 + 1)  = 20.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
+Ith(y_ursino, 13 + 1)  = 30.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
+Ith(y_ursino, 14 + 1)  = 15.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
 
 // Atrial states (BP and compliances)
 Ith(y_ursino, 15 + 1)  = 1.0; 			// Cla variable, left atrial elastance.
