@@ -24,8 +24,8 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void *user_data)
 double loc_t       		= data->p_ursino[1] - data->p_ursino[106]; // gnu fmod function. p11 is T_n_1, see above for definition of T_n_1.
 
 
-data->p_ursino[105]   = loc_t; // passed back to main to calculate cardiac output.
-double respRate  = data->p_ursino[12]; // % respiratory rate; units: (breaths/s)
+data->p_ursino[3]   = loc_t; // passed back to main to calculate cardiac output.
+double respRate  = data->p_ursino[2]; // % respiratory rate; units: (breaths/s)
 
 #include "baroreflex.c"
 double sigma_lv     				= Y[53];///1.5; //data->p_ursino[113]; // % units: mmHg/ml

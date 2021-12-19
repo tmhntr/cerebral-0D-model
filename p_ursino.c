@@ -2,23 +2,9 @@
 data->p_ursino[0] = 0.0; // you never use p0, but it must have a value, lest you confuse the program.
 data->p_ursino[1]  = 0.0;            // time, seconds. data->p_Ursino[1] = 0.0;
 
-// data->p_ursino[11] = 60.0/70.0;      // Heart Rate; units (beats/s), baseline duration of cardiac cycle. Severi cycle length: 0.825 s per beat.
-data->p_ursino[12] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
+data->p_ursino[2] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
 
-/******************************************************************************/
-//
-// data->p_ursino[100] = 3 * pow(10,-5); // blood dynamic viscosity. Letcher et al. Am J Med. 70: 1195-1202. 1981. mmHg-s.
-//
-// // the 0.1 resistance is a placeholder - find justification when writing paper/doing simulations.
-// data->p_ursino[101] = 0.1; // length of all microvasculature in cm, microvasculature is with resistance more than 0.1.
-// data->p_ursino[102] = 10.0; // length of all large vessels in cm, microvasculature is with resistance less than 0.1.
-//
-// // the ascending aorta does not have a resistance as yet. For now, assign some constant value of radius to the aorta.
-// // Literature value of ascending aorta diameter: 3 cm (Journal of the American College of Cardiology,  Volume 69, Issue 11 Supplement, March 2017, DOI: 10.1016/S0735-1097(17)35464-5; Paruchuri et al. Cardiology 2015;131:265-272).
-// data->p_ursino[103] = 0.90; // ascending aorta diameter in cm, this is a large value as compared to what using lengths to work our radius gives in this model. The observed value is closer to 1.5 cm.
-// data->p_ursino[104] = 0.007; // units PRU. Ascending aorta resistance according to table on p35 of Heldt thesis. Note that written in this way, it presumes certain things and will need to be generalised. This resistance is NOT feeding into the aorta flow yet. There is no aorta ODE yet. Written in this way, ascending aorta shear will depend on LV elastance.
-
-data->p_ursino[105] = 0.0;  // this is loc_t passed back from RHS to the main function thru' userdata. loc_t is from 0 to p[11].
+data->p_ursino[3] = 0.0;  // this is loc_t passed back from RHS to the main function thru' userdata. loc_t is from 0 to p[11].
 
 
 /*******************************************************************************
