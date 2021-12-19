@@ -26,8 +26,9 @@ int main (int argc, char *argv[])
 void *cvode_mem;  // pointer to memory: the full state lives here.
 realtype t, tout;
 int iout, NOUT, retval, i;
-char *str;
-FILE *cerebral,*cardiac_output_file,*pinkFile,*expFile;
+
+char *str, *stateFilename, *outputInfoFilename, *postprocessedFilename;
+FILE *stateFile, *outputInfoFile, *postprocessedFile, *pinkFile, *expFile;
 UserData 	data; // instance pointer.
 data 		= (UserData) malloc(sizeof *data); // now it is created. // allocated memory to pointer.
 
