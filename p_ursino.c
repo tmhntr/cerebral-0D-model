@@ -22,7 +22,7 @@ data->p_ursino[3]  = 150.0;          // Meqex
 // data->p_ursino[10] = 35;             // chco3d: concentration of HCO3 in dialysate; units: mmol.
 // // is pursino11 up for time dependent baroreflex modulation?
 // // revised pursino11 from 60/60 to 60/70 according to the PhysioNet program.
-// data->p_ursino[11] = 60.0/70.0;      // Heart Rate; units (beats/s), baseline duration of cardiac cycle. Severi cycle length: 0.825 s per beat.
+data->p_ursino[11] = 60.0/70.0;      // Heart Rate; units (beats/s), baseline duration of cardiac cycle. Severi cycle length: 0.825 s per beat.
 data->p_ursino[12] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
 // data->p_ursino[13] = 0;              // cuinf: concentration of U in infused fluid; units: mmol/L
 // data->p_ursino[14] = 0;              // cnainf: concentration of Na in infused fluid; units: mmol/L
@@ -137,34 +137,34 @@ RESISTANCE PARAMETERS
 
 // data->p_R[] = ; //
 data->p_R[0]  = 0.0; // Empty
-data->p_R[1]  = 0.06 * (data->p_ursino[61]);         // Rsup:  superior vena cava;
+data->p_R[1]  = 0.06;         // Rsup:  superior vena cava;
 data->p_R[2]  = 0.01;                                // Rab:   abdominal vena cava;
 data->p_R[3]  = 0.015;                               // Rinf:  inferior vena cava;
 data->p_R[4]  =  0.005;                             // Rao: right heart's atrio-ventricular valve (tricuspid valve)
 data->p_R[5]  =  0.003;                             // Rro: Resistance of right heart outlet;
-data->p_R[6]  = 0.08 * (data->p_ursino[61]);        // Rp: Resistance of pulmonary arteries;
+data->p_R[6]  = 0.08;        // Rp: Resistance of pulmonary arteries;
 data->p_R[7]  = 0.01;                               // Rpv: Resistance of pulmonary veins;
 data->p_R[8]  = 0.01;                               // Rmv: Left heart's mitral value
 data->p_R[9]  = 0.006;                             // Rlo: Resistance of left heart outlet;
-data->p_R[10] = 0.003* (data->p_ursino[61]);        // R_Brachiocephalic aorta
-data->p_R[11] = 0.011* (data->p_ursino[61]);        // R_Thoracic Aorta
-data->p_R[12] = 0.010* (data->p_ursino[61]);        // R_abdominal aorta
+data->p_R[10] = 0.003;        // R_Brachiocephalic aorta
+data->p_R[11] = 0.011;        // R_Thoracic Aorta
+data->p_R[12] = 0.010;        // R_abdominal aorta
 
-data->p_R[13] = 8.1 * (data->p_ursino[61]);//*atof(argv[16]);  //  Rup1: Resistance of upper body(1), originally 3.9 (Heldt); changed to 8.1
-data->p_R[14] = 0.5 * (data->p_ursino[61]);                //  Rup2: Resistance of upper body (2), originally 0.23 (Heldt);
-data->p_R[15] = 3.0 * (data->p_ursino[61]);//*atof(argv[14]);  //  Rsp1: Resistance of splanchic circulation (1);
-data->p_R[16] = 0.18 * (data->p_ursino[61]);                //  Rsp2: Resistance of splanchic circulation (2);
-data->p_R[17] = 4.1* (data->p_ursino[61]);//*atof(argv[12]);                  //  Changed to R_kidi  //R_Inlet_right Kidneys
-data->p_R[18] = 0.3* (data->p_ursino[61]);//*atof(argv[13]);                  //  Changed to R_kido  //_Inlet_left Kidneys
+data->p_R[13] = 8.1;//*atof(argv[16]);  //  Rup1: Resistance of upper body(1), originally 3.9 (Heldt); changed to 8.1
+data->p_R[14] = 0.5;                //  Rup2: Resistance of upper body (2), originally 0.23 (Heldt);
+data->p_R[15] = 3.0;//*atof(argv[14]);  //  Rsp1: Resistance of splanchic circulation (1);
+data->p_R[16] = 0.18;                //  Rsp2: Resistance of splanchic circulation (2);
+data->p_R[17] = 4.1;//*atof(argv[12]);                  //  Changed to R_kidi  //R_Inlet_right Kidneys
+data->p_R[18] = 0.3;//*atof(argv[13]);                  //  Changed to R_kido  //_Inlet_left Kidneys
 
 for(i = 0; i<12; i++){
-  data->p_R[19+i] = 4.1 * (data->p_ursino[61]) * 12;   // R_kidi,1 to R_kidi,12
+  data->p_R[19+i] = 4.1 * 12;   // R_kidi,1 to R_kidi,12
   }
 
-for(i = 0; i<12; i++) data->p_R[31+i] = 0.3 * (data->p_ursino[61]) * 12;  // R_kido,1 to R_kido,12
+for(i = 0; i<12; i++) data->p_R[31+i] = 0.3 * 12;  // R_kido,1 to R_kido,12
 
-data->p_R[43] = 3.6 * (data->p_ursino[61]);//*atof(argv[15]);                // Rll1: Resistance of legs (1);
-data->p_R[44] = 0.3 * (data->p_ursino[61]);                               // Rll2: Resistance of legs (2);
+data->p_R[43] = 3.6;//*atof(argv[15]);                // Rll1: Resistance of legs (1);
+data->p_R[44] = 0.3;                               // Rll2: Resistance of legs (2);
 
 /*******************************************************************************
 COMPARTMENT COMPLIANCES
