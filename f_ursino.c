@@ -192,75 +192,12 @@ Pumping function for the heart
 #include "cerebral.c"
 
 
-// // % eq. 12 from Ursino 2000 p206 (unless stated otherwise)
-// // % mass transfer rate from ic compartment to is compartment
-// double phi_k       = - k_K * ( ckic - beta_K * ckis ) ; // % Ursino 2008, eq 26. amount of solute exchanged at cellular membrane per unit time. units:
-// double phi_na      = - k_Na * ( cnaic - beta_Na * cnais ) ; // % Ursino 2008, eq 26. amount of solute exchanged at cellular membrane per unit time. units:
-// double phi_u       = - k_U * ( cuic - beta_U * cuis ) ; // % Ursino 2008, eq 26. amount of solute exchanged at cellular membrane per unit time. units:
-// double phi_hco3    = - eta_hco3 * ( chco3ic - g_hco3 * chco3is ) ; // % Ursino 2000, eq 12. amount of solute exchanged at cellular membrane per unit time. units:
-// double phi_h       = - eta_h * ( chic - g_h * chis ) ; // % Ursino 2000, eq 12. amount of solute exchanged at cellular membrane per unit time. units:
-// double phi_p       = 0.0; // % Ursino 2000. p207, second para.
-// double phi_cl      = phi_na + phi_k + phi_h - phi_hco3; // % Ursino 2000, eq 13.
-// // %
-// // % eq 11 from Ursino 2000. These are eq 20 to 22 p207 of Ursino 2000. Algebriac equations.
-// double Rhco3ic 	= etaprime_r * ( kprime_a * cco2ic - chco3ic * chic ); // % eq 20
-// // % for chpic in eq 21, see bottom para p207 of Ursino 2000.
-// double chpic    = cpic0 - cpic; // % ref ursino 2000 p. 207 last paragraph
-// double Rpic 		= etaprimeprime_r * (kprimeprime_a * chpic - cpic * chic ); // % eq 21. Dont know chpic yet (4 June 2020).
-// double Rhic 		= Rhco3ic + Rpic; // % eq 22.
-// // %
-// // % Rsex values are analogous to Rsic values. Ursino 2000 p.
-// double Rhco3is 	= etaprime_r * ( kprime_a * cco2ex - chco3is * chis ); // % eq 20
-// // %
-// // % for chpis in eq 21, see bottom para p207 of Ursino 2000.
-// // % Protein activity is assumed to be mainly in plasma
-// double chpis    = c_pis - cpis; // % ref ursino 2000 p. 207 last paragraph
-// double Rpis 		= etaprimeprime_r * (kprimeprime_a * chpis - cpis * chis ); // % etaprimeprime_r * (kprimeprime_a * chpis - cpex * chex ); // % eq 21. Dont know chpic yet (4 June 2020).
-// double Rhis 		= Rhco3is + Rpis; // % eq 22.
-// double Rhco3pl 	= etaprime_r * ( kprime_a * cco2ex - chco3pl * chpl ); // % eq 20
-// // %
-// // % for chpic in eq 21, see bottom para p207 of Ursino 2000.
-// double chppl    = c_ppl - cppl; // % ref ursino 2000 p. 207 last paragraph
-// double Rppl 		= etaprimeprime_r * (kprimeprime_a * chppl - cppl * chpl ); // % eq 21. Dont know chpic yet (4 June 2020).
-// double Rhpl 		= Rhco3pl + Rppl; // % eq 22.
-// // %
-// // % TEMPORARY reaction rate was entered as the sum of rates in pl and is
-// // % compartments. Find reference or revise
-// double Rhco3ex  = Rhco3pl + Rhco3is; double Rpex = Rppl + Rpis; double Rhex = Rhpl + Rhis;
-// // %
-// double V_rc     = 1.3;          // % red blood cell volume, units (L) ursino + innocenti 2008
-// double V        = V_rc + Y[3-1];  // % whole blood volume
-// double Hct      = V_rc / V;
-//
-// // % eq 29 from Ursino and Innocenti 2008 p888
-// double Q_eK 		 = Q_B*(F_p * (1 - Hct) + F_R * gamma_K 	* alphac);
-// double Q_eNa	   = Q_B*(F_p * (1 - Hct) + F_R * gamma_Na 	* alphac);
-// double Q_eU		   = Q_B*(F_p * (1 - Hct) + F_R * gamma_U 	* R_DU);
-// double Q_eHCO3	 = Q_B*(F_p * (1 - Hct) + F_R * gamma_HCO3 * alphac);
-// double Q_eCl		 = Q_B*(F_p * (1 - Hct) + F_R * gamma_Cl 	* alphaa);
-//
-// // % eq 28 from Ursino and Innocenti 2008 p888
-// // % convective and diffusive transport to dialyzer.
-// // J is solute removal rate across the dialyser.
-// double J_k     	= (D_s * 		(1.0 - QF / Q_eK) + QF) 			* ckex 	- D_s * 	     	(1.0 - QF / Q_eK) 	* ckd ;
-// double J_na    	= (D_s * 		(1.0 - QF / Q_eNa) + QF) 		* cnaex 	- D_s *  		(1.0 - QF / Q_eNa) 	* cnad ;
-// double J_u     	= (D_u * 		(1.0 - QF / Q_eU) + QF) 		* cuex 	- D_u *  		(1.0 - QF / Q_eU) 	* cud ;
-// double J_hco3  	= (D_hco3 * 	(1.0 - QF / Q_eHCO3) 	+ QF) 	* chco3ex- D_hco3 *     	(1.0 - QF / Q_eHCO3) * chco3d ;
-// double J_cl    	= (D_s * 		(1.0 - QF / Q_eCl) 		+ QF) 	* cclex 	- D_s * 	      	(1.0 - QF / Q_eCl) 	* ccld ;
-// double J_h      = 0.0; // % for hydrogen J is 0.
-// double J_p      = 0.0; // % for proteins, J is 0.
 
 
 /***********************ODES***************************************************/
 /******************************************************************************/
 // %================== ALL ODEs ARE LISTED BELOW ==================
 
-// % in Urisino eq 2, Oic is the intracellular osmotic activity. units: probably mEq/L or mmol/L unless the 0.93 has
-// % Ois is the interstitial osmotic activity.
-// dY[0] 	=   k_f*(cic - cis); // % equation 1, appendix 1, Vic, intracellular fluid volume. Ursino 2000 units: L (liters).
-// // is the 1000 conversion factor applied consistently throughout the RHS?
-// dY[1] 	= - k_f*(cic - cis) + (Fa - Rv)/1000.; // % eq. 2, appendix 1, Vis. Vis is interstial fluid volume. Ursino 2000. units: L.
-// dY[2] 	= ( -(Fa - Rv) - QF + Qinfused)/1000.; 	// % eq. 3, appedix 1, Vpl. Vpl is plasma volume. Ursino 2000. unit: L.
 
 /* Y[3] is Pup, pressure in upper body, head and neck.
  		eq. 22, appendix 2, p585.*/
@@ -339,45 +276,7 @@ dY[13]    = (data->Qro - data->Qpa) / data->p_C[4] + dY[5]; // % Y[17-1] is Ppa,
 // % Y[17] is Ppv. Left ventricle inlet pressure.
 dY[14]    = (data->Qpa - data->Qli) / data->p_C[5] + dY[5]; // % Y[18-1] is Ppv, eq. 31 appendix 2.
 
-// //  Brachiocephalic Aortic Pressure
-// dY[50] = (data->Q_ao_bra - (data->Qupi + Q_Ceri))/data->p_C[7] + dY[8]; //  Brachiocephalic Aortic Pressure
-//
-// //  Thoracic Aortic Pressure
-// dY[51] = (data->Q_ao_tho - data->Q_ao_abd)/data->p_C[8] + dY[8];
-//
-// //  Abdominal Aortic Pressure
-// dY[52] = (data->Q_ao_abd - (data->Qsp1 + data->Qll1 + data->Qk1))/data->p_C[9] + dY[8];
 
-
-/****************************************************************************************************************************/
-// % for eq 11, Ursino 2000
-// % State variables 19-25 are Intracellular Solute mass
-// dY[19-1] = phi_u;                   // % urea 		   eq 26 Ursino 2000.
-// dY[20-1] = phi_na;                  // % sodium 	   eq 26 Ursino 2000.
-// dY[21-1] = phi_k;                   // % potassium   eq 26 Ursino 2000.
-// dY[22-1] = phi_cl;                  // % chlorine 	 eq 11 Ursino 2000.
-// dY[23-1] = phi_hco3 + Rhco3ic;      // % bicarbonate eq 11 Ursino 2000.
-// dY[24-1] = phi_h 		+ Rhic;         // % hydrogen 	 eq 11 Ursino 2000.
-// dY[25-1] = phi_p 		+ Rpic;         // % urea 		   eq 11 Ursino 2000.
-//
-// // % for eq 14, Ursino 2000
-// // % State variables 28-34 are Extracellular Solute mass
-// dY[26-1]   = -phi_u 	  - J_u/1000. 		+ (Qinfused/1000.)*cuinf; // % urea eq 14, p207, Ursino 2000. combined with eqn 27, Ursino 2008.
-// dY[27-1]   = -phi_na    - J_na/1000.		+ (Qinfused/1000.)*cnainf; // % sodium 	eq 14, p207, Ursino 2000.combined with eqn 27, Ursino 2008.
-// dY[28-1]   = -phi_k 	  - J_k/1000. 		+ (Qinfused/1000.)*ckinf; // % potassium  eq 14, p207, Ursino 2000.combined with eqn 27, Ursino 2008.
-// dY[29-1]   = -phi_cl 	  - J_cl/1000.    + (Qinfused/1000.)*cclinf; // % chlorine 	eq 14, p207, Ursino 2000.
-// dY[30-1]   = -phi_hco3 	- J_hco3/1000. 	+ Rhco3ex; // % bicarbonate eq 14, p207, Ursino 2000.
-// dY[31-1]   = -phi_h 	  - J_h/1000. 		+ Rhex	; // % hydrogen eq 14, p207, Ursino 2000.
-// dY[32-1]   = -phi_p 	  - J_p/1000. 		+ Rpex	; // % protein eq 14, p207, Ursino 2000.
-/*****************************************************************************************************************************/
-/******************************************************************************************************************************/
-
-
-// printf("%d=%f\n",57, Y[56]);
-//
-// printf("C_dml=%f\n", data->C_dqs[0]);
-// printf("dC_dml=%f\n", dC_dml);
-// printf("q_dml=%f\n", data->q_ml);
 
 
  for(i=0;i<NEQ;i++) Ith(ydot,i+1) = dY[i];
