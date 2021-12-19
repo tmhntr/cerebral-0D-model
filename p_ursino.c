@@ -106,90 +106,71 @@ data->p_C[26] = 19.0;//*atof(argv[20]);   // Cll: Legs venous capacitance;
 BAROREFLEX PARAMETERS
 *******************************************************************************/
 
-data->p_ursino[106]   = 0.0;	//t_cardCycleInit: initiation time of the current cardiac cycle
+data->p_ursino[4]   = 0.0;	//t_cardCycleInit: initiation time of the current cardiac cycle
 
-data->p_ursino[107]   = 2.739; // SNA
-data->p_ursino[108]   = 3.27; // PNA
-data->p_ursino[109]   = 40.0; // Pbco2; units: mmHg
-data->p_ursino[110]   = 87.0; // Pb02; units: mmHg
-data->p_ursino[111]   = 0; // deltaHR_S
-data->p_ursino[112]   = 0; // deltaHR_V
-data->p_ursino[113]   = 1.15; // sigma_lv; units: mmHg/ml
-data->p_ursino[114]   = 0.72; // sigma_rv; units: mmHg/ml
-data->p_ursino[115]   = 9.3; // delta_sigma_V; units: ml
-data->p_ursino[116]   = 0.7; // sigma_R; units: mmHg/(ml/s)
-
-// ZPFV
-data->p_ursino[117]   = 645;//650; // ZPFV_up: zero-pressure filling volume upper body veins; units: ml;
-data->p_ursino[118]   = 30;//150; // ZPFV_kid;
-data->p_ursino[119]   = 1146;//1300; // ZPFV_sp;
-data->p_ursino[120]   = 716;//350; // ZPFV_ll
-data->p_ursino[121]   = 79;//250; // ZPFV_ab
-data->p_ursino[122]   = 33;//75; // ZPFV_inf
-data->p_ursino[123]   = 16;//10; // ZPFV_sup
+data->p_ursino[5]   = 40.0; // Pbco2; units: mmHg
+data->p_ursino[6]   = 87.0; // Pb02; units: mmHg
 
 // Baroreflex INTEGRATOR Parameters
-data->p_ursino[124]  = 0.001;   // tau_aff: units: seconds
-data->p_ursino[125]  = 1;       // G_aff
-data->p_ursino[126]  = 0.001;   // tau_c: Same as tau_aff,  units: s
-data->p_ursino[127]  = 0.0205;  // S_p
-data->p_ursino[128]  = 6;       // PNA_max, units: Hz
-data->p_ursino[129]  = 0.6;     // PNA_min, units: Hz
-data->p_ursino[130]  = -0.0138; // S_s
-data->p_ursino[131]  = 4;       // SNA_max, units: Hz
-data->p_ursino[132]  = 1.12;    // SNA_min, units: Hz
-data->p_ursino[133]  = 13.8;    // k1
-data->p_ursino[134]  = 0.182;   // k2
-data->p_ursino[135]  = 828;     // k3
-data->p_ursino[136]  = 1;       // k4
-data->p_ursino[137]  = -18.118; // k5
+data->p_ursino[7]  = 0.001;   // tau_aff: units: seconds
+data->p_ursino[8]  = 1;       // G_aff
+data->p_ursino[9]  = 0.001;   // tau_c: Same as tau_aff,  units: s
+data->p_ursino[10]  = 0.0205;  // S_p
+data->p_ursino[11]  = 6;       // PNA_max, units: Hz
+data->p_ursino[12]  = 0.6;     // PNA_min, units: Hz
+data->p_ursino[13]  = -0.0138; // S_s
+data->p_ursino[14]  = 4;       // SNA_max, units: Hz
+data->p_ursino[15]  = 1.12;    // SNA_min, units: Hz
+data->p_ursino[16]  = 13.8;    // k1
+data->p_ursino[17]  = 0.182;   // k2
+data->p_ursino[18]  = 828;     // k3
+data->p_ursino[19]  = 1;       // k4
+data->p_ursino[20]  = -18.118; // k5
 
 // Baroreflex EFFECTOR Parameters
-double G_factor = 1.0;//*atof(argv[28]);
-data->p_ursino[138]  = 90.0; 			// G_k_s0, units: beats/min/Hz
-data->p_ursino[139]  = 0.28; 		// k_k_s0
-data->p_ursino[140]  = 3.0; 			// T_s, units: s
-data->p_ursino[141]  = 60.0; 			// G_v0, units: beats/min/Hz 45
-data->p_ursino[142]  = 0.4; 		// k_v0
-data->p_ursino[143]  = 0.5; 		// T_v, units: s
-data->p_ursino[144]  = 1.5; 		// tau_sigma_lv, units: s
-data->p_ursino[145]  = 2; 			// T_e_lv, units: s
-// All parameters with G_factor are baroreflex gains.
-data->p_ursino[146]  = 0.45*1.5; 		// G_eff_lv, units: mmHg/ml/Hz
+data->p_ursino[21]  = 90.0; 			// G_k_s0, units: beats/min/Hz
+data->p_ursino[22]  = 0.28; 		// k_k_s0
+data->p_ursino[23]  = 3.0; 			// T_s, units: s
+data->p_ursino[24]  = 60.0; 			// G_v0, units: beats/min/Hz 45
+data->p_ursino[25]  = 0.4; 		// k_v0
+data->p_ursino[26]  = 0.5; 		// T_v, units: s
+data->p_ursino[27]  = 1.5; 		// tau_sigma_lv, units: s
+data->p_ursino[28]  = 2; 			// T_e_lv, units: s
+data->p_ursino[29]  = 0.45*1.5; 		// G_eff_lv, units: mmHg/ml/Hz
 
-data->p_ursino[147]  = 1.5; 		// tau_sigma_rv, units: s
-data->p_ursino[148]  = 2; 			// T_e_rv, units: s
-data->p_ursino[149]  = 0.282*0.935; 	// G_eff_rv, units: mmHg/ml/Hz
-data->p_ursino[150]  = 10.0; 			// tau_sigma_V, units: s
-data->p_ursino[151]  = 5; 			// T_e_V, units: s
-data->p_ursino[152]  = -275.0*13.0;//*G_factor; 		// G_eff_V, units: ml/Hz
-data->p_ursino[153]  = 1.5; 		// tau_sigma_R, units: s
-data->p_ursino[154]  = 3; 			// T_e_R, units: s
-data->p_ursino[155]  = 0.2*0.55; 		// G_eff_R, units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
-data->p_ursino[156]  = 25.0; 			// tau_s, simplified from equation 23, units: s
-data->p_ursino[157]  = 0.8; 		// tau_v, simplified from eq. 28; units: s
+data->p_ursino[30]  = 1.5; 		// tau_sigma_rv, units: s
+data->p_ursino[31]  = 2; 			// T_e_rv, units: s
+data->p_ursino[32]  = 0.282*0.935; 	// G_eff_rv, units: mmHg/ml/Hz
+data->p_ursino[33]  = 10.0; 			// tau_sigma_V, units: s
+data->p_ursino[34]  = 5; 			// T_e_V, units: s
+data->p_ursino[35]  = -275.0*13.0;//*G_factor; 		// G_eff_V, units: ml/Hz
+data->p_ursino[36]  = 1.5; 		// tau_sigma_R, units: s
+data->p_ursino[37]  = 3; 			// T_e_R, units: s
+data->p_ursino[38]  = 0.2*0.55; 		// G_eff_R, units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
+data->p_ursino[39]  = 25.0; 			// tau_s, simplified from equation 23, units: s
+data->p_ursino[40]  = 0.8; 		// tau_v, simplified from eq. 28; units: s
 // state vectors for baroreflex
-data->p_ursino[158]  	= 0.116; 			// x0_P_aff
-data->p_ursino[159]  	= 0.0903; 			// x0_temp1
-data->p_ursino[160] 	= 63.49; 			// x1_deltaHR_s;
-data->p_ursino[161] 	= 2.92; 			// x1_deltaHR_v;
-data->p_ursino[162] 	= 3.85; 			// x1_sigma_lv;
-data->p_ursino[163] 	= 3.85; 			// x1_sigma_rv;
-data->p_ursino[164] 	= 25.42; 			// x1_sigma_V;
-data->p_ursino[165] 	= 3.84; 			// x1_sigma_R;
-data->p_ursino[166] 	= -699.0; 			// sigma_V
+// data->p_ursino[158]  	= 0.116; 			// x0_P_aff
+// data->p_ursino[159]  	= 0.0903; 			// x0_temp1
+// data->p_ursino[160] 	= 63.49; 			// x1_deltaHR_s;
+// data->p_ursino[161] 	= 2.92; 			// x1_deltaHR_v;
+// data->p_ursino[162] 	= 3.85; 			// x1_sigma_lv;
+// data->p_ursino[163] 	= 3.85; 			// x1_sigma_rv;
+// data->p_ursino[164] 	= 25.42; 			// x1_sigma_V;
+// data->p_ursino[165] 	= 3.84; 			// x1_sigma_R;
+// data->p_ursino[166] 	= -699.0; 			// sigma_V
 
-data->p_ursino[167] 	= atof(argv[4]);//*atof(argv[29]); 		// HR0 units: bpm
+data->p_ursino[41] 	= atof(argv[4]);//*atof(argv[29]); 		// HR0 units: bpm
 
-data->p_ursino[168]  	= 6.0; 			// lambda; for AF calculation
+data->p_ursino[42]  	= 6.0; 			// lambda; for AF calculation
 if (atoi(argv[2]) < 1){ // switch on for AF
-  data->p_ursino[169]  	= 0.07; 			// coefficient of variation for HR
+  data->p_ursino[43]  	= 0.07; 			// coefficient of variation for HR
 } else {
-  data->p_ursino[169]  	= 0.24; 			// coefficient of variation for HR
+  data->p_ursino[43]  	= 0.24; 			// coefficient of variation for HR
 }
 // data->p_ursino[169]  	= 0.05; 			// coefficient of variation for HR
-data->p_ursino[170]  	= 0.5; 			// tau; for AF calculation
-data->p_ursino[171]  	= 0.1; 			// nu; for AF calculation
+data->p_ursino[44]  	= 0.5; 			// tau; for AF calculation
+data->p_ursino[45]  	= 0.1; 			// nu; for AF calculation
 
 // This is a buffer for the past 2 RR intervals
 data->RR[0]           = 0.8;

@@ -12,32 +12,32 @@
 
 
 double MAP =  Y[9];                        // this is the aortic pressure, carotid pressures may be taken instead.
-double Pbco2 =  data->p_ursino[90+19];      // this is the blood CO2 concentration
-double Pbo2 =  data->p_ursino[91+19];       // this is the blood O2 concentration
+double Pbco2 =  data->p_ursino[5];      // this is the blood CO2 concentration
+double Pbo2 =  data->p_ursino[6];       // this is the blood O2 concentration
 
 
 //  Table 3 - Baroreflex control parameters
 //  Afferent compartment:
-double tau_aff =  data->p_ursino[105+19];   //  units: seconds
-double G_aff   =  data->p_ursino[106+19];
+double tau_aff =  data->p_ursino[7];   //  units: seconds
+double G_aff   =  data->p_ursino[8];
 
 //  Central Compartment:
-double tau_c =  data->p_ursino[107+19];     //  Same as tau_aff,  units: s
+double tau_c =  data->p_ursino[9];     //  Same as tau_aff,  units: s
 
 //  Efferent compartment:
-double S_p =  data->p_ursino[108+19];
-double PNA_max =  data->p_ursino[109+19];   //  units: Hz
-double PNA_min =  data->p_ursino[110+19];   //  units: Hz
-double S_s =  data->p_ursino[111+19];
-double SNA_max =  data->p_ursino[112+19];   //  units: Hz
-double SNA_min =  data->p_ursino[113+19];   //  units: Hz
+double S_p =  data->p_ursino[10];
+double PNA_max =  data->p_ursino[11];   //  units: Hz
+double PNA_min =  data->p_ursino[12];   //  units: Hz
+double S_s =  data->p_ursino[13];
+double SNA_max =  data->p_ursino[14];   //  units: Hz
+double SNA_min =  data->p_ursino[15];   //  units: Hz
 
 //  Table A3
-double k1 =  data->p_ursino[114+19];
-double k2 =  data->p_ursino[115+19];
-double k3 =  data->p_ursino[116+19];
-double k4 =  data->p_ursino[117+19];
-double k5 =  data->p_ursino[118+19];
+double k1 =  data->p_ursino[16];
+double k2 =  data->p_ursino[17];
+double k3 =  data->p_ursino[18];
+double k4 =  data->p_ursino[19];
+double k5 =  data->p_ursino[20];
 
 // P_aff
 dY[49] = (-Y[49] + G_aff * (MAP))/tau_aff;
@@ -79,42 +79,42 @@ data->PNA = (PNA_max - PNA_min * exp(P_error/k_v)) / (1.0 + exp(P_error/k_v)); /
 
 
 // Table 3 baroreflex control parameters
-double G_k_s0 = data->p_ursino[119+19]; // units: beats/min/Hz
-double k_k_s0 = data->p_ursino[120+19];
-double T_s = data->p_ursino[121+19]; // units: s
+double G_k_s0 = data->p_ursino[21]; // units: beats/min/Hz
+double k_k_s0 = data->p_ursino[22];
+double T_s = data->p_ursino[23]; // units: s
 double G_tau_s0 = 10.0; // beats/min/Hz
 double k_tau_s0 = 0.2;
 
 
-double G_v0 = data->p_ursino[122+19]; // units: beats/min/Hz 45
-double k_v0 = data->p_ursino[123+19];
-double T_v = data->p_ursino[124+19]; // units: s
+double G_v0 = data->p_ursino[24]; // units: beats/min/Hz 45
+double k_v0 = data->p_ursino[25];
+double T_v = data->p_ursino[26]; // units: s
 
 // Myocardial constriction
-double tau_sigma_lv = data->p_ursino[125+19]; // units: s
-double T_e_lv = data->p_ursino[126+19]; // units: s
-double G_eff_lv = data->p_ursino[127+19]; // units: mmHg/ml/Hz
+double tau_sigma_lv = data->p_ursino[27]; // units: s
+double T_e_lv = data->p_ursino[28]; // units: s
+double G_eff_lv = data->p_ursino[29]; // units: mmHg/ml/Hz
 
-double tau_sigma_rv = data->p_ursino[128+19]; // units: s
-double T_e_rv = data->p_ursino[129+19]; // units: s
-double G_eff_rv = data->p_ursino[130+19]; // units: mmHg/ml/Hz
+double tau_sigma_rv = data->p_ursino[30]; // units: s
+double T_e_rv = data->p_ursino[31]; // units: s
+double G_eff_rv = data->p_ursino[32]; // units: mmHg/ml/Hz
 
 // Veins
-double tau_sigma_V = data->p_ursino[131+19]; // units: s
-double T_e_V = data->p_ursino[132+19]; // units: s
-double G_eff_V = data->p_ursino[133+19]; // units: ml/Hz
+double tau_sigma_V = data->p_ursino[33]; // units: s
+double T_e_V = data->p_ursino[34]; // units: s
+double G_eff_V = data->p_ursino[35]; // units: ml/Hz
 
 // Arterioles
-double tau_sigma_R = data->p_ursino[134+19]; // units: s
-double T_e_R = data->p_ursino[135+19]; // units: s
-double G_eff_R = data->p_ursino[136+19]; // units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
+double tau_sigma_R = data->p_ursino[36]; // units: s
+double T_e_R = data->p_ursino[37]; // units: s
+double G_eff_R = data->p_ursino[38]; // units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
 
 double tau_s;
 if (data->SNA > data->SNA_buffer[0]){
-  double k_tau_s = G_tau_s0 / k_tau_s0;
-  tau_s = 10.0; //G_tau_s0 * exp(-k_tau_s * data->SNA); this is a substituted value based on G_tau_s0 as given eqation goes to zero and crashes
+  double k_tau_s = G_tau_s0 * k_tau_s0;
+  tau_s = G_tau_s0 * exp(-k_tau_s * data->SNA); // this is a substituted value based on G_tau_s0 as given eqation goes to zero and crashes
 } else {
-  tau_s = 25.0;
+  tau_s = data->p_ursino[39];
 }
 
 double k_s2 = G_k_s0 / k_k_s0; // eq. 22
@@ -128,7 +128,7 @@ double tau_v;
 if (data->PNA > data->PNA_buffer[0]){
   tau_v = 0.1;
 } else {
-  tau_v = 0.8;
+  tau_v = data->p_ursino[40];
 }
 
 double k_v2 = G_v0 / k_v0; // eq. 27

@@ -12,7 +12,7 @@
 // This model has 24 ODEs
 
 double P_a = Y[9];
-double P_aCO2 = data->p_ursino[109];
+double P_aCO2 = data->p_ursino[5];
 double P_vs = Y[10];
 
 ///////////////////////// CoW variations //////////////////////////////////////

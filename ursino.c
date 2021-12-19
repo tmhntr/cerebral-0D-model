@@ -247,23 +247,23 @@ while(cardiac_iter<numBeats){
   data->PNA_buffer[0] = data->PNA;
 
   // Timing Parameters
-  if(data->p_ursino[1] >= data->p_ursino[106] + data->RR[0]){
+  if(data->p_ursino[1] >= data->p_ursino[4] + data->RR[0]){
 
-  	data->p_ursino[106]  		= data->p_ursino[1];
+  	data->p_ursino[4]  		= data->p_ursino[1];
 		data->RR[2] 						= data->RR[1];
 		data->RR[1] 						= data->RR[0];
 
 		deltaHR = (19.64*Ith(y_ursino, 51 + 1)) - (17.95*Ith(y_ursino, 52 + 1)) - (1.225*pow(Ith(y_ursino, 51 + 1),2)) + (1.357*pow(Ith(y_ursino, 52 + 1),2)) - (1.523*Ith(y_ursino, 51 + 1)*Ith(y_ursino, 52 + 1));
-		data->RR[0] = 60.0/(data->p_ursino[148+19]+ deltaHR);
+		data->RR[0] = 60.0/(data->p_ursino[41]+ deltaHR);
 
 		if (atoi(argv[2]) < 1){
-			data->RR[0] 				= data->RR[0] + pinkNoise[cardiac_iter]*(data->p_ursino[169]*(data->RR[0])/0.033);
+			data->RR[0] 				= data->RR[0] + pinkNoise[cardiac_iter]*(data->p_ursino[43]*(data->RR[0])/0.033);
 		} else {
 			// The following is AF condition 1 and 3 as described by Scarsoglio et al. 2014
-			data->p_ursino[171] = expRand[cardiac_iter]/(-9.2*data->RR[0] + 14.6); //r4_exponential_sample(1.0/(-9.2*data->RR[0] + 14.6));
-			data->p_ursino[170] = (data->RR[0] - 1.0/(-9.2*data->RR[0] + 14.6)) + pinkNoise[cardiac_iter]*(data->p_ursino[169]*(data->RR[0] - 1.0/(-9.2*data->RR[0] + 14.6))/0.033);
+			data->p_ursino[45] = expRand[cardiac_iter]/(-9.2*data->RR[0] + 14.6); //r4_exponential_sample(1.0/(-9.2*data->RR[0] + 14.6));
+			data->p_ursino[44] = (data->RR[0] - 1.0/(-9.2*data->RR[0] + 14.6)) + pinkNoise[cardiac_iter]*(data->p_ursino[43]*(data->RR[0] - 1.0/(-9.2*data->RR[0] + 14.6))/0.033);
 
-			data->RR[0] 				= data->p_ursino[171] + data->p_ursino[170];
+			data->RR[0] 				= data->p_ursino[45] + data->p_ursino[44];
 
 
 			// EQ 2 from Scarsoglio et al. 2014

@@ -21,7 +21,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void *user_data)
 /*****************************************************************************************************************************/
 // %%% ALL PASSED PARAMETERS ARE LISTED BELOW %%%
 
-double loc_t       		= data->p_ursino[1] - data->p_ursino[106]; // gnu fmod function. p11 is T_n_1, see above for definition of T_n_1.
+double loc_t       		= data->p_ursino[1] - data->p_ursino[4]; // gnu fmod function. p11 is T_n_1, see above for definition of T_n_1.
 
 
 data->p_ursino[3]   = loc_t; // passed back to main to calculate cardiac output.
