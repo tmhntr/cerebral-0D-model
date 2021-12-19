@@ -58,7 +58,7 @@ double P_demand = 90.0 + deltaMAP/100.0; //  Desrcibed in fig. 2 and on page 793
 // for P_error
 dY[50] = (-Y[50] + 1.0 * (P_demand))/tau_c; // second term in the P_error eq.
 
-double P_error = Y[49] - Y[50] ;//  eq. 13
+double P_error = - Y[49] + Y[50] ;//  eq. 13 // NOTE Dec 18 changed sign of this term
 
 
 //  Efferent Compartment:
