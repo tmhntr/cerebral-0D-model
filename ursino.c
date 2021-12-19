@@ -81,12 +81,12 @@ Ith(y_ursino, 18 + 1)  = 1.0;   		//  right atrial pressure initial condition, m
 Ith(y_ursino, 19 + 1)  = 9.5; // eq 1: dP_ic
 Ith(y_ursino, 20 + 1)  = 25.0; // P_c
 Ith(y_ursino, 21 + 1)  = 14.0; // eq. 11 : dP_v
-Ith(y_ursino, 22 + 1)  = 40.5; // P_djs
-Ith(y_ursino, 23 + 1)  = 40.5; // P_djs
-Ith(y_ursino, 24 + 1)  = 40.5; // P_djs
-Ith(y_ursino, 25 + 1)  = 40.5; // P_djs
-Ith(y_ursino, 26 + 1)  = 40.5; // P_djs
-Ith(y_ursino, 27 + 1)  = 40.5; // P_djs
+Ith(y_ursino, 22 + 1)  = 35.5; // P_djs
+Ith(y_ursino, 23 + 1)  = 35.5; // P_djs
+Ith(y_ursino, 24 + 1)  = 35.5; // P_djs
+Ith(y_ursino, 25 + 1)  = 35.5; // P_djs
+Ith(y_ursino, 26 + 1)  = 35.5; // P_djs
+Ith(y_ursino, 27 + 1)  = 35.5; // P_djs
 Ith(y_ursino, 28 + 1)  = 85.5; // P_ICAl
 Ith(y_ursino, 29 + 1)  = 85.5; // P_ICAr
 Ith(y_ursino, 30 + 1)  = 85.5; // P_BA
@@ -254,7 +254,7 @@ while(cardiac_iter<numBeats){
 		data->RR[1] 						= data->RR[0];
 
 		deltaHR = (19.64*Ith(y_ursino, 51 + 1)) - (17.95*Ith(y_ursino, 52 + 1)) - (1.225*pow(Ith(y_ursino, 51 + 1),2)) + (1.357*pow(Ith(y_ursino, 52 + 1),2)) - (1.523*Ith(y_ursino, 51 + 1)*Ith(y_ursino, 52 + 1));
-		data->RR[0] = 60.0/(data->p_ursino[148+19]/* + deltaHR*/);
+		data->RR[0] = 60.0/(data->p_ursino[148+19]+ deltaHR);
 
 		if (atoi(argv[2]) < 1){
 			data->RR[0] 				= data->RR[0] + pinkNoise[cardiac_iter]*(data->p_ursino[169]*(data->RR[0])/0.033);
