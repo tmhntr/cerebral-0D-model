@@ -21,7 +21,7 @@
 
 #define NEQ  			57               /* number of equations, ODEs */
 #define N_PARAMETER 172         	// number of parameters
-#define DELTAT 		0.01  	// time step, seconds. You cannot have time step bigger than a few milliseconds as there are fast processes going on.
+#define DELTAT 		0.001  	// time step, seconds. You cannot have time step bigger than a few milliseconds as there are fast processes going on.
 #define debg			1 		// this is always 1.
 
 // a check to choose if we want to output all or few state variables
