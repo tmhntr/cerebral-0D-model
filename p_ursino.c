@@ -7,77 +7,77 @@ data->p_ursino[3]  = 150.0;          // Meqex
 
 // Qf is the rate fluid is removed to the dialyzer
 // data->p_ursino[4]  = 0.2083*atof(argv[3]);          // 1/60; // Qf; TEMPORARY from ursino 2000 table 2, p. 209
-data->p_ursino[4]  = 0.0; //0.2083;          // 1/60; // Qf; TEMPORARY from ursino 2000 table 2, p. 209
-// Qinf is the rate that fluid is injected from dialyzer
-// data->p_ursino[5]  = 0.2*atof(argv[3]);           // Qinf: infused fluid
-data->p_ursino[5]  = 0.0; //0.2;           // Qinf: infused fluid
-
-// data->p_ursino[56] = 3.0*atof(argv[3]); // Q_B: bulk blood flow through the dialyzer
-data->p_ursino[56] = 3.0; // Q_B: bulk blood flow through the dialyzer
-
-data->p_ursino[6]  = 0;              // cud: concentration of urea in dialysate; units: mmol/L
-data->p_ursino[7]  = 142;            // cnad: concentration of Na in dialysate; units: mmol/L; ref. ursino 1997 p666
-data->p_ursino[8]  = 2;              // ckd: concentration of K in dialysate; units: mmol
-data->p_ursino[9]  = 0;              // ccld: concentration of Cl in dialysate; units: mmol
-data->p_ursino[10] = 35;             // chco3d: concentration of HCO3 in dialysate; units: mmol.
-// is pursino11 up for time dependent baroreflex modulation?
-// revised pursino11 from 60/60 to 60/70 according to the PhysioNet program.
-data->p_ursino[11] = 60.0/70.0;      // Heart Rate; units (beats/s), baseline duration of cardiac cycle. Severi cycle length: 0.825 s per beat.
-data->p_ursino[12] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
-data->p_ursino[13] = 0;              // cuinf: concentration of U in infused fluid; units: mmol/L
-data->p_ursino[14] = 0;              // cnainf: concentration of Na in infused fluid; units: mmol/L
-data->p_ursino[15] = 0;              // ckinf: concentration of K in infused fluid; units: mmol/L
-data->p_ursino[16] = 0;              // cclinf: concentration of Cl in infused fluid; units: mmol/L
-data->p_ursino[17] = 2.67;           // D_s: dialysance (or clearance) of solute
-data->p_ursino[18] = 2.67;           // D_U: dialysance (or clearance) of urea
-data->p_ursino[19] = 0.13/60.0;      // D_HCO3: dialysance (or clearance) of HCO3
-data->p_ursino[20] = 0.94;           // F_p: plasma water fraction
-data->p_ursino[21] = 0.72;           // F_R: RBC water fraction
-data->p_ursino[22] = 1;              // gamma_u: fraction of red blood cell water that participates in the transfer through the dialyzer
-data->p_ursino[23] = 1;              // R_DU: Donnan ratio for Urea.
-data->p_ursino[24] = 0;              // gamma_Na: fraction of red blood cell water that participates in the transfer through the dialyzer
-data->p_ursino[25] = 0;              // gamma_K: fraction of red blood cell water that participates in the transfer through the dialyzer
-data->p_ursino[26] = 0;              // gamma_Cl: fraction of red blood cell water that participates in the transfer through the dialyzer
-data->p_ursino[27] = 0;              // gamma_HCO3: fraction of red blood cell water that participates in the transfer through the dialyzer
-data->p_ursino[28] = 25;             // k_Na: mass transfer coefficient for K; units (ml/s)
-data->p_ursino[29] = 0.0704;         // beta_Na: mass transfer coefficient for K; units (n/a)
-data->p_ursino[30] = 0.0667;         // k_K: mass transfer coefficient for K; units (ml/s)
-data->p_ursino[31] = 28.2  ;         // beta_K: mass transfer coefficient for K; units (n/a)
-data->p_ursino[32] = 13    ;         // k_U: mass transfer coefficient for U; units (ml/s)
-data->p_ursino[33] = 1     ;         // beta_U: mass transfer coefficient for U; units (n/a)
-data->p_ursino[34] = 0.004 ;         // k_f: water exchange coefficient; units (L^2 s^-1 mmol^-1)
-data->p_ursino[35] = 2.45  ;         // E_is: elastance of the interstitial space; units (mmHg/L)
-data->p_ursino[36] = 11    ;         // V_isn: basal volume of interstitial compartments; units (L)
-data->p_ursino[37] = 3.25  ;         // V_pln: basal volume of blood plasma; units (L)
-data->p_ursino[38] = 7.4   ;         // c_ppln: basal protein concentration in plasma; units (g/dl)
-data->p_ursino[39] = 1.37  ;         // c_pisn: basal protein concentration in interstitial compartment; units (g/dl)
-data->p_ursino[40] = 1.05;           // Gibbs Donnan ratio for anions. Ursino 2000, table 1.
-data->p_ursino[41] = 0.95;           // Gibbs Donnan ratio for cations. Ursino 2000, table 1.
-data->p_ursino[42] = 0.2 /61.0;     // eta_hco3: bicarbonate mass transfer coefficient. table 1, Ursino 2000. units: L/s.
-data->p_ursino[43] = 0.03 /60.0;      // eta_h: hydrogen ion mass transfer coefficient. table 1, Ursino 2000. units: L/s.
-data->p_ursino[44] = 0.4	;          // g_hco3: bicarbonate equilibrium ratio. table 1, Ursino 2000. units: dimensionless.
-data->p_ursino[45] = 3.5	;          // g_h: hydrogen ion equilibrium ratio. table 1, Ursino 2000. units: dimensionless.
-data->p_ursino[46] = 6.0 / 60.0;       // etaprime_r: reaction velocity, hco3 buffer. table 1, Ursino 2000. see reaction i. units: L^2/s/mmol
-data->p_ursino[47] = pow(10.0,(-6.1));// kprime_a: dissociation constant; p209 of Ursino 2000, right column 3rd para.
-data->p_ursino[48] = 6.0 / 60;       // etaprimeprime_r: reaction velocity, protein buffer. table 1, Ursino 2000. see reaction ii. units: L^2/s/mmol
-data->p_ursino[49] = pow(10.0,(-7.4));// kprimeprime_a:dissociation constant; p209 of Ursino 2000, right column 3rd para.
-data->p_ursino[50] = 1.2;            // cco2ic: concentration of CO2 in ic compartment; (in eq 20) Ursino 2000, p209, para 3 on right column.
-data->p_ursino[51] = 1.2;            // cco2ex: concentration of CO2 in ex compartment; (in eq 20) Ursino 2000, p209, para 3 on right column.
-data->p_ursino[52] = 4;              // cpic0: basal protein concentration in intracellular compartment; units mmol/L, Table 1 ursino 2000
-data->p_ursino[53] = -5.97;          // pis0: basal pressure in is compartment; units: mmHg; eq. 10, appendix 1. Ursino 2000. table 1.
-data->p_ursino[54] = 0.01;           // La: arterial capillary permeability; units: mL/mmHg/s; table 1. Ursino 2008, table 1
-data->p_ursino[55] = 0.062;          // Lv: venous capillary permeability; units: mL/mmHg/s; table 1. Ursino 2008, table 1
-
-
-/******************************************************************************************************************************************/
-// cooling mechanism paramters.
-data->p_ursino[57] = 37.5; // physiological temperature is 37.5C.
-data->p_ursino[58] = 37.5; //37.5; // 36.0; // cool temperature. You are wanting a 10% increase in microvascular resistance. Our range is 33C to 36.5C.
-data->p_ursino[59] = 2.961; // alpha in J appl physiol 102: 1329; 2007. This is the Q10. Also see scanned notes.
-data->p_ursino[60] = 0.08401; // beta in J appl physiol 102: 1329; 2007. This is the exponent. Also see scanned notes.
-// the alpha^{-beta*(Tcool - Tphys)} factor.
-data->p_ursino[61]  = pow(data->p_ursino[59], - data->p_ursino[60] * (data->p_ursino[58] - data->p_ursino[57]));
-// printf("P_61 = %f\n",data->p_ursino[61]);
+// data->p_ursino[4]  = 0.0; //0.2083;          // 1/60; // Qf; TEMPORARY from ursino 2000 table 2, p. 209
+// // Qinf is the rate that fluid is injected from dialyzer
+// // data->p_ursino[5]  = 0.2*atof(argv[3]);           // Qinf: infused fluid
+// data->p_ursino[5]  = 0.0; //0.2;           // Qinf: infused fluid
+//
+// // data->p_ursino[56] = 3.0*atof(argv[3]); // Q_B: bulk blood flow through the dialyzer
+// data->p_ursino[56] = 3.0; // Q_B: bulk blood flow through the dialyzer
+//
+// data->p_ursino[6]  = 0;              // cud: concentration of urea in dialysate; units: mmol/L
+// data->p_ursino[7]  = 142;            // cnad: concentration of Na in dialysate; units: mmol/L; ref. ursino 1997 p666
+// data->p_ursino[8]  = 2;              // ckd: concentration of K in dialysate; units: mmol
+// data->p_ursino[9]  = 0;              // ccld: concentration of Cl in dialysate; units: mmol
+// data->p_ursino[10] = 35;             // chco3d: concentration of HCO3 in dialysate; units: mmol.
+// // is pursino11 up for time dependent baroreflex modulation?
+// // revised pursino11 from 60/60 to 60/70 according to the PhysioNet program.
+// data->p_ursino[11] = 60.0/70.0;      // Heart Rate; units (beats/s), baseline duration of cardiac cycle. Severi cycle length: 0.825 s per beat.
+// data->p_ursino[12] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
+// data->p_ursino[13] = 0;              // cuinf: concentration of U in infused fluid; units: mmol/L
+// data->p_ursino[14] = 0;              // cnainf: concentration of Na in infused fluid; units: mmol/L
+// data->p_ursino[15] = 0;              // ckinf: concentration of K in infused fluid; units: mmol/L
+// data->p_ursino[16] = 0;              // cclinf: concentration of Cl in infused fluid; units: mmol/L
+// data->p_ursino[17] = 2.67;           // D_s: dialysance (or clearance) of solute
+// data->p_ursino[18] = 2.67;           // D_U: dialysance (or clearance) of urea
+// data->p_ursino[19] = 0.13/60.0;      // D_HCO3: dialysance (or clearance) of HCO3
+// data->p_ursino[20] = 0.94;           // F_p: plasma water fraction
+// data->p_ursino[21] = 0.72;           // F_R: RBC water fraction
+// data->p_ursino[22] = 1;              // gamma_u: fraction of red blood cell water that participates in the transfer through the dialyzer
+// data->p_ursino[23] = 1;              // R_DU: Donnan ratio for Urea.
+// data->p_ursino[24] = 0;              // gamma_Na: fraction of red blood cell water that participates in the transfer through the dialyzer
+// data->p_ursino[25] = 0;              // gamma_K: fraction of red blood cell water that participates in the transfer through the dialyzer
+// data->p_ursino[26] = 0;              // gamma_Cl: fraction of red blood cell water that participates in the transfer through the dialyzer
+// data->p_ursino[27] = 0;              // gamma_HCO3: fraction of red blood cell water that participates in the transfer through the dialyzer
+// data->p_ursino[28] = 25;             // k_Na: mass transfer coefficient for K; units (ml/s)
+// data->p_ursino[29] = 0.0704;         // beta_Na: mass transfer coefficient for K; units (n/a)
+// data->p_ursino[30] = 0.0667;         // k_K: mass transfer coefficient for K; units (ml/s)
+// data->p_ursino[31] = 28.2  ;         // beta_K: mass transfer coefficient for K; units (n/a)
+// data->p_ursino[32] = 13    ;         // k_U: mass transfer coefficient for U; units (ml/s)
+// data->p_ursino[33] = 1     ;         // beta_U: mass transfer coefficient for U; units (n/a)
+// data->p_ursino[34] = 0.004 ;         // k_f: water exchange coefficient; units (L^2 s^-1 mmol^-1)
+// data->p_ursino[35] = 2.45  ;         // E_is: elastance of the interstitial space; units (mmHg/L)
+// data->p_ursino[36] = 11    ;         // V_isn: basal volume of interstitial compartments; units (L)
+// data->p_ursino[37] = 3.25  ;         // V_pln: basal volume of blood plasma; units (L)
+// data->p_ursino[38] = 7.4   ;         // c_ppln: basal protein concentration in plasma; units (g/dl)
+// data->p_ursino[39] = 1.37  ;         // c_pisn: basal protein concentration in interstitial compartment; units (g/dl)
+// data->p_ursino[40] = 1.05;           // Gibbs Donnan ratio for anions. Ursino 2000, table 1.
+// data->p_ursino[41] = 0.95;           // Gibbs Donnan ratio for cations. Ursino 2000, table 1.
+// data->p_ursino[42] = 0.2 /61.0;     // eta_hco3: bicarbonate mass transfer coefficient. table 1, Ursino 2000. units: L/s.
+// data->p_ursino[43] = 0.03 /60.0;      // eta_h: hydrogen ion mass transfer coefficient. table 1, Ursino 2000. units: L/s.
+// data->p_ursino[44] = 0.4	;          // g_hco3: bicarbonate equilibrium ratio. table 1, Ursino 2000. units: dimensionless.
+// data->p_ursino[45] = 3.5	;          // g_h: hydrogen ion equilibrium ratio. table 1, Ursino 2000. units: dimensionless.
+// data->p_ursino[46] = 6.0 / 60.0;       // etaprime_r: reaction velocity, hco3 buffer. table 1, Ursino 2000. see reaction i. units: L^2/s/mmol
+// data->p_ursino[47] = pow(10.0,(-6.1));// kprime_a: dissociation constant; p209 of Ursino 2000, right column 3rd para.
+// data->p_ursino[48] = 6.0 / 60;       // etaprimeprime_r: reaction velocity, protein buffer. table 1, Ursino 2000. see reaction ii. units: L^2/s/mmol
+// data->p_ursino[49] = pow(10.0,(-7.4));// kprimeprime_a:dissociation constant; p209 of Ursino 2000, right column 3rd para.
+// data->p_ursino[50] = 1.2;            // cco2ic: concentration of CO2 in ic compartment; (in eq 20) Ursino 2000, p209, para 3 on right column.
+// data->p_ursino[51] = 1.2;            // cco2ex: concentration of CO2 in ex compartment; (in eq 20) Ursino 2000, p209, para 3 on right column.
+// data->p_ursino[52] = 4;              // cpic0: basal protein concentration in intracellular compartment; units mmol/L, Table 1 ursino 2000
+// data->p_ursino[53] = -5.97;          // pis0: basal pressure in is compartment; units: mmHg; eq. 10, appendix 1. Ursino 2000. table 1.
+// data->p_ursino[54] = 0.01;           // La: arterial capillary permeability; units: mL/mmHg/s; table 1. Ursino 2008, table 1
+// data->p_ursino[55] = 0.062;          // Lv: venous capillary permeability; units: mL/mmHg/s; table 1. Ursino 2008, table 1
+//
+//
+// /******************************************************************************************************************************************/
+// // cooling mechanism paramters.
+// data->p_ursino[57] = 37.5; // physiological temperature is 37.5C.
+// data->p_ursino[58] = 37.5; //37.5; // 36.0; // cool temperature. You are wanting a 10% increase in microvascular resistance. Our range is 33C to 36.5C.
+// data->p_ursino[59] = 2.961; // alpha in J appl physiol 102: 1329; 2007. This is the Q10. Also see scanned notes.
+// data->p_ursino[60] = 0.08401; // beta in J appl physiol 102: 1329; 2007. This is the exponent. Also see scanned notes.
+// // the alpha^{-beta*(Tcool - Tphys)} factor.
+// data->p_ursino[61]  = pow(data->p_ursino[59], - data->p_ursino[60] * (data->p_ursino[58] - data->p_ursino[57]));
+// // printf("P_61 = %f\n",data->p_ursino[61]);
 
 /******************************************************************************/
 
