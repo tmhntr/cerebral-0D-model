@@ -227,6 +227,73 @@ for(i = 0; i<(int)(0.5/DELTAT); i++){
 
 data->CoW = atoi(argv[3]);
 
+
+// Parameters from table 1 of ref.
+// Hemodynamic and hydrodynamic
+data->P_cerebral[0] = 2.38 * pow(10,3); // R_f, units mmHg s mL^-1
+data->P_cerebral[1] = 526.3; // R_o, units mmHg s mL^-1
+data->P_cerebral[2] = 0.880; // R_pv, units mmHg s mL^-1
+data->P_cerebral[3] = 0.366; // R_vs1, units mmHg s mL^-1
+data->P_cerebral[4] = 120.0; // R_cpms, units mmHg s mL^-1
+data->P_cerebral[5] = 105.0; // R_cams, units mmHg s mL^-1
+data->P_cerebral[6] = 75.0; // R_cpp,  mmHg s mL^-1
+data->P_cerebral[7] = 22.0; // R_caa, units mmHg s mL^-1
+data->P_cerebral[8] = 3.4 * pow(10,-3); // C_ICAs, units mL mmHg^-1
+data->P_cerebral[9] = 1.7 * pow(10,-3); // C_BA, units mL mmHg^-1
+data->P_cerebral[10] = 0.205; // r_ICAns, units cm
+data->P_cerebral[11] = 0.17; // r_BAn, units cm
+data->P_cerebral[12] = 0.14; // r_MCAns, units cm
+data->P_cerebral[13] = 0.1; // r_PCA1ns, units cm
+data->P_cerebral[14] = 0.075; // r_ACA1ns, units cm
+data->P_cerebral[15] = 0.1; // r_PCA2ns, units cm
+data->P_cerebral[16] = 0.075; // r_ACA2ns, units cm
+data->P_cerebral[17] = 0.036; // r_PCoAns, units cm
+data->P_cerebral[18] = 0.04; // r_ACoAn, units cm
+data->P_cerebral[19] = 13.15; // l_ICAns, units cm
+data->P_cerebral[20] = 4.92; // l_BAn, units cm
+data->P_cerebral[21] = 7.25; // l_MCAns, units cm
+data->P_cerebral[22] = 1.0; // l_PCA1ns, units cm
+data->P_cerebral[23] = 1.57; // l_ACA1ns, units cm
+data->P_cerebral[24] = 4.72; // l_PCA2ns, units cm
+data->P_cerebral[25] = 0.672; // l_ACA2ns, units cm
+data->P_cerebral[26] = 2.0; // l_PCoAns, units cm
+data->P_cerebral[27] = 0.5; // l_ACoAn, units cm
+data->P_cerebral[28] = 0.155; // k_ven, units mL^-1
+data->P_cerebral[29] = 12.0; // k_MCAs
+data->P_cerebral[30] = 0.077; // k_E, units mL^-1
+data->P_cerebral[31] = -2.5; // P_v1, units mmHg
+data->P_cerebral[32] = 10.1; // V_dn, units mL
+data->P_cerebral[33] = 200.0 * pow(10,-3); // C_dn, units mL mmHg^-1
+data->P_cerebral[34] = 5.4; // R_dn, units mmHg s mL^-1
+data->P_cerebral[35] = 13.1 * pow(10,3); // k_R, units mmHg^-3 s mL^-1
+data->P_cerebral[36] = 12.5; // q_n, units mL s^-1
+data->P_cerebral[37] = 0.38; // W_ICAs
+data->P_cerebral[38] = 0.24; // W_BA
+data->P_cerebral[39] = 0.12; // W_PCA1s
+data->P_cerebral[40] = 0.08; // W_ACA1s
+data->P_cerebral[41] = 0.30; // W_MCAs
+data->P_cerebral[42] = 0.12; // W_PCA2s
+data->P_cerebral[43] = 0.08; // W_ACA2s
+
+data->P_cerebral[44] = 0.004/133.322; // mu, units poise
+
+// Cerebrlovascular control mechanisms
+data->P_cerebral[45] = 20.0; // tau_autjs, units s
+data->P_cerebral[46] = 0.9; // G_autjs
+data->P_cerebral[47] = 40.0; // tau_CO2js, units s
+data->P_cerebral[48] = 4.0; // G_CO2js
+data->P_cerebral[49] = 7.0; // sat2
+data->P_cerebral[50] = 0.4; // sat1
+data->P_cerebral[51] = 15.0; // k_CO2
+data->P_cerebral[52] = 0.5; // b_CO2
+data->P_cerebral[53] = 40.0; // P_aCO2njs, units mmHg
+
+
+
+
+
+
+
 for(i = 1; i<argc; i++){
   data->argv[i] = atof(argv[i]);
 }

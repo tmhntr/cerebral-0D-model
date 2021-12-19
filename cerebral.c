@@ -170,9 +170,9 @@ double q_nps = q_n * W_PCA2s;
 // C_d0ps = C_dn * W_PCA2s;
 //
 // These values are k_R * weight factor
-double k_Rms = 4.2848 * pow(10,4);//k_R * W_MCAs;
-double k_Ras = 1.6060 * pow(10,5);//k_R * W_ACA2s;
-double k_Rps = 1.0777 * pow(10,5);//k_R * W_PCA2s;
+double k_Rms = k_R / W_MCAs;
+double k_Ras = k_R / W_ACA2s;
+double k_Rps = k_R / W_PCA2s;
 
 
 

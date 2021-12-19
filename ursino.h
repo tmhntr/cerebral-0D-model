@@ -73,6 +73,8 @@ realtype temp;
 // BAROREFLEX
 realtype SNA, PNA, SNA_buffer[5000], PNA_buffer[500];
 
+realtype P_cerebral[54]
+
 // realtype x0_aut[6], x_aut[6], A_CO2[6], x0_CO2[6], x_CO2[6], C_dqs[6], dC_dqs[6];
 
 } *UserData;
