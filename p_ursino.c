@@ -23,7 +23,7 @@ data->p_ursino[3]  = 150.0;          // Meqex
 // // is pursino11 up for time dependent baroreflex modulation?
 // // revised pursino11 from 60/60 to 60/70 according to the PhysioNet program.
 // data->p_ursino[11] = 60.0/70.0;      // Heart Rate; units (beats/s), baseline duration of cardiac cycle. Severi cycle length: 0.825 s per beat.
-// data->p_ursino[12] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
+data->p_ursino[12] = 12/70.0;        // baseline respiration rate; units: s/breath; ref. Heldt 2002
 // data->p_ursino[13] = 0;              // cuinf: concentration of U in infused fluid; units: mmol/L
 // data->p_ursino[14] = 0;              // cnainf: concentration of Na in infused fluid; units: mmol/L
 // data->p_ursino[15] = 0;              // ckinf: concentration of K in infused fluid; units: mmol/L
