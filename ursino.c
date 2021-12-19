@@ -324,6 +324,15 @@ while(cardiac_iter<numBeats){
   fprintf(stateFile, "\t%f", data->q_pr);
   if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "q_pr");
 
+  fprintf(stateFile, "\t%f", data->SNA);
+  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "SNA");
+
+  fprintf(stateFile, "\t%f", data->PNA);
+  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "PNA");
+
+  fprintf(stateFile, "\t%f", deltaHR);
+  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "deltaHR");
+
   fprintf(stateFile,"\n");
   if (headersPrinted == 0) headersPrinted = 1;
 // *****************************************************************************
