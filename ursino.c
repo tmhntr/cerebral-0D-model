@@ -42,10 +42,10 @@ N_Vector 	y_ursino = N_VNew_Serial(NEQ); // allocated memory to pointer.
 //******************************************************************************
 
 // Blood pressure states
-Ith(y_ursino, 0 + 1)   = 40.7;  		// % Pup, 	units: mmHg
-Ith(y_ursino, 1 + 1)   = 40.0;  		// % Pk, 		units: mmHg.=
-Ith(y_ursino, 2 + 1)   = 40.0;     // % Psp, 	units: mmHg
-Ith(y_ursino, 3 + 1)   = 40.0;  		// % Pll, 	units: mmHg
+Ith(y_ursino, 0 + 1)   = 35.7;  		// % Pup, 	units: mmHg
+Ith(y_ursino, 1 + 1)   = 35.0;  		// % Pk, 		units: mmHg.=
+Ith(y_ursino, 2 + 1)   = 35.0;     // % Psp, 	units: mmHg
+Ith(y_ursino, 3 + 1)   = 35.0;  		// % Pll, 	units: mmHg
 Ith(y_ursino, 4 + 1)   = 5.2;  		// % Pab, 	units: mmHg
 
 // Thoracic pressure (pressure in thoracic cavity NOT blood pressure)
