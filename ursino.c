@@ -199,7 +199,6 @@ if (atoi(argv[2]) == 1){
 	}
 	fclose(expFile);
 }
-//******************************************************************************
 
 
 
@@ -256,7 +255,7 @@ while(cardiac_iter<numBeats){
   // Cardiac interval calculations
   if(data->p_ursino[1] >= data->p_ursino[4] + data->RR[0]){
 
-    fprintf(endDiastolicFile, "%f/n", data->p_ursino[1]);
+    fprintf(endDiastolicFile, "%f\n", data->p_ursino[1]);
 
   	data->p_ursino[4]  		= data->p_ursino[1];
 		data->RR[2] 						= data->RR[1];
@@ -333,20 +332,20 @@ while(cardiac_iter<numBeats){
   fprintf(stateFile, "\t%f", data->q_pr);
   if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "q_pr");
 
-  fprintf(stateFile, "\t%f", data->SNA);
-  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "SNA");
-
-  fprintf(stateFile, "\t%f", data->PNA);
-  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "PNA");
-
-  fprintf(stateFile, "\t%f", deltaHR);
-  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "deltaHR");
-
-  fprintf(stateFile, "\t%f", Ith(y_ursino, 49 + 1));
-  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_aff");
-
-  fprintf(stateFile, "\t%f", Ith(y_ursino, 50 + 1));
-  if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_demand");
+  // fprintf(stateFile, "\t%f", data->SNA);
+  // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "SNA");
+  //
+  // fprintf(stateFile, "\t%f", data->PNA);
+  // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "PNA");
+  //
+  // fprintf(stateFile, "\t%f", deltaHR);
+  // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "deltaHR");
+  //
+  // fprintf(stateFile, "\t%f", Ith(y_ursino, 49 + 1));
+  // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_aff");
+  //
+  // fprintf(stateFile, "\t%f", Ith(y_ursino, 50 + 1));
+  // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_demand");
 
   fprintf(stateFile,"\n");
   if (headersPrinted == 0) headersPrinted = 1;
