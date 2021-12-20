@@ -20,6 +20,13 @@ elastance:
 // my standard headers and functions.
 #include "ursino.h"
 
+double randomPar(double inputPar, int* index, FILE *parameterFile, double* randomPars) {
+  double parameter = inputPar * randomPars[(*index)];
+  (*index)++;
+  fprintf(parameterFile, "%0.50f\t", parameter);
+  return parameter;
+}
+
 int main (int argc, char *argv[])
 {
 // exit(-1);
@@ -28,7 +35,7 @@ realtype t, tout;
 int iout, NOUT, retval, i;
 
 char *str, *stateFilename, *outputInfoFilename;
-FILE *stateFile, *outputInfoFile, *endDiastolicFile, *pinkFile, *expFile;
+FILE *stateFile, *outputInfoFile, *endDiastolicFile, *pinkFile, *expFile, *randomParFile, *parameterFile;
 UserData 	data; // instance pointer.
 data 		= (UserData) malloc(sizeof *data); // now it is created. // allocated memory to pointer.
 
@@ -61,7 +68,7 @@ Ith(y_ursino, 9 + 1)  = 80.0;  		// % Pa, aortic pressure, units: mmHg.
 Ith(y_ursino, 10 + 1)  = 5.0;     	// % Psup, 		units: mmHg
 Ith(y_ursino, 11 + 1)  = 5.0;     	// % Pinf, 		units: mmHg
 Ith(y_ursino, 12 + 1)  = 5.60;   		// % Pr, 			units: mmHg. right ventricle pressure.
-Ith(y_ursino, 13 + 1)  = 25.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
+Ith(y_ursino, 13 + 1)  = 20.66;  		// % Ppa,			units: mmHg. Pulmonary artery pressure.
 Ith(y_ursino, 14 + 1)  = 5.99;  		// % Ppv, 		units: mmHg. Pulmonary vein pressure.
 
 // Atrial states (BP and compliances)
@@ -129,8 +136,31 @@ CVodeSStolerances(cvode_mem, ATOL, RTOL);
 CVDense(cvode_mem, NEQ);
 CVodeSetMaxStep(cvode_mem,DELTAT);
 
-#include "p_ursino.c"
+str = malloc(128*sizeof(char)); sprintf(str,"randomPars.dat");
+randomParFile = fopen(str, "r");
+free(str);
 
+for (int i = 0; i < atoi(argv[1]); i++) {
+  fscanf(randomParFile, "%*[^\n]");
+}
+
+int numPars = 93;
+double randomPars[numPars] = {0.0};
+for (int i = 0; i < numPars; i++){
+    fscanf(randomParFile, "%lf", &randomPars[i]);
+}
+fclose(randomParFile);
+
+
+
+str = malloc(128*sizeof(char)); sprintf(str,"parameters.%05d.dat", atoi(argv[1]));
+parameterFile = fopen(str, "w");
+free(str);
+
+int randomParIndex = 0;
+
+#include "p_ursino.c"
+fclose(parameterFile);
 
 
 //******************************************************************************

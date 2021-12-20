@@ -126,11 +126,11 @@ Qupi is the inlet flow through the upper body,
 Qupo is the outlet flow through the upper body,
 Rup1 & Rup2, are the resistances of each. */
 // Y[9] is P_a , Y[0] is P_up
-data->Qupi	= (Y[9] - Y[0])	/(data->p_R[13] * sigma_R)	;
+data->Qupi	= (Y[9] - Y[0])	/(data->p_R[10] * sigma_R)	;
 
 // Y[0] is P_up, Y[10] is P_sup
 if (Y[0] > Y[10]){
-	data->Qupo	 = (Y[0]   - Y[10])	/data->p_R[14]	;
+	data->Qupo	 = (Y[0]   - Y[10])	/data->p_R[11]	;
 }else{
 	data->Qupo= 0;
 }
@@ -143,10 +143,10 @@ Y[9] is P_a,
 Y[2] is P_sp,
 Y[4] is P_ab
 */
-data->Qsp1 = (Y[9] - Y[2])	/(data->p_R[15] * sigma_R)	;
+data->Qsp1 = (Y[9] - Y[2])	/(data->p_R[12] * sigma_R)	;
 
 if(Y[4] < Y[2]){
-  data->Qsp2 = (Y[2]   - Y[4])	/data->p_R[16]	;
+  data->Qsp2 = (Y[2]   - Y[4])	/data->p_R[13]	;
 }else{
   data->Qsp2 = 0;
 }
@@ -167,8 +167,8 @@ if(Y[4] < Y[2]){
 
 /*************** REGULAR KIDNEY ************************************/
 
-data->Qk1 = (Y[9] - Y[1])/data->p_R[17];
-data->Qk2 = (Y[1] - Y[4])/data->p_R[18];
+data->Qk1 = (Y[9] - Y[1])/data->p_R[14];
+data->Qk2 = (Y[1] - Y[4])/data->p_R[15];
 
 /*************************** LOWER BODY ***********************************
 Qll1 & Qll2 are the lower body/legs flow,
@@ -176,10 +176,10 @@ data->p_R[43] & data->p_R[44] are their resistances.
 Y[12] is P_a,
 Y[6] is P_ll,
 Y[7] is P_ab.  */
-data->Qll1	 	= (Y[9] - Y[3])	/(data->p_R[43]* sigma_R);
+data->Qll1	 	= (Y[9] - Y[3])	/(data->p_R[16]* sigma_R);
 
 if (Y[3] > Y[4]){
-	data->Qll2	= (Y[3]   - Y[4])	/data->p_R[44]	;
+	data->Qll2	= (Y[3]   - Y[4])	/data->p_R[17]	;
 }else{
 	data->Qll2	= 0;
 }
@@ -201,12 +201,12 @@ Pumping function for the heart
 
 /* Y[3] is Pup, pressure in upper body, head and neck.
  		eq. 22, appendix 2, p585.*/
-dY[0]     = (data->Qupi - data->Qupo) / data->p_C[10];
+dY[0]     = (data->Qupi - data->Qupo) / data->p_C[7];
 
 
 /*************** kidney ************************************/
 /*************** original formula **************************/
-dY[1]     = (data->Qk1 - data->Qk2) / data->p_C[13]; // % Y[5-1] is Pk, Ck is non-zero. eq. 23, appendix 2, p585.
+dY[1]     = (data->Qk1 - data->Qk2) / data->p_C[9]; // % Y[5-1] is Pk, Ck is non-zero. eq. 23, appendix 2, p585.
 
 /*************** detailed formula **************************/
 // for(i = 0; i<12; i++){
@@ -226,10 +226,10 @@ dY[1]     = (data->Qk1 - data->Qk2) / data->p_C[13]; // % Y[5-1] is Pk, Ck is no
 
 
 // % Y[5] is Psp, splanchic pressure at inlet.
-dY[2]     = (data->Qsp1 - data->Qsp2) / data->p_C[11];
+dY[2]     = (data->Qsp1 - data->Qsp2) / data->p_C[8];
 
 // % Y[6] is Pll, legs pressure.
-dY[3]     = (data->Qll1 - data->Qll2) / data->p_C[26];
+dY[3]     = (data->Qll1 - data->Qll2) / data->p_C[10];
 
 // % Y[7] is Pab.
 dY[4]     = (data->Qk2 + data->Qsp2 + data->Qll2 - data->Qab) / data->p_C[2] ;
