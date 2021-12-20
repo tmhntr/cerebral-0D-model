@@ -206,7 +206,7 @@ int headersPrinted = 1;
 //*** Parse input files ********************************************************
 //******************************************************************************
 
-str = malloc(128*sizeof(char)); sprintf(str,"input/pinkNoise.dat", atoi(argv[1]));
+str = malloc(128*sizeof(char)); sprintf(str,"input/pinkNoise.dat");
 pinkFile = fopen(str, "r");
 free(str);
 
@@ -222,7 +222,7 @@ fclose(pinkFile);
 
 double expRand[numBeats] = {0.0};
 if (atoi(argv[2]) == 1){
-	str = malloc(128*sizeof(char)); sprintf(str,"input/expNoise.dat", atoi(argv[1]));
+	str = malloc(128*sizeof(char)); sprintf(str,"input/expNoise.dat");
 	expFile = fopen(str, "r");
 	free(str);
 
