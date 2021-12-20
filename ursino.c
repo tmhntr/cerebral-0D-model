@@ -144,8 +144,8 @@ for (int i = 0; i < atoi(argv[1]); i++) {
   fscanf(randomParFile, "%*[^\n]");
 }
 
-int numPars = 93;
-double randomPars[93] = {0.0};
+int numPars = 95;
+double randomPars[100] = {0.0};
 for (int i = 0; i < numPars; i++){
     fscanf(randomParFile, "%lf", &randomPars[i]);
 }
