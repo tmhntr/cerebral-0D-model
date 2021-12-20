@@ -160,13 +160,13 @@ if (atoi(argv[2]) == 0){
   sprintf(str,"endDiastolicTime.%05d.AF.dat", atoi(argv[1]));
 }
 endDiastolicFile = fopen(str, "w");
+
+
+
 free(str);
-
-
-
 free(stateFilename);
-free(outputInfoFilename);
-free(postprocessedFilename);
+// free(outputInfoFilename);
+// free(postprocessedFilename);
 
 int headersPrinted = 1;
 
