@@ -149,16 +149,7 @@ data->p_ursino[37]  = 3; 			// T_e_R, units: s
 data->p_ursino[38]  = 0.2*0.55; 		// G_eff_R, units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
 data->p_ursino[39]  = 25.0; 			// tau_s, simplified from equation 23, units: s
 data->p_ursino[40]  = 0.8; 		// tau_v, simplified from eq. 28; units: s
-// state vectors for baroreflex
-// data->p_ursino[158]  	= 0.116; 			// x0_P_aff
-// data->p_ursino[159]  	= 0.0903; 			// x0_temp1
-// data->p_ursino[160] 	= 63.49; 			// x1_deltaHR_s;
-// data->p_ursino[161] 	= 2.92; 			// x1_deltaHR_v;
-// data->p_ursino[162] 	= 3.85; 			// x1_sigma_lv;
-// data->p_ursino[163] 	= 3.85; 			// x1_sigma_rv;
-// data->p_ursino[164] 	= 25.42; 			// x1_sigma_V;
-// data->p_ursino[165] 	= 3.84; 			// x1_sigma_R;
-// data->p_ursino[166] 	= -699.0; 			// sigma_V
+
 
 data->p_ursino[41] 	= atof(argv[4]);//*atof(argv[29]); 		// HR0 units: bpm
 

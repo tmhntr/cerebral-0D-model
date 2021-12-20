@@ -69,7 +69,6 @@ Ith(y_ursino, 15 + 1)  = 1.0; 			// Cla variable, left atrial elastance.
 Ith(y_ursino, 16 + 1)  = 2.0;   		//  Cra variable, right atrial elastance.
 Ith(y_ursino, 17 + 1)  = 8.0;   		//  left atrial pressure initial condition, mmHg.
 Ith(y_ursino, 18 + 1)  = 1.0;   		//  right atrial pressure initial condition, mmHg.
-//******************************************************************************
 
 
 
@@ -100,7 +99,6 @@ for(i=31;i<=42;i++) {
 for(i=43;i<=48;i++) {
   Ith(y_ursino, i + 1) = 0.004; // C_djs
 }
-//******************************************************************************
 
 
 
@@ -118,7 +116,6 @@ Ith(y_ursino, 54 + 1)  = 1.0; // sigma_rv
 Ith(y_ursino, 55 + 1)  = 0.0; // sigma_V
 Ith(y_ursino, 56 + 1)  = 1.0; // sigma_R
 
-//******************************************************************************
 
 
 
@@ -134,8 +131,6 @@ CVodeSetMaxStep(cvode_mem,DELTAT);
 
 #include "p_ursino.c"
 
-//******************************************************************************
-
 
 
 //******************************************************************************
@@ -143,16 +138,29 @@ CVodeSetMaxStep(cvode_mem,DELTAT);
 //******************************************************************************
 
 stateFilename = malloc(32*sizeof(char));
-sprintf(stateFilename,"statesOutput.%d.dat", atoi(argv[1])); // argv2
-stateFile = fopen(stateFilename,"w+");
+if (atoi(argv[2]) == 0){
+  sprintf(stateFilename,"statesOutput.%05d.NSR.dat", atoi(argv[1]));
+} else {
+  sprintf(stateFilename,"statesOutput.%05d.AF.dat", atoi(argv[1]));
+}
+stateFile = fopen(stateFilename,"w");
 
-outputInfoFilename = malloc(32*sizeof(char));
-sprintf(outputInfoFilename,"outputInfo.%d.txt", atoi(argv[1])); // argv2
-outputInfoFile = fopen(outputInfoFilename,"w+");
+// outputInfoFilename = malloc(32*sizeof(char));
+// sprintf(outputInfoFilename,"outputInfo.%d.txt", atoi(argv[1])); // argv2
+// outputInfoFile = fopen(outputInfoFilename,"w");
 
-postprocessedFilename = malloc(32*sizeof(char));
-sprintf(postprocessedFilename,"result.%d.txt", atoi(argv[1])); // argv2
-postprocessedFile = fopen(postprocessedFilename,"w+");
+// postprocessedFilename = malloc(32*sizeof(char));
+// sprintf(postprocessedFilename,"result.%d.txt", atoi(argv[1])); // argv2
+// postprocessedFile = fopen(postprocessedFilename,"w");
+
+str = malloc(128*sizeof(char));
+if (atoi(argv[2]) == 0){
+  sprintf(str,"endDiastolicTime.%05d.NSR.dat", atoi(argv[1]));
+} else {
+  sprintf(str,"endDiastolicTime.%05d.AF.dat", atoi(argv[1]));
+}
+endDiastolicFile = fopen(str, "w");
+free(str);
 
 
 
@@ -160,8 +168,7 @@ free(stateFilename);
 free(outputInfoFilename);
 free(postprocessedFilename);
 
-int headersPrinted = 0;
-//******************************************************************************
+int headersPrinted = 1;
 
 
 
@@ -246,8 +253,10 @@ while(cardiac_iter<numBeats){
   for(int p = p_l-1; p>0; p--) data->PNA_buffer[p] = data->PNA_buffer[p-1];
   data->PNA_buffer[0] = data->PNA;
 
-  // Timing Parameters
+  // Cardiac interval calculations
   if(data->p_ursino[1] >= data->p_ursino[4] + data->RR[0]){
+
+    fprintf(endDiastolicFile, "%f/n", data->p_ursino[1]);
 
   	data->p_ursino[4]  		= data->p_ursino[1];
 		data->RR[2] 						= data->RR[1];
@@ -349,8 +358,9 @@ while(cardiac_iter<numBeats){
 
 
   fclose(stateFile);
-  fclose(outputInfoFile);
-  fclose(postprocessedFile);
+  // fclose(outputInfoFile);
+  // fclose(postprocessedFile);
+  fclose(endDiastolicFile);
 
   N_VDestroy_Serial(y_ursino);
 	// emxDestroyArray_real_T(X);
