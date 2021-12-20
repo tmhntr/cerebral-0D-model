@@ -136,16 +136,16 @@ CVodeSStolerances(cvode_mem, ATOL, RTOL);
 CVDense(cvode_mem, NEQ);
 CVodeSetMaxStep(cvode_mem,DELTAT);
 
-str = malloc(128*sizeof(char)); sprintf(str,"randomPars.dat");
+str = malloc(128*sizeof(char)); sprintf(str,"input/randomPars.dat");
 randomParFile = fopen(str, "r");
 free(str);
 
 for (int i = 0; i < atoi(argv[1]); i++) {
   fscanf(randomParFile, "%*[^\n]");
 }
-
+// hugo ariel programmer at cs company for echo images
 int numPars = 95;
-double randomPars[100] = {0.0};
+double randomPars[100] = {1.0};
 for (int i = 0; i < numPars; i++){
     fscanf(randomParFile, "%lf", &randomPars[i]);
 }
@@ -206,12 +206,15 @@ int headersPrinted = 1;
 //*** Parse input files ********************************************************
 //******************************************************************************
 
-str = malloc(128*sizeof(char)); sprintf(str,"samples/pinkNoise_%05d.dat", atoi(argv[1]));
+str = malloc(128*sizeof(char)); sprintf(str,"input/pinkNoise.dat", atoi(argv[1]));
 pinkFile = fopen(str, "r");
 free(str);
 
 double pinkNoise[numBeats] = {0.0};
 
+for (int i = 0; i < atoi(argv[1]); i++) {
+  fscanf(pinkFile, "%*[^\n]");
+}
 for (int i = 0; i < numBeats; i++){
     fscanf(pinkFile, "%lf", &pinkNoise[i]);
 }
@@ -219,11 +222,13 @@ fclose(pinkFile);
 
 double expRand[numBeats] = {0.0};
 if (atoi(argv[2]) == 1){
-	str = malloc(128*sizeof(char)); sprintf(str,"samples/expRand_%05d.dat", atoi(argv[1]));
+	str = malloc(128*sizeof(char)); sprintf(str,"input/expNoise.dat", atoi(argv[1]));
 	expFile = fopen(str, "r");
 	free(str);
 
-
+  for (int i = 0; i < atoi(argv[1]); i++) {
+    fscanf(expFile, "%*[^\n]");
+  }
 	for (int i = 0; i < numBeats; i++){
 	    fscanf(expFile, "%lf", &expRand[i]);
 	}
