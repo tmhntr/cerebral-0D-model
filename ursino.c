@@ -140,16 +140,18 @@ str = malloc(128*sizeof(char)); sprintf(str,"input/randomPars.dat");
 randomParFile = fopen(str, "r");
 free(str);
 
-for (int i = 0; i < atoi(argv[1]); i++) {
-  fscanf(randomParFile, "%*[^\n]");
+str = malloc(2040*sizeof(char));
+for (int i = 0; i <= atoi(argv[1]); i++) {
+  fgets(str, sizeof(str), randomParFile)
 }
 int numPars = 95;
 double randomPars[100] = {1.0};
 for (int i = 0; i < numPars; i++){
-    fscanf(randomParFile, "%lf", &randomPars[i]);
+    sscanf(str, "%lf", &randomPars[i]);
     // printf("%f\t", randomPars[i]);
 }
 fclose(randomParFile);
+free(str);
 
 printf("%f\n", randomPars[0]);
 
