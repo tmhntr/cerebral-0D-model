@@ -149,9 +149,11 @@ for (int i = 0; i < numPars; i++){
     fscanf(randomParFile, "%lf", &randomPars[i]);
     // printf("%f\t", randomPars[i]);
 }
-// printf("\n");
 fclose(randomParFile);
 
+printf("%f\n", randomPars[0]);
+
+return 0;
 
 
 str = malloc(128*sizeof(char)); sprintf(str,"parameters.%05d.dat", atoi(argv[1]));
@@ -163,7 +165,6 @@ int randomParIndex = 0;
 #include "p_ursino.c"
 fclose(parameterFile);
 
-return 0;
 
 //******************************************************************************
 //*** Input/output setup *******************************************************
