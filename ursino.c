@@ -142,7 +142,7 @@ free(str);
 
 str = malloc(2040*sizeof(char));
 for (int i = 0; i <= atoi(argv[1]); i++) {
-  fgets(str, sizeof(str), randomParFile)
+  fgets(str, sizeof(str), randomParFile);
 }
 int numPars = 95;
 double randomPars[100] = {1.0};
