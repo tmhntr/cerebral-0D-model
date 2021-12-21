@@ -140,12 +140,14 @@ str = malloc(128*sizeof(char)); sprintf(str,"input/randomPars.dat");
 randomParFile = fopen(str, "r");
 free(str);
 
-str = malloc(128*sizeof(char));
+// str = malloc(128*sizeof(char));
+// for (int i = 0; i < atoi(argv[1]); i++) {
+//   fgets(str, 128, randomParFile);
+// }
+// free(str);
 for (int i = 0; i < atoi(argv[1]); i++) {
-  fgets(str, 128, randomParFile);
+  fscanf(randomParFile, "%*[^\n]\n");
 }
-free(str);
-
 int numPars = 95;
 double randomPars[100] = {1.0};
 for (int i = 0; i < numPars; i++){
@@ -219,7 +221,7 @@ free(str);
 double pinkNoise[numBeats] = {0.0};
 
 for (int i = 0; i < atoi(argv[1]); i++) {
-  fscanf(pinkFile, "%*[^\n]");
+  fscanf(pinkFile, "%*[^\n]\n");
 }
 for (int i = 0; i < numBeats; i++){
     fscanf(pinkFile, "%lf", &pinkNoise[i]);
