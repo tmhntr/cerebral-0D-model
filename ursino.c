@@ -148,8 +148,11 @@ int numPars = 95;
 double randomPars[100] = {1.0};
 for (int i = 0; i < numPars; i++){
     fscanf(randomParFile, "%lf", &randomPars[i]);
+    printf("%f\t", randomPars[i]);
 }
+printf("\n");
 fclose(randomParFile);
+return 0;
 
 
 
