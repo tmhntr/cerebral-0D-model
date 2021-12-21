@@ -143,16 +143,14 @@ free(str);
 for (int i = 0; i < atoi(argv[1]); i++) {
   fscanf(randomParFile, "%*[^\n]");
 }
-// hugo ariel programmer at cs company for echo images
 int numPars = 95;
 double randomPars[100] = {1.0};
 for (int i = 0; i < numPars; i++){
     fscanf(randomParFile, "%lf", &randomPars[i]);
-    printf("%f\t", randomPars[i]);
+    // printf("%f\t", randomPars[i]);
 }
-printf("\n");
+// printf("\n");
 fclose(randomParFile);
-return 0;
 
 
 
@@ -165,6 +163,7 @@ int randomParIndex = 0;
 #include "p_ursino.c"
 fclose(parameterFile);
 
+return 0;
 
 //******************************************************************************
 //*** Input/output setup *******************************************************
