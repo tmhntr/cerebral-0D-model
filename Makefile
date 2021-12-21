@@ -1,7 +1,7 @@
 # makefile.
 # customized for TH/pm3
 # change all DRIVER instances to whatever it needs to be.
-whoisthis=$USER
+whoisthis=${USER}
 #
 #
 CC       	= mpicc
