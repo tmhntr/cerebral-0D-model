@@ -151,9 +151,9 @@ for (int i = 0; i < numPars; i++){
 }
 fclose(randomParFile);
 
-printf("%f\n", randomPars[0]);
-
-return 0;
+// printf("%f\n", randomPars[0]);
+//
+// return 0;
 
 
 str = malloc(128*sizeof(char)); sprintf(str,"parameters.%05d.dat", atoi(argv[1]));
