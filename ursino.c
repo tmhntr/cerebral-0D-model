@@ -141,16 +141,19 @@ randomParFile = fopen(str, "r");
 free(str);
 
 for (int i = 0; i < atoi(argv[1]); i++) {
-  fscanf(randomParFile, "%*[^\n]");
+  fscanf(randomParFile, "%*[^\n]\n");
 }
-// hugo ariel programmer at cs company for echo images
 int numPars = 95;
 double randomPars[100] = {1.0};
 for (int i = 0; i < numPars; i++){
     fscanf(randomParFile, "%lf", &randomPars[i]);
+    // printf("%f\t", randomPars[i]);
 }
 fclose(randomParFile);
 
+printf("%f\n", randomPars[0]);
+
+return 0;
 
 
 str = malloc(128*sizeof(char)); sprintf(str,"parameters.%05d.dat", atoi(argv[1]));
@@ -213,7 +216,7 @@ free(str);
 double pinkNoise[numBeats] = {0.0};
 
 for (int i = 0; i < atoi(argv[1]); i++) {
-  fscanf(pinkFile, "%*[^\n]");
+  fscanf(pinkFile, "%*[^\n]\n");
 }
 for (int i = 0; i < numBeats; i++){
     fscanf(pinkFile, "%lf", &pinkNoise[i]);
@@ -227,7 +230,7 @@ if (atoi(argv[2]) == 1){
 	free(str);
 
   for (int i = 0; i < atoi(argv[1]); i++) {
-    fscanf(expFile, "%*[^\n]");
+    fscanf(expFile, "%*[^\n]\n");
   }
 	for (int i = 0; i < numBeats; i++){
 	    fscanf(expFile, "%lf", &expRand[i]);
