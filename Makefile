@@ -1,14 +1,14 @@
 # makefile.
 # customized for TH/pm3
 # change all DRIVER instances to whatever it needs to be.
-whoisthis=$USER
+whoisthis=${USER}
 #
 #
 CC       	= mpicc
 CFLAGS   	= -g -O2
-INCLUDE  	= /home/${whoisthis}/software/sundials/instdir/include
+INCLUDE  	= /home/pm3user/software/sundials/instdir/include
 MY_APP	 	= cbf
-LIB	 			= -L/home/${whoisthis}/software/sundials/instdir/lib
+LIB	 			= -L/home/pm3user/software/sundials/instdir/lib
 
 cbf:	ursino.c
 	${CC} ${CFLAGS} -I${INCLUDE} -c ursino.c -o ursino.o

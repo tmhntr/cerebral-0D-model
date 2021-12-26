@@ -19,14 +19,14 @@
 #define ATOL			RCONST(1.0e-6)   /* scalar absolute tolerance components */
 #define MAXSTEPS	500000
 
-#define NEQ  			91               /* number of equations, ODEs */
+#define NEQ  			57               /* number of equations, ODEs */
 #define N_PARAMETER 172         	// number of parameters
-#define DELTAT 		0.001  	// time step, seconds. You cannot have time step bigger than a few milliseconds as there are fast processes going on.
+#define DELTAT 		0.01  	// time step, seconds. You cannot have time step bigger than a few milliseconds as there are fast processes going on.
 #define debg			1 		// this is always 1.
 
 // a check to choose if we want to output all or few state variables
 // 1 means all, 0 means only important pressures.
-#define numBeats 	1000 // this is total number of beats in a simulation run
+#define numBeats 	6000 // this is total number of beats in a simulation run
 
 typedef struct {
 /* Model parameters, some of which are time dependent. */
@@ -73,6 +73,8 @@ realtype temp;
 // BAROREFLEX
 realtype SNA, PNA, SNA_buffer[5000], PNA_buffer[500];
 
+realtype P_cerebral[54];
+
 // realtype x0_aut[6], x_aut[6], A_CO2[6], x0_CO2[6], x_CO2[6], C_dqs[6], dC_dqs[6];
 
 } *UserData;
@@ -80,6 +82,7 @@ realtype SNA, PNA, SNA_buffer[5000], PNA_buffer[500];
 #include "f_ursino.c"
 // #include "ranlib.c"
 // #include "rnglib.c"
+
 
 static int check_retval(void *returnvalue, const char *funcname, int opt)
 {

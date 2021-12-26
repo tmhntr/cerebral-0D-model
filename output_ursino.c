@@ -30,9 +30,9 @@
 
 	// can choose to only output after iout reaches a certain percentage of NOUT i.e 90%
 	// if(tout>=SIMTIME-10.0){
-	fprintf(cardiac_output_file, "%f\t", tout);
-	fprintf(cardiac_output_file, "%f\t",Ith(y_ursino, 13)); // arterial pressure
-	fprintf(cardiac_output_file,"\n");
+	// fprintf(cardiac_output_file, "%f\t", tout);
+	// fprintf(cardiac_output_file, "%f\t",Ith(y_ursino, 13)); // arterial pressure
+	// fprintf(cardiac_output_file,"\n");
 
 
 
@@ -51,44 +51,40 @@
 	21) P_B
 	*/
 // if ((int)(tout*1000) % 10 == 0){
-	fprintf(cerebral, "%f\t", tout);
 
+	fprintf(cerebral, "%f", tout);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "time");
 
-	// fprintf(cerebral, "%f\t%f\t%f\t%f\t%f\t%f\t",data->q_ml, data->q_al, data->q_pl, data->q_mr, data->q_ar, data->q_pr);
-	//
-	//
-	// fprintf(cerebral, "%f\t%f\t%f\t%f\t%f\t%f\t",Ith(y_ursino, 13), Ith(y_ursino, 14), Ith(y_ursino, 88), Ith(y_ursino, 89),Ith(y_ursino, 90), Ith(y_ursino, 91));
-	//
-	// for(i=54;i<=65;i++) {
-	// 	fprintf(cerebral, "%f\t", Ith(y_ursino, i));
-	// }
+  fprintf(cerebral, "\t%f", Ith(y_ursino, 10));
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "P_a");
 
-	/* outputs:
-q_ml
-q_al
-q_pl
-q_mr
-q_ar
-q_pr
-q_ICAl
-q_ICAr
-q_MCAl
-q_MCAr
-q_ACAl
-q_ACAr
-q_PCAl
-q_PCAr
-q_PCoAl
-q_PCoAr
-*/
-  // fprintf(cerebral, "%f\t",Ith(y_ursino, 13)); // arterial pressure
-	// fprintf(cerebral, "%f\t%f\t%f\t%f\t%f\t%f\t",data->q_ml, data->q_al, data->q_pl, data->q_mr, data->q_ar, data->q_pr);
-	fprintf(cerebral, "%f\t",data->q_ICAl);
-	fprintf(cerebral, "%f\t",data->temp); // currently P_PCAl
-	fprintf(cerebral, "%f\t",Ith(y_ursino, 55));
-	fprintf(cerebral, "%f\t",Ith(y_ursino, 78));
-	fprintf(cerebral, "%f\t",Ith(y_ursino, 79));
-	fprintf(cerebral, "%f\t",Ith(y_ursino, 80));
+	fprintf(cerebral, "\t%f", data->q_ml);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_ml");
+
+  fprintf(cerebral, "\t%f", data->q_al);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_al");
+
+  fprintf(cerebral, "\t%f", data->q_pl);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_pl");
+
+  fprintf(cerebral, "\t%f", data->q_mr);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_mr");
+
+  fprintf(cerebral, "\t%f", data->q_ar);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_ar");
+
+  fprintf(cerebral, "\t%f", data->q_pr);
+  if (headersPrinted == 0) fprintf(cerebral, "%s", "q_pr");
+
+  fprintf(cerebral,"\n");
+  headersPrinted = 1;
+
+	// fprintf(cerebral, "%f\t",data->q_ICAl);
+	// fprintf(cerebral, "%f\t",data->temp); // currently P_PCAl
+	// fprintf(cerebral, "%f\t",Ith(y_ursino, 55));
+	// fprintf(cerebral, "%f\t",Ith(y_ursino, 78));
+	// fprintf(cerebral, "%f\t",Ith(y_ursino, 79));
+	// fprintf(cerebral, "%f\t",Ith(y_ursino, 80));
 	// fprintf(cerebral, "%f\t",data->q_ICAr);
 	// fprintf(cerebral, "%f\t",data->q_MCAl);
 	// fprintf(cerebral, "%f\t",data->q_MCAr);
@@ -99,6 +95,5 @@ q_PCoAr
 	// fprintf(cerebral, "%f\t",data->q_PCoAl);
 	// fprintf(cerebral, "%f\t",data->q_PCoAr);
 
-	fprintf(cerebral,"\n");
 // }
 // }
