@@ -1,12 +1,14 @@
 #ifndef CBF_PARAMETERS_H
 #define CBF_PARAMETERS_H
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sundials/sundials_types.h>
-// #include "ursino.h"
 
+#include "CBF_driver.h"
 #define N_PARAMETER 172 // number of parameters
+#define isAFib 0 // hard coded to healthy (not afib)
 
 typedef struct {
     /* Model parameters, some of which are time dependent. */

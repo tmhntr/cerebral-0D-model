@@ -26,9 +26,8 @@
 // a check to choose if we want to output all or few state variables
 // 1 means all, 0 means only important pressures.
 #define numBeats 6000 // this is total number of beats in a simulation run
-#define isAFib 0 // hard coded to healthy (not afib)
 
-int driver();
+int CBF_driver(void* data);
 
 static int check_retval(void* returnvalue, const char* funcname, int opt)
 {

@@ -20,15 +20,15 @@ elastance:
 // my standard headers and functions.
 #include "CBF_driver.h"
 
-int CBF_driver()
+int CBF_driver(void* dataPtr)
 {
     void* cvode_mem; // pointer to memory: the full state lives here.
     realtype t, tout;
     int iout, NOUT, retval, i;
 
     UserData data; // instance pointer.
-    // data = (UserData)malloc(sizeof *data); // now it is created. // allocated memory to pointer.
-    data = CBF_parameters();
+    // // data = (UserData)malloc(sizeof *data); // now it is created. // allocated memory to pointer.
+    data = (UserData)dataPtr;
 
     /* Create serial vector of length NEQ for I.C. and abstol */
     N_Vector y_ursino = N_VNew_Serial(NEQ); // allocated memory to pointer.

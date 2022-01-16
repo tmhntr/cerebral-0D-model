@@ -11,7 +11,7 @@ Lumped parameter model of human circulation including:
 - Baroreflex control mechanism
 
 */
-static int CBF_rightHandSide(realtype t, N_Vector y, N_Vector ydot, void* user_data)
+int CBF_rightHandSide(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 {
 
     realtype Y[NEQ];

@@ -9,6 +9,6 @@
 #include "CBF_driver.h"
 #include "CBF_parameters.h"
 
-static int CBF_rightHandSide(realtype t, N_Vector y, N_Vector ydot, void* user_data);
+int CBF_rightHandSide(realtype t, N_Vector y, N_Vector ydot, void* user_data);
 
 #endif
