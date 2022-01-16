@@ -18,27 +18,17 @@ capacitance: ml/mmHg
 elastance:
 */
 // my standard headers and functions.
-#include "ursino.h"
+#include "CBF_driver.h"
 
-double randomPar(double inputPar, int* index, FILE* parameterFile, double* randomPars)
+int CBF_driver()
 {
-    double parameter = inputPar * randomPars[(*index)];
-    (*index)++;
-    fprintf(parameterFile, "%0.50f\t", parameter);
-    return parameter;
-}
-
-int main(int argc, char* argv[])
-{
-    // exit(-1);
     void* cvode_mem; // pointer to memory: the full state lives here.
     realtype t, tout;
     int iout, NOUT, retval, i;
 
-    char *str, *stateFilename, *outputInfoFilename;
-    FILE *stateFile, *outputInfoFile, *endDiastolicFile, *pinkFile, *expFile, *randomParFile, *parameterFile;
     UserData data; // instance pointer.
-    data = (UserData)malloc(sizeof *data); // now it is created. // allocated memory to pointer.
+    // data = (UserData)malloc(sizeof *data); // now it is created. // allocated memory to pointer.
+    data = CBF_parameters();
 
     /* Create serial vector of length NEQ for I.C. and abstol */
     N_Vector y_ursino = N_VNew_Serial(NEQ); // allocated memory to pointer.
@@ -117,110 +107,10 @@ int main(int argc, char* argv[])
     //******************************************************************************
 
     cvode_mem = CVodeCreate(CV_BDF, CV_NEWTON);
-    CVodeInit(cvode_mem, f_ursino, 0.0, y_ursino);
+    CVodeInit(cvode_mem, CBF_rightHandSide, 0.0, y_ursino);
     CVodeSStolerances(cvode_mem, ATOL, RTOL);
     CVDense(cvode_mem, NEQ);
     CVodeSetMaxStep(cvode_mem, DELTAT);
-
-    str = malloc(128 * sizeof(char));
-    sprintf(str, "input/randomPars.dat");
-    randomParFile = fopen(str, "r");
-    free(str);
-
-    for (int i = 0; i < atoi(argv[1]); i++) {
-        fscanf(randomParFile, "%*[^\n]\n");
-    }
-    int numPars = 95;
-    double randomPars[100] = { 1.0 };
-    for (int i = 0; i < numPars; i++) {
-        fscanf(randomParFile, "%lf", &randomPars[i]);
-        // printf("%f\t", randomPars[i]);
-    }
-    fclose(randomParFile);
-
-    // printf("%f\n", randomPars[0]);
-    //
-    // return 0;
-
-    str = malloc(128 * sizeof(char));
-    sprintf(str, "parameters.%05d.dat", atoi(argv[1]));
-    parameterFile = fopen(str, "w");
-    free(str);
-
-    int randomParIndex = 0;
-
-#include "p_ursino.c"
-    fclose(parameterFile);
-
-    //******************************************************************************
-    //*** Input/output setup *******************************************************
-    //******************************************************************************
-
-    stateFilename = malloc(32 * sizeof(char));
-    if (atoi(argv[2]) == 0) {
-        sprintf(stateFilename, "statesOutput.%05d.NSR.dat", atoi(argv[1]));
-    } else {
-        sprintf(stateFilename, "statesOutput.%05d.AF.dat", atoi(argv[1]));
-    }
-    stateFile = fopen(stateFilename, "w");
-
-    // outputInfoFilename = malloc(32*sizeof(char));
-    // sprintf(outputInfoFilename,"outputInfo.%d.txt", atoi(argv[1])); // argv2
-    // outputInfoFile = fopen(outputInfoFilename,"w");
-
-    // postprocessedFilename = malloc(32*sizeof(char));
-    // sprintf(postprocessedFilename,"result.%d.txt", atoi(argv[1])); // argv2
-    // postprocessedFile = fopen(postprocessedFilename,"w");
-
-    str = malloc(128 * sizeof(char));
-    if (atoi(argv[2]) == 0) {
-        sprintf(str, "endDiastolicTime.%05d.NSR.dat", atoi(argv[1]));
-    } else {
-        sprintf(str, "endDiastolicTime.%05d.AF.dat", atoi(argv[1]));
-    }
-    endDiastolicFile = fopen(str, "w");
-
-    free(str);
-    free(stateFilename);
-    // free(outputInfoFilename);
-    // free(postprocessedFilename);
-
-    int headersPrinted = 1;
-
-    //******************************************************************************
-    //*** Parse input files ********************************************************
-    //******************************************************************************
-
-    str = malloc(128 * sizeof(char));
-    sprintf(str, "input/pinkNoise.dat");
-    pinkFile = fopen(str, "r");
-    free(str);
-
-    double pinkNoise[numBeats] = { 0.0 };
-
-    for (int i = 0; i < atoi(argv[1]); i++) {
-        fscanf(pinkFile, "%*[^\n]\n");
-    }
-    for (int i = 0; i < numBeats; i++) {
-        fscanf(pinkFile, "%lf", &pinkNoise[i]);
-    }
-    fclose(pinkFile);
-
-    double expRand[numBeats] = { 0.0 };
-    if (atoi(argv[2]) == 1) {
-        str = malloc(128 * sizeof(char));
-        sprintf(str, "input/expNoise.dat");
-        expFile = fopen(str, "r");
-        free(str);
-
-        for (int i = 0; i < atoi(argv[1]); i++) {
-            fscanf(expFile, "%*[^\n]\n");
-        }
-        for (int i = 0; i < numBeats; i++) {
-            fscanf(expFile, "%lf", &expRand[i]);
-        }
-        fclose(expFile);
-    }
 
     // JJ TH Nov 3
     // calculate length of each buffer
@@ -275,8 +165,6 @@ int main(int argc, char* argv[])
         // Cardiac interval calculations
         if (data->p_ursino[1] >= data->p_ursino[4] + data->RR[0]) {
 
-            fprintf(endDiastolicFile, "%f\n", data->p_ursino[1]);
-
             data->p_ursino[4] = data->p_ursino[1];
             data->RR[2] = data->RR[1];
             data->RR[1] = data->RR[0];
@@ -284,12 +172,12 @@ int main(int argc, char* argv[])
             deltaHR = (19.64 * Ith(y_ursino, 51 + 1)) - (17.95 * Ith(y_ursino, 52 + 1)) - (1.225 * pow(Ith(y_ursino, 51 + 1), 2)) + (1.357 * pow(Ith(y_ursino, 52 + 1), 2)) - (1.523 * Ith(y_ursino, 51 + 1) * Ith(y_ursino, 52 + 1));
             data->RR[0] = 60.0 / (data->p_ursino[41] + deltaHR);
 
-            if (atoi(argv[2]) < 1) {
-                data->RR[0] = data->RR[0] + pinkNoise[cardiac_iter] * (data->p_ursino[43] * (data->RR[0]) / 0.033);
+            if (isAFib < 1) {
+                data->RR[0] = data->RR[0] + /* pinkNoise[cardiac_iter] * */ (data->p_ursino[43] * (data->RR[0]) / 0.033);
             } else {
                 // The following is AF condition 1 and 3 as described by Scarsoglio et al. 2014
-                data->p_ursino[45] = expRand[cardiac_iter] / (-9.2 * data->RR[0] + 14.6); //r4_exponential_sample(1.0/(-9.2*data->RR[0] + 14.6));
-                data->p_ursino[44] = (data->RR[0] - 1.0 / (-9.2 * data->RR[0] + 14.6)) + pinkNoise[cardiac_iter] * (data->p_ursino[43] * (data->RR[0] - 1.0 / (-9.2 * data->RR[0] + 14.6)) / 0.033);
+                data->p_ursino[45] = /* expRand[cardiac_iter] */ 1.0 / (-9.2 * data->RR[0] + 14.6); //r4_exponential_sample(1.0/(-9.2*data->RR[0] + 14.6));
+                data->p_ursino[44] = (data->RR[0] - 1.0 / (-9.2 * data->RR[0] + 14.6)) + /* pinkNoise[cardiac_iter] * */ (data->p_ursino[43] * (data->RR[0] - 1.0 / (-9.2 * data->RR[0] + 14.6)) / 0.033);
 
                 data->RR[0] = data->p_ursino[45] + data->p_ursino[44];
 
@@ -311,90 +199,19 @@ int main(int argc, char* argv[])
         if (check_retval(&retval, "CVode", 1))
             exit(1);
 
-        // JJJ Shear Stress
-
-        // array of lengths for each flow. Might be better to choose reasonable lengths. But for now all set to Sanjay's constant parameter.
-        // for (i = 0; i<45; i++){
-        //   data->lengths[i] = data->p_ursino[101];
-        // }
-        //
-        // // mu is p[100].
-        // for(i = 1; i<45; i++){
-        //   data->radius[i]    	= pow(( (8.0 * data->lengths[i]  * data->p_ursino[100] )/ (M_PI * data->p_R[i]) ), 0.25 );
-        //   data->tau[i]       	= 4.0 * data->p_ursino[100] * (*(data->flows[i]))  / (M_PI * pow(data->radius[i],3));
-        // }
-
-        // *****************************************************************************
-        // ***** Transient outputs *****************************************************
-        // *****************************************************************************
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "Output values:\n");
-
-        fprintf(stateFile, "%f", tout);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "time");
-
-        fprintf(stateFile, "\t%f", Ith(y_ursino, 10));
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "P_a");
-
-        fprintf(stateFile, "\t%f", data->q_ml);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_ml");
-
-        fprintf(stateFile, "\t%f", data->q_al);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_al");
-
-        fprintf(stateFile, "\t%f", data->q_pl);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_pl");
-
-        fprintf(stateFile, "\t%f", data->q_mr);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_mr");
-
-        fprintf(stateFile, "\t%f", data->q_ar);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_ar");
-
-        fprintf(stateFile, "\t%f", data->q_pr);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_pr");
-
-        // fprintf(stateFile, "\t%f", data->SNA);
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "SNA");
-        //
-        // fprintf(stateFile, "\t%f", data->PNA);
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "PNA");
-        //
-        // fprintf(stateFile, "\t%f", deltaHR);
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "deltaHR");
-        //
-        // fprintf(stateFile, "\t%f", Ith(y_ursino, 49 + 1));
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_aff");
-        //
-        // fprintf(stateFile, "\t%f", Ith(y_ursino, 50 + 1));
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_demand");
-
-        fprintf(stateFile, "\n");
-        if (headersPrinted == 0)
-            headersPrinted = 1;
-        // *****************************************************************************
-
         tout = tout + DELTAT;
     } // end of time loop.
 
-    fclose(stateFile);
+    // fclose(stateFile);
     // fclose(outputInfoFile);
     // fclose(postprocessedFile);
-    fclose(endDiastolicFile);
+    // fclose(endDiastolicFile);
 
     N_VDestroy_Serial(y_ursino);
     // emxDestroyArray_real_T(X);
     CVodeFree(&cvode_mem);
     free(data);
-    printf("done run %d\n", atoi(argv[1]));
+    // printf("done run %d\n", atoi(argv[1]));
 
     return 0; // the main must return a success exit code to the middleware.
 }
