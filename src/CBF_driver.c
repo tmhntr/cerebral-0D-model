@@ -176,7 +176,7 @@ int CBF_driver(void* dataPtr)
                 data->RR[0] = data->RR[0] + /* pinkNoise[cardiac_iter] * */ (data->p_ursino[43] * (data->RR[0]) / 0.033);
             } else {
                 // The following is AF condition 1 and 3 as described by Scarsoglio et al. 2014
-                data->p_ursino[45] = /* expRand[cardiac_iter] */ 1.0 / (-9.2 * data->RR[0] + 14.6); //r4_exponential_sample(1.0/(-9.2*data->RR[0] + 14.6));
+                data->p_ursino[45] = /* expRand[cardiac_iter] */ 1.0 / (-9.2 * data->RR[0] + 14.6); // r4_exponential_sample(1.0/(-9.2*data->RR[0] + 14.6));
                 data->p_ursino[44] = (data->RR[0] - 1.0 / (-9.2 * data->RR[0] + 14.6)) + /* pinkNoise[cardiac_iter] * */ (data->p_ursino[43] * (data->RR[0] - 1.0 / (-9.2 * data->RR[0] + 14.6)) / 0.033);
 
                 data->RR[0] = data->p_ursino[45] + data->p_ursino[44];
@@ -199,6 +199,7 @@ int CBF_driver(void* dataPtr)
         if (check_retval(&retval, "CVode", 1))
             exit(1);
 
+        printf("%f\n", tout);
         tout = tout + DELTAT;
     } // end of time loop.
 

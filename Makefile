@@ -40,9 +40,9 @@ MY_APP	 	= cbf
 
 
 ifeq (${USER}, pm3user)
-	LDFLAGS	 		+= -L/home/pm3user/software/sundials/instdir/lib
+	LDFLAGS	+= -L/home/pm3user/software/sundials/instdir/lib
 else
-	LDFLAGS 		+= -L${PWD}/extern/sundials/instdir/lib
+	LDFLAGS += -L${PWD}/extern/sundials/instdir/lib
 endif
 
 LDFLAGS += -lm
@@ -55,6 +55,7 @@ $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 
 # Build step for C source
 $(BUILD_DIR)/%.c.o: $(SRC_DIRS)/%.c
+	if [[ ! -d build ]]; then mkdir build; fi
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean

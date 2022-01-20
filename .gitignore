@@ -1,3 +1,6 @@
-extern
+extern/sundials
 build
 bin
+.DS_Store
+cbf
+*.o
