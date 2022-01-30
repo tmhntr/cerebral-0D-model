@@ -1,3 +1,6 @@
 scripts/*
 *.o
 cbf
+.DS_Store
+extern
+build
