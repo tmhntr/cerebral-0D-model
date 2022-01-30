@@ -33,7 +33,7 @@ typedef struct {
 
     realtype radius[45];
     realtype lengths[45];
-    realtype tau[45]; //shearstress
+    realtype tau[45]; // shearstress
     realtype* flows[45];
     realtype argv[5];
     realtype RR[3];
@@ -59,7 +59,15 @@ typedef struct {
 
     // realtype x0_aut[6], x_aut[6], A_CO2[6], x0_CO2[6], x_CO2[6], C_dqs[6], dC_dqs[6];
 
+    // for reading in patient data
+    realtype P_a, PetCO2;
+
 } * UserData;
+
+typedef struct {
+    double currentTime;
+    double value;
+} TimeSeriesData;
 
 UserData CBF_parameters();
 
