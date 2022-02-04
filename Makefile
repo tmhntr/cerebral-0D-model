@@ -6,13 +6,25 @@ whoisthis=${USER}
 #
 CC       	= mpicc
 CFLAGS   	= -g -O2
-INCLUDE  	= /home/pm3user/software/sundials/instdir/include
 MY_APP	 	= cbf
-LIB	 			= -L/home/pm3user/software/sundials/instdir/lib
+
+ifeq (${USER}, pm3user)
+	INC_DIRS  	+= /home/pm3user/software/sundials/instdir/include
+endif
+# Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
+INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+
+
+ifeq (${USER}, pm3user)
+	LDFLAGS	+= -L/home/pm3user/software/sundials/instdir/lib
+endif
+LDFLAGS += -lm
+LDFLAGS += -lsundials_cvodes
+LDFLAGS += -lsundials_nvecserial
 
 cbf:	ursino.c
-	${CC} ${CFLAGS} -I${INCLUDE} -c ursino.c -o ursino.o
-	${CC} ${CFLAGS} ursino.o -I${INCLUDE} -lm ${LIB} -lsundials_cvodes -lsundials_nvecserial -o ${MY_APP}
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c ursino.c -o ursino.o
+	$(CC) $(CFLAGS) ursino.o $(LDFLAGS) -o $(MY_APP)
 
 run:
 	./${MY_APP}
