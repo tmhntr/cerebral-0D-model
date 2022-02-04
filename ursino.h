@@ -28,6 +28,8 @@
 // 1 means all, 0 means only important pressures.
 #define numBeats 6000 // this is total number of beats in a simulation run
 
+#define isAFib 0 // Atrial Fibrillation is switched off
+
 typedef struct {
     /* Model parameters, some of which are time dependent. */
     realtype Ts;

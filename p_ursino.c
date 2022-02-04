@@ -28,7 +28,7 @@ data->Esys_ra = 0.74; //*atof(argv[11]);
 if (isAFib == 1) { // switch on for AF.
     data->Esys_la = data->Edias_la; // 0.61*atof(argv[11]);
     data->Esys_ra = data->Edias_ra; // 0.74*atof(argv[13]);
-}
+};
 
 /******************************************************************************
 RESISTANCE PARAMETERS
@@ -164,13 +164,12 @@ data->q_PCoAl = 0.0;
 data->q_PCoAr = 0.0;
 
 data->temp = 0.0;
-int i;
-for (i = 0; i < (int)(5.0 / DELTAT); i++) {
+for (int i = 0; i < (int)(5.0 / DELTAT); i++) {
     data->SNA_buffer[i] = 3.0;
-}
-for (i = 0; i < (int)(0.5 / DELTAT); i++) {
+};
+for (int i = 0; i < (int)(0.5 / DELTAT); i++) {
     data->PNA_buffer[i] = 3.0;
-}
+};
 
 data->CoW = 0; // atoi(argv[3]); Hard coded complete COW variant
 

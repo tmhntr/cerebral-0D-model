@@ -11,30 +11,33 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     realtype Y[NEQ];
     realtype dY[NEQ];
 
+    for (int i = 0; i < NEQ; i++) {
+        Y[i] = Ith(y, i + 1);
+        dY[i] = 0.0;
+    };
+
     // Create data struct for parameter assignment
     UserData data;
     data = (UserData)user_data;
 
-    int i;
-
-    for (i = 0; i < NEQ; i++)
-        Y[i] = Ith(y, i + 1);
-    for (i = 0; i < NEQ; i++)
-        dY[i] = 0.0;
     /*****************************************************************************************************************************/
     /*****************************************************************************************************************************/
     // %%% ALL PASSED PARAMETERS ARE LISTED BELOW %%%
 
-    double loc_t = data->p_ursino[1] - data->p_ursino[4]; // gnu fmod function. p11 is T_n_1, see above for definition of T_n_1.
-
-    data->p_ursino[3] = loc_t; // passed back to main to calculate cardiac output.
+    double time = data->p_ursino[1];
     double respRate = data->p_ursino[2]; // % respiratory rate; units: (breaths/s)
+
+    double loc_t = data->p_ursino[1] - data->p_ursino[4]; // gnu fmod function. p11 is T_n_1, see above for definition of T_n_1.
+    data->p_ursino[3] = loc_t; // passed back to main to calculate cardiac output.
+
+    // State variables are asigned below
+
+    double P_a = Ith(y, 9 + 1);
 
     /**********************************************************
     ******************* baroreflex ****************************
     **********************************************************/
 
-    double MAP = Y[9]; // this is the aortic pressure, carotid pressures may be taken instead.
     double Pbco2 = data->p_ursino[5]; // this is the blood CO2 concentration
     double Pbo2 = data->p_ursino[6]; // this is the blood O2 concentration
 
@@ -62,7 +65,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     double k5 = data->p_ursino[20];
 
     // P_aff
-    dY[49] = (-Y[49] + G_aff * (MAP)) / tau_aff;
+    dY[49] = (-Y[49] + G_aff * (P_a)) / tau_aff;
 
     //  Central Compartment
     double deltaMAP;
@@ -258,8 +261,8 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     Qlo is the flow out of the left ventricle,
     Rlo is the aortic valve resistance. */
     // Y[8] is P_rv , Y[9] is P_a
-    if (Y[8] > Y[9]) {
-        data->Qlo = (Y[8] - Y[9]) / data->p_R[9];
+    if (Y[8] > P_a) {
+        data->Qlo = (Y[8] - P_a) / data->p_R[9];
     } else {
         data->Qlo = 0;
     }
@@ -274,8 +277,8 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     Qupi is the inlet flow through the upper body,
     Qupo is the outlet flow through the upper body,
     Rup1 & Rup2, are the resistances of each. */
-    // Y[9] is P_a , Y[0] is P_up
-    data->Qupi = (Y[9] - Y[0]) / (data->p_R[10] * sigma_R);
+    // P_a is P_a , Y[0] is P_up
+    data->Qupi = (P_a - Y[0]) / (data->p_R[10] * sigma_R);
 
     // Y[0] is P_up, Y[10] is P_sup
     if (Y[0] > Y[10]) {
@@ -292,7 +295,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     Y[2] is P_sp,
     Y[4] is P_ab
     */
-    data->Qsp1 = (Y[9] - Y[2]) / (data->p_R[12] * sigma_R);
+    data->Qsp1 = (P_a - Y[2]) / (data->p_R[12] * sigma_R);
 
     if (Y[4] < Y[2]) {
         data->Qsp2 = (Y[2] - Y[4]) / data->p_R[13];
@@ -315,7 +318,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 
     /*************** REGULAR KIDNEY ************************************/
 
-    data->Qk1 = (Y[9] - Y[1]) / data->p_R[14];
+    data->Qk1 = (P_a - Y[1]) / data->p_R[14];
     data->Qk2 = (Y[1] - Y[4]) / data->p_R[15];
 
     /*************************** LOWER BODY ***********************************
@@ -324,7 +327,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     Y[12] is P_a,
     Y[6] is P_ll,
     Y[7] is P_ab.  */
-    data->Qll1 = (Y[9] - Y[3]) / (data->p_R[16] * sigma_R);
+    data->Qll1 = (P_a - Y[3]) / (data->p_R[16] * sigma_R);
 
     if (Y[3] > Y[4]) {
         data->Qll2 = (Y[3] - Y[4]) / data->p_R[17];
@@ -391,7 +394,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 
     // This model has 24 ODEs
 
-    double P_a = Y[9];
+    // double P_a = Y[9];
     double P_aCO2 = data->p_ursino[5];
     double P_vs = Y[10];
 
@@ -846,7 +849,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     // % Y[17] is Ppv. Left ventricle inlet pressure.
     dY[14] = (data->Qpa - data->Qli) / data->p_C[5] + dY[5]; // % Y[18-1] is Ppv, eq. 31 appendix 2.
 
-    for (i = 0; i < NEQ; i++)
+    for (int i = 0; i < NEQ; i++)
         Ith(ydot, i + 1) = dY[i];
     return (0);
 }
