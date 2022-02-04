@@ -33,10 +33,10 @@ int main(int argc, char* argv[])
     // exit(-1);
     void* cvode_mem; // pointer to memory: the full state lives here.
     realtype t, tout;
-    int iout, NOUT, retval;
+    int iout, retval;
 
-    char *str, *stateFilename, *outputInfoFilename;
-    FILE *stateFile, *outputInfoFile, *endDiastolicFile, *pinkFile, *expFile, *randomParFile, *parameterFile;
+    char *str, *stateFilename;
+    FILE *stateFile, *endDiastolicFile, *pinkFile, *expFile, *randomParFile;
     UserData data; // instance pointer.
     data = (UserData)malloc(sizeof *data); // now it is created. // allocated memory to pointer.
 
@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
     }
 
     // Cerebral compliance states
-    for (inti = 43; i <= 48; i++) {
+    for (int i = 43; i <= 48; i++) {
         Ith(y_ursino, i + 1) = 0.004; // C_djs
     }
 
@@ -148,15 +148,13 @@ int main(int argc, char* argv[])
     //
     // return 0;
 
-    str = malloc(128 * sizeof(char));
-    sprintf(str, "parameters.%05d.dat", atoi(argv[1]));
-    parameterFile = fopen(str, "w");
-    free(str);
-
-    int randomParIndex = 0;
+    // str = malloc(128 * sizeof(char));
+    // sprintf(str, "parameters.%05d.dat", atoi(argv[1]));
+    // parameterFile = fopen(str, "w");
+    // free(str);
 
 #include "p_ursino.c"
-    fclose(parameterFile);
+    // fclose(parameterFile);
 
     //******************************************************************************
     //*** Input/output setup *******************************************************
@@ -251,16 +249,16 @@ int main(int argc, char* argv[])
     iout = 0;
     tout = DELTAT;
     int cardiac_iter = 0;
-    double cardiac_output = 0.0; // this is time integral of Qlo (LV output flow) over one heart period. for now, it is p11 as the reflex is switched off 10 Oct 2020.
+    // double cardiac_output = 0.0; // this is time integral of Qlo (LV output flow) over one heart period. for now, it is p11 as the reflex is switched off 10 Oct 2020.
 
-    double flowpermin[7] = { 0.0 };
+    // double flowpermin[7] = { 0.0 };
 
-    double sysPressures[7] = { 0.0 };
-    double PresToCompare[7] = { 0.0 };
-    double diasPressures[7] = { 0.0 };
-    double maxFlows[7] = { 0.0 };
-    double FlowsToCompare[7] = { 0.0 };
-    double minFlows[7] = { 0.0 };
+    // double sysPressures[7] = { 0.0 };
+    // double PresToCompare[7] = { 0.0 };
+    // double diasPressures[7] = { 0.0 };
+    // double maxFlows[7] = { 0.0 };
+    // double FlowsToCompare[7] = { 0.0 };
+    // double minFlows[7] = { 0.0 };
 
     // printf("Starting solver loop...");
     // TIME LOOP STARTS HERE
@@ -333,55 +331,22 @@ int main(int argc, char* argv[])
         // *****************************************************************************
         // ***** Transient outputs *****************************************************
         // *****************************************************************************
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "Output values:\n");
 
         fprintf(stateFile, "%f", tout);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "time");
 
         fprintf(stateFile, "\t%f", Ith(y_ursino, 10));
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "P_a");
 
         fprintf(stateFile, "\t%f", data->q_ml);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_ml");
 
         fprintf(stateFile, "\t%f", data->q_al);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_al");
 
         fprintf(stateFile, "\t%f", data->q_pl);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_pl");
 
         fprintf(stateFile, "\t%f", data->q_mr);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_mr");
 
         fprintf(stateFile, "\t%f", data->q_ar);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_ar");
 
         fprintf(stateFile, "\t%f", data->q_pr);
-        if (headersPrinted == 0)
-            fprintf(outputInfoFile, "%s", "q_pr");
-
-        // fprintf(stateFile, "\t%f", data->SNA);
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "SNA");
-        //
-        // fprintf(stateFile, "\t%f", data->PNA);
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "PNA");
-        //
-        // fprintf(stateFile, "\t%f", deltaHR);
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "deltaHR");
-        //
-        // fprintf(stateFile, "\t%f", Ith(y_ursino, 49 + 1));
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_aff");
-        //
-        // fprintf(stateFile, "\t%f", Ith(y_ursino, 50 + 1));
-        // if (headersPrinted == 0) fprintf(outputInfoFile, "%s", "P_demand");
 
         fprintf(stateFile, "\n");
         if (headersPrinted == 0)

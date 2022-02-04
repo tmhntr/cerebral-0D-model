@@ -4,3 +4,4 @@ cbf
 .DS_Store
 extern
 build
+.vscode/settings.json

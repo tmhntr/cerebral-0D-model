@@ -5,7 +5,7 @@ whoisthis=${USER}
 #
 #
 CC       	= mpicc
-CFLAGS   	= -g -O2
+CFLAGS   	= -g -O2 -Wall
 MY_APP	 	= cbf
 
 ifeq (${USER}, pm3user)

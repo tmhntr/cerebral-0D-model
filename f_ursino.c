@@ -68,12 +68,12 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     dY[49] = (-Y[49] + G_aff * (P_a)) / tau_aff;
 
     //  Central Compartment
-    double deltaMAP;
+    double deltaMAP = 0.0;
     if ((Pbco2 > 40.0) && (Pbo2 < 104.0))
         deltaMAP = k1 + k2 * Pbco2 + k3 / Pbo2;
     else if ((Pbco2 <= 40.0) && (Pbo2 < 104.0))
         deltaMAP = k1 + k2 * 40 + k3 / Pbo2;
-    else if ((Pbco2 > 40.0) && (Pbo2 >= 104.0))
+    else // if ((Pbco2 > 40.0) && (Pbo2 >= 104.0))
         deltaMAP = k1 + k2 * Pbco2 + k3 / 104.0;
 
     double P_demand = 90.0 + deltaMAP / 100.0; //  Desrcibed in fig. 2 and on page 793
@@ -355,8 +355,8 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
         act_fxn_v = 0.0;
     }
 
-    double Elv = data->Elv = data->Edias_lv + 0.5 * (data->Esys_lv - data->Edias_lv) * act_fxn_v;
-    double Erv = data->Erv = data->Edias_rv + 0.5 * (data->Esys_rv - data->Edias_rv) * act_fxn_v;
+    double Elv = data->Elv = data->Edias_lv + 0.5 * (data->Esys_lv * sigma_lv - data->Edias_lv) * act_fxn_v;
+    double Erv = data->Erv = data->Edias_rv + 0.5 * (data->Esys_rv * sigma_rv - data->Edias_rv) * act_fxn_v;
 
     double Clv = 1.0 / Elv; //
     double Crv = 1.0 / Erv; //
@@ -642,7 +642,7 @@ static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
             P_PCA1l = (Y[24] / (R_PCA2s + R_dpl / 2.0)) / (1.0 / (R_PCA2s + R_dpl / 2.0));
         }
     }
-    double P_PCA1r;
+    double P_PCA1r = 0.0;
     if (PCoAr == 0) {
         P_PCA1r = (Y[29] / R_PCoAs + Y[30] / R_PCA1s + Y[27] / (R_PCA2s + R_dpr / 2.0)) / (1.0 / R_PCoAs + 1.0 / R_PCA1s + 1.0 / (R_PCA2s + R_dpr / 2.0));
     } else if (PCoAr == 1) {
