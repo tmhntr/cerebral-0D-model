@@ -1,3 +1,4 @@
+#include "CBF_RHS.h"
 /*
 Timothy J. Hunter, Part of PM3 platforms.
 Human circulation, baroreceptor mechanism, and cerebral circulation RHS. Sept 24, 2020.
@@ -5,7 +6,7 @@ Human circulation, baroreceptor mechanism, and cerebral circulation RHS. Sept 24
 Sept 24. 2020.
 To extend this model using the baro-reflex model.
 */
-static int f_ursino(realtype t, N_Vector y, N_Vector ydot, void* user_data)
+int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 {
     // Assign Y and dY
     realtype Y[NEQ];

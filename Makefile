@@ -22,12 +22,8 @@ LDFLAGS += -lm
 LDFLAGS += -lsundials_cvodes
 LDFLAGS += -lsundials_nvecserial
 
-cbf:	ursino.c
-	$(CC) $(CFLAGS) $(INC_FLAGS) -c ursino.c -o ursino.o
-	$(CC) $(CFLAGS) ursino.o $(LDFLAGS) -o $(MY_APP)
-
-run:
-	./${MY_APP}
+cbf:	CBF_parameters.o CBF_RHS.o CBF_driver.o
+	$(CC) $(CFLAGS) $(INC_FLAGS) $^ $(LDFLAGS) -o $@
 
 clean:
 	rm  ${MY_APP}
