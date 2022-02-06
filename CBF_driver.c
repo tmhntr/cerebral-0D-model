@@ -188,31 +188,31 @@ int main(int argc, char* argv[])
 
         fprintf(output_file, "%f", tout);
 
-        fprintf(output_file, "\t%f", Ith(y_cbf, 10));
+        // fprintf(output_file, "\t%f", Ith(y_cbf, 10));
 
-        // fprintf(output_file, "\t%f", data->q_ml);
+        fprintf(output_file, "\t%f", data->q_ml);
 
-        // fprintf(output_file, "\t%f", data->q_al);
+        fprintf(output_file, "\t%f", data->q_al);
 
-        // fprintf(output_file, "\t%f", data->q_pl);
+        fprintf(output_file, "\t%f", data->q_pl);
 
-        // fprintf(output_file, "\t%f", data->q_mr);
+        fprintf(output_file, "\t%f", data->q_mr);
 
-        // fprintf(output_file, "\t%f", data->q_ar);
+        fprintf(output_file, "\t%f", data->q_ar);
 
-        // fprintf(output_file, "\t%f", data->q_pr);
+        fprintf(output_file, "\t%f", data->q_pr);
 
         // fprintf(output_file, "\t%f", Ith(y_cbf, 50));
         // fprintf(output_file, "\t%f", Ith(y_cbf, 51));
-        fprintf(output_file, "\t%f", Ith(y_cbf, 52));
-        fprintf(output_file, "\t%f", Ith(y_cbf, 53));
+        // fprintf(output_file, "\t%f", Ith(y_cbf, 52));
+        // fprintf(output_file, "\t%f", Ith(y_cbf, 53));
         // fprintf(output_file, "\t%f", Ith(y_cbf, 54));
         // fprintf(output_file, "\t%f", Ith(y_cbf, 55));
         // fprintf(output_file, "\t%f", Ith(y_cbf, 56));
         // fprintf(output_file, "\t%f", Ith(y_cbf, 57));
-        fprintf(output_file, "\t%f", deltaHR);
-        fprintf(output_file, "\t%f", data->SNA);
-        fprintf(output_file, "\t%f", data->PNA);
+        // fprintf(output_file, "\t%f", deltaHR);
+        // fprintf(output_file, "\t%f", data->SNA);
+        // fprintf(output_file, "\t%f", data->PNA);
 
         fprintf(output_file, "\n");
 
