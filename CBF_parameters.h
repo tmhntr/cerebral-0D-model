@@ -53,7 +53,7 @@ typedef struct {
 
     realtype P_cerebral[54];
 
-    realtype P_a, PetCO2;
+    realtype P_a, PetCO2, CVP;
 
     // realtype x0_aut[6], x_aut[6], A_CO2[6], x0_CO2[6], x_CO2[6], C_dqs[6], dC_dqs[6];
 

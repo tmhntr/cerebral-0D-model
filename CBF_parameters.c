@@ -1,5 +1,4 @@
 #include "CBF_parameters.h"
-// our my parameters. *************************************************************************************************************
 
 void parameters(UserData data)
 {
@@ -95,7 +94,7 @@ void parameters(UserData data)
 
     // Baroreflex INTEGRATOR Parameters
     data->p_ursino[7] = 0.001; // tau_aff: units: seconds
-    data->p_ursino[8] = 1; // G_aff
+    data->p_ursino[8] = 1.0; // G_aff
     data->p_ursino[9] = 0.001; // tau_c: Same as tau_aff,  units: s
     data->p_ursino[10] = 0.0205; // S_p
     data->p_ursino[11] = 6; // PNA_max, units: Hz
@@ -125,10 +124,10 @@ void parameters(UserData data)
     data->p_ursino[32] = 0.282 * 0.935; // G_eff_rv, units: mmHg/ml/Hz
     data->p_ursino[33] = 10.0; // tau_sigma_V, units: s
     data->p_ursino[34] = 5; // T_e_V, units: s
-    data->p_ursino[35] = -275.0 * 13.0; //*G_factor; 		// G_eff_V, units: ml/Hz
+    data->p_ursino[35] = -275.0; //*G_factor; 		// G_eff_V, units: ml/Hz
     data->p_ursino[36] = 1.5; // tau_sigma_R, units: s
     data->p_ursino[37] = 3; // T_e_R, units: s
-    data->p_ursino[38] = 0.2; // G_eff_R, units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
+    data->p_ursino[38] = 0.3; // G_eff_R, units: mmHg/(ml/s)/Hz // EDIT G_eff_R increased from 0.2 to 0.21
     data->p_ursino[39] = 25.0; // tau_s, simplified from equation 23, units: s
     data->p_ursino[40] = 0.8; // tau_v, simplified from eq. 28; units: s
 
@@ -236,6 +235,8 @@ void parameters(UserData data)
     data->P_cerebral[51] = 15.0; // k_CO2
     data->P_cerebral[52] = 0.5; // b_CO2
     data->P_cerebral[53] = 40.0; // P_aCO2njs, units mmHg
+
+    data->CVP = 10.0; // mmHg
 }
 // for (i = 1; i < argc; i++) {
 //     data->argv[i] = atof(argv[i]);

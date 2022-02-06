@@ -3,8 +3,14 @@
 Timothy J. Hunter, Part of PM3 platforms.
 Human circulation, baroreceptor mechanism, and cerebral circulation RHS. Sept 24, 2020.
 
-Sept 24. 2020.
-To extend this model using the baro-reflex model.
+Outline of code
+
+line 39: Baroreceptor mechanism
+line 192: systemic blood flows
+line 343: heart pumping function
+line 391: cerebral circulation
+line 785: systemic ODEs (pressures)
+
 */
 int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 {
@@ -33,13 +39,17 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 
     // State variables are asigned below
 
-    double P_a = Ith(y, 9 + 1);
+    // double P_a = Ith(y, 9 + 1);
+
+    double P_a = data->P_a;
+    double Pbco2 = data->PetCO2; // this is the blood CO2 concentration
+    double P_sup = data->CVP;
 
     /**********************************************************
     ******************* baroreflex ****************************
     **********************************************************/
 
-    double Pbco2 = data->p_ursino[5]; // this is the blood CO2 concentration
+    // double Pbco2 = data->p_ursino[5]; // this is the blood CO2 concentration
     double Pbo2 = data->p_ursino[6]; // this is the blood O2 concentration
 
     //  Table 3 - Baroreflex control parameters
@@ -66,7 +76,7 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     double k5 = data->p_ursino[20];
 
     // P_aff
-    dY[49] = (-Y[49] + G_aff * (P_a)) / tau_aff;
+    dY[49] = (-Y[49] + G_aff * (P_a)) / (tau_aff);
 
     //  Central Compartment
     double deltaMAP = 0.0;
@@ -80,7 +90,7 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     double P_demand = 90.0 + deltaMAP / 100.0; //  Desrcibed in fig. 2 and on page 793
 
     // for P_error
-    dY[50] = (-Y[50] + 1.0 * (P_demand)) / tau_c; // second term in the P_error eq.
+    dY[50] = (-Y[50] + 1.0 * (P_demand)) / (tau_c); // second term in the P_error eq.
 
     double P_error = -Y[49] + Y[50]; //  eq. 13 // NOTE Dec 18 changed sign of this term
 
@@ -141,7 +151,7 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     double G_s = 1.0 * (1.0 - exp(-k_s2 * data->SNA)); // eq. 21 EDIT gain value changed to 1
 
     // deltaHR_s
-    dY[51] = (-Y[51] + G_s * (data->SNA_buffer[(int)(T_s / DELTAT) - 1])) / tau_s;
+    dY[51] = (-Y[51] + G_s * (data->SNA_buffer[(int)(T_s / DELTAT) - 1])) / (tau_s);
 
     double tau_v;
     if (data->PNA > data->PNA_buffer[0]) {
@@ -154,7 +164,7 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     double G_v = 1.0 * (1.0 - exp(-k_v2 * data->PNA)); // eq. 26, EDIT gain value changed to 1 for more accurate description of HR used in
 
     // deltaHR_v
-    dY[52] = (-Y[52] + G_v * (data->PNA_buffer[(int)(T_v / DELTAT) - 1])) / tau_v;
+    dY[52] = (-Y[52] + G_v * (data->PNA_buffer[(int)(T_v / DELTAT) - 1])) / (tau_v);
 
     // // SNA Effector Sites
     // again the paper uses inconsistent notation
@@ -166,19 +176,19 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     // The following are all described by eq. 29
     // Left ventricular contractility
     // sigma_lv
-    dY[53] = (-Y[53] + G_eff_lv * (data->SNA_buffer[(int)(T_sigma_lv / DELTAT) - 1])) / tau_sigma_lv;
+    dY[53] = (-Y[53] + G_eff_lv * (data->SNA_buffer[(int)(T_sigma_lv / DELTAT) - 1])) / (tau_sigma_lv);
 
     // Right ventricular contractility
     // sigma_rv
-    dY[54] = (-Y[54] + G_eff_rv * (data->SNA_buffer[(int)(T_sigma_rv / DELTAT) - 1])) / tau_sigma_rv;
+    dY[54] = (-Y[54] + G_eff_rv * (data->SNA_buffer[(int)(T_sigma_rv / DELTAT) - 1])) / (tau_sigma_rv);
 
     // Venous tone
     // sigma_V
-    dY[55] = (-Y[55] + G_eff_V * (data->SNA_buffer[(int)(T_sigma_V / DELTAT) - 1])) / tau_sigma_V;
+    dY[55] = (-Y[55] + G_eff_V * (data->SNA_buffer[(int)(T_sigma_V / DELTAT) - 1])) / (tau_sigma_V);
 
     // Arterial resistance
     // sigma_R
-    dY[56] = (-Y[56] + G_eff_R * (data->SNA_buffer[(int)(T_sigma_R / DELTAT) - 1])) / tau_sigma_R;
+    dY[56] = (-Y[56] + G_eff_R * (data->SNA_buffer[(int)(T_sigma_R / DELTAT) - 1])) / (tau_sigma_R);
 
     double sigma_lv = Y[53]; /// 1.5; //data->p_ursino[113]; // % units: mmHg/ml
     double sigma_rv = Y[54]; /// 0.935; //data->p_ursino[114]; //  units: mmHg/ml
@@ -196,18 +206,18 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 
     /************************ VENA CAVA ************************************/
     // Y[18] is P_ra , Y[10] is P_sup
-    if (Y[10] > Y[18]) {
-        data->Qsup = (Y[10] - Y[18]) / data->p_R[1];
+    if (P_sup > Y[18]) {
+        data->Qsup = (P_sup - Y[18]) / data->p_R[1];
     } else {
         data->Qsup = 0;
     }
 
     // Y[4] is P_ab , Y[11] is P_inf
-    data->Qab = (Y[4] - Y[11]) / data->p_R[2];
+    data->Qab = (Y[4] - P_sup) / data->p_R[2];
 
     // Y[11] is P_inf , Y[18] is P_ra
-    if (Y[11] > Y[18]) {
-        data->Qinf = (Y[11] - Y[18]) / data->p_R[3];
+    if (P_sup > Y[18]) {
+        data->Qinf = (P_sup - Y[18]) / data->p_R[3];
     } else {
         data->Qinf = 0;
     }
@@ -282,8 +292,8 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     data->Qupi = (P_a - Y[0]) / (data->p_R[10] * sigma_R);
 
     // Y[0] is P_up, Y[10] is P_sup
-    if (Y[0] > Y[10]) {
-        data->Qupo = (Y[0] - Y[10]) / data->p_R[11];
+    if (Y[0] > P_sup) {
+        data->Qupo = (Y[0] - P_sup) / data->p_R[11];
     } else {
         data->Qupo = 0;
     }
@@ -319,7 +329,7 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 
     /*************** REGULAR KIDNEY ************************************/
 
-    data->Qk1 = (P_a - Y[1]) / data->p_R[14];
+    data->Qk1 = (P_a - Y[1]) / data->p_R[14] * sigma_R;
     data->Qk2 = (Y[1] - Y[4]) / data->p_R[15];
 
     /*************************** LOWER BODY ***********************************
@@ -356,8 +366,12 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
         act_fxn_v = 0.0;
     }
 
-    double Elv = data->Elv = data->Edias_lv + 0.5 * (data->Esys_lv * sigma_lv - data->Edias_lv) * act_fxn_v;
-    double Erv = data->Erv = data->Edias_rv + 0.5 * (data->Esys_rv * sigma_rv - data->Edias_rv) * act_fxn_v;
+    double Elv = data->Elv = data->Edias_lv + 0.5 * (sigma_lv - data->Edias_lv) * act_fxn_v;
+    double Erv = data->Erv = data->Edias_rv + 0.5 * (sigma_rv - data->Edias_rv) * act_fxn_v;
+    // double Elv = data->Elv = data->Edias_lv + 0.5 * (1.0 / sigma_lv - data->Edias_lv) * act_fxn_v;
+    // double Erv = data->Erv = data->Edias_rv + 0.5 * (1.0 / sigma_rv - data->Edias_rv) * act_fxn_v;
+    // double Elv = data->Elv = data->Edias_lv + 0.5 * (data->Esys_lv - data->Edias_lv) * act_fxn_v;
+    // double Erv = data->Erv = data->Edias_rv + 0.5 * (data->Esys_rv - data->Edias_rv) * act_fxn_v;
 
     double Clv = 1.0 / Elv; //
     double Crv = 1.0 / Erv; //
@@ -378,6 +392,7 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
 
     double Cla = 1.0 / Ela;
     double Cra = 1.0 / Era; // new value of elastance ODE variables.
+
     /**********************************************************
     ********************* cerebral ****************************
     **********************************************************/
@@ -396,8 +411,9 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     // This model has 24 ODEs
 
     // double P_a = Y[9];
-    double P_aCO2 = data->p_ursino[5];
-    double P_vs = Y[10];
+    // double P_aCO2 = data->p_ursino[5];
+    double P_aCO2 = Pbco2;
+    double P_vs = P_sup;
 
     ///////////////////////// CoW variations //////////////////////////////////////
     // The following are settings that determine which blood vessels are to be excluded from the model
@@ -502,7 +518,9 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     double sat1 = data->P_cerebral[50]; // 0.4;
     double k_CO2 = data->P_cerebral[51]; // 15.0;
     double b_CO2 = data->P_cerebral[52]; // 0.5;
+
     double P_aCO2njs = data->P_cerebral[53]; // 40.0; // units mmHg
+    // double P_aCO2njs = Pbco2; // 40.0; // units mmHg
 
     // ****************************************************************************
     //********** compliances ********************
@@ -772,32 +790,13 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     data->temp = P_PCA1l;
 
     /***********************ODES***************************************************/
-    /******************************************************************************/
-    // %================== ALL ODEs ARE LISTED BELOW ==================
 
     /* Y[3] is Pup, pressure in upper body, head and neck.
                     eq. 22, appendix 2, p585.*/
     dY[0] = (data->Qupi - data->Qupo) / data->p_C[7];
 
     /*************** kidney ************************************/
-    /*************** original formula **************************/
     dY[1] = (data->Qk1 - data->Qk2) / data->p_C[9]; // % Y[5-1] is Pk, Ck is non-zero. eq. 23, appendix 2, p585.
-
-    /*************** detailed formula **************************/
-    // for(i = 0; i<12; i++){
-    //   dY[36+i] = (data->Q_kidneys[i] - data->Q_kidneys[12 + i])/(data->p_C[14+i]);
-    // }
-    //
-    // // right and left feeding arteries to the kidneys.
-    // double Q_kidRi_tot = 0.0;
-    // double Q_kidLi_tot = 0.0;
-    // for(i = 0; i<6; i++){
-    //   Q_kidRi_tot = Q_kidRi_tot + data->Q_kidneys[i];
-    //   Q_kidLi_tot = Q_kidLi_tot + data->Q_kidneys[6+i];
-    // }
-    // dY[48] = (data->QkRi - Q_kidRi_tot)/data->p_C[12]; // right.
-    // dY[49] = (data->QkLi - Q_kidLi_tot)/data->p_C[13]; // left.
-    /*************** END of  detailed kidney ************************************/
 
     // % Y[5] is Psp, splanchic pressure at inlet.
     dY[2] = (data->Qsp1 - data->Qsp2) / data->p_C[8];
@@ -842,13 +841,19 @@ int RHS(realtype t, N_Vector y, N_Vector ydot, void* user_data)
     // % Y[13] is Psup, eq. 27 appendix 2.
     dY[10] = ((data->Qupo + Q_Cero) - data->Qsup) / data->p_C[1] + dY[5];
     // % Y[14] is Pinf, eq. 28 appendix 2.
-    dY[11] = (data->Qab - data->Qinf) / data->p_C[3] + dY[5];
+    dY[11] = (data->Qab - data->Qinf + dY[55]) / data->p_C[3] + dY[5]; // dY[55] is dSigma_v represents venous contraction
 
     // % Y[16] is Ppa. Pulmonary circulation inlet pressure.
     dY[13] = (data->Qro - data->Qpa) / data->p_C[4] + dY[5]; // % Y[17-1] is Ppa, eq. 30 appendix 2.
 
     // % Y[17] is Ppv. Left ventricle inlet pressure.
     dY[14] = (data->Qpa - data->Qli) / data->p_C[5] + dY[5]; // % Y[18-1] is Ppv, eq. 31 appendix 2.
+
+    /***************************** Tissue oxygen calculation ****************************************/
+    // from study Jung et al. 2005; 10.1007/s00285-005-0343-5
+
+    // double beta = 0.201; // as given in [23]
+    // double gamma = 3.0 * pow(10, -5); // as given in [23]
 
     for (int i = 0; i < NEQ; i++)
         Ith(ydot, i + 1) = dY[i];

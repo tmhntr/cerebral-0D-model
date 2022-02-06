@@ -19,7 +19,7 @@
 
 // a check to choose if we want to output all or few state variables
 // 1 means all, 0 means only important pressures.
-#define SIM_TIME 30.0 // this is total number of beats in a simulation run
+#define SIM_TIME 100.0 // this is total number of beats in a simulation run
 
 #define isAFib 0 // Atrial Fibrillation is switched off
 
