@@ -128,7 +128,7 @@ int main(int argc, char* argv[])
     while (tout < SIM_TIME) {
 
         if (tout > read_t) {
-            fscanf(input_data_file, "%f %f %f", &read_t, &data->P_a, &data->PetCO2);
+            fscanf(input_data_file, "%lf %lf %lf", &read_t, &data->P_a, &data->PetCO2);
         }
 
         data->p_ursino[1] = tout; // pursino1 is time in seconds. time dependent paramter.

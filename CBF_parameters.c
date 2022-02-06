@@ -220,8 +220,10 @@ void parameters(UserData data)
     data->P_cerebral[39] = 0.12; // W_PCA1s
     data->P_cerebral[40] = 0.08; // W_ACA1s
     data->P_cerebral[41] = 0.30; // W_MCAs
-    data->P_cerebral[42] = 0.12; // W_PCA2s
-    data->P_cerebral[43] = 0.08; // W_ACA2s
+
+    // These two values are switched according to Zarrinkoob 2015
+    data->P_cerebral[42] = 0.08; // 0.12; // W_PCA2s
+    data->P_cerebral[43] = 0.12; // 0.08; // W_ACA2s
 
     data->P_cerebral[44] = 0.004 / 133.322; // mu, units poise
 
