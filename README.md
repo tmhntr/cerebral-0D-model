@@ -3,8 +3,8 @@ June 3, 2021
 
 
 args:
-1     2           3         4         5         
-Run#  AF (off/on) CoW var   HR0       (must be set to 1)
+1     2           3         4    
+Run#  AF (off/on) CoW var   HR0    
 
 features:
 This program is a lumped parameter model of human systemic blood flow. It is constructed from several compartments representing the body, including detailed kidneys and cerebral circulation.
