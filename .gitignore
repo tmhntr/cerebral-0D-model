@@ -1,4 +1,5 @@
 scripts/*
+!scripts/precompute.py
 *.o
 cbf
 .DS_Store
