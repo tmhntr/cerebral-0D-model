@@ -30,10 +30,10 @@ COW_VARIANTS = list(range(6))
 COW_NAMES = {
     0: "Complete (normal)",
     1: "Absent left PCoA",
-    2: "Absent right PCoA",
-    3: "Absent both PCoAs",
-    4: "Absent ACoA",
-    5: "Fetal-type left PCA",
+    2: "Absent bilateral PCoA",
+    3: "Absent left A1 (ACA)",
+    4: "Absent left P1 (PCA)",
+    5: "Absent right PCoA + left P1",
 }
 HEART_RATES = [60, 75, 90]
 
