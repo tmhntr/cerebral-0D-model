@@ -2,21 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <malloc.h>
 #include <time.h>
 #include <cvodes/cvodes.h>
 #include <nvector/nvector_serial.h>
 #include <sundials/sundials_types.h>
+#include <sundials/sundials_types_deprecated.h>
 #include <sundials/sundials_math.h>
-#include <cvodes/cvodes_dense.h>
-
-// # include "ranlib.h"
-// # include "rnglib.h"
+#include <sundials/sundials_context.h>
+#include <sunmatrix/sunmatrix_dense.h>
+#include <sunlinsol/sunlinsol_dense.h>
+#include <sunnonlinsol/sunnonlinsol_newton.h>
 
 #define Ith(v,i)			NV_Ith_S(v,i-1)       /* Ith numbers components 1..NEQ    */
-#define IJth(A,i,j)		DENSE_ELEM(A,i-1,j-1) /* IJth numbers rows,cols 1..NEQ    */
-#define RTOL			RCONST(1.0e-3)   /* scalar relative tolerance            */
-#define ATOL			RCONST(1.0e-6)   /* scalar absolute tolerance components */
+#define RTOL			SUN_RCONST(1.0e-3)   /* scalar relative tolerance            */
+#define ATOL			SUN_RCONST(1.0e-6)   /* scalar absolute tolerance components */
 #define MAXSTEPS	500000
 
 #define NEQ  			57               /* number of equations, ODEs */

@@ -4,3 +4,7 @@ cbf
 .DS_Store
 extern
 build
+
+# Simulation output
+*.dat
+!input/*.dat

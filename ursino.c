@@ -31,6 +31,10 @@ int main (int argc, char *argv[])
 {
 // exit(-1);
 void *cvode_mem;  // pointer to memory: the full state lives here.
+SUNContext sunctx;
+SUNMatrix A;
+SUNLinearSolver LS;
+SUNNonlinearSolver NLS;
 realtype t, tout;
 int iout, NOUT, retval, i;
 
@@ -39,8 +43,11 @@ FILE *stateFile, *outputInfoFile, *endDiastolicFile, *pinkFile, *expFile, *rando
 UserData 	data; // instance pointer.
 data 		= (UserData) malloc(sizeof *data); // now it is created. // allocated memory to pointer.
 
+/* Create SUNDIALS context */
+SUNContext_Create(SUN_COMM_NULL, &sunctx);
+
 /* Create serial vector of length NEQ for I.C. and abstol */
-N_Vector 	y_ursino = N_VNew_Serial(NEQ); // allocated memory to pointer.
+N_Vector 	y_ursino = N_VNew_Serial(NEQ, sunctx); // allocated memory to pointer.
 
 
 
@@ -130,10 +137,14 @@ Ith(y_ursino, 56 + 1)  = 1.0; // sigma_R
 //*** Solver setup *************************************************************
 //******************************************************************************
 
-cvode_mem = CVodeCreate(CV_BDF, CV_NEWTON);
+cvode_mem = CVodeCreate(CV_BDF, sunctx);
 CVodeInit(cvode_mem, f_ursino, 0.0, y_ursino);
 CVodeSStolerances(cvode_mem, ATOL, RTOL);
-CVDense(cvode_mem, NEQ);
+A = SUNDenseMatrix(NEQ, NEQ, sunctx);
+LS = SUNLinSol_Dense(y_ursino, A, sunctx);
+CVodeSetLinearSolver(cvode_mem, LS, A);
+NLS = SUNNonlinSol_Newton(y_ursino, sunctx);
+CVodeSetNonlinearSolver(cvode_mem, NLS);
 CVodeSetMaxStep(cvode_mem,DELTAT);
 
 str = malloc(128*sizeof(char)); sprintf(str,"input/randomPars.dat");
@@ -399,9 +410,12 @@ while(cardiac_iter<numBeats){
   // fclose(postprocessedFile);
   fclose(endDiastolicFile);
 
-  N_VDestroy_Serial(y_ursino);
-	// emxDestroyArray_real_T(X);
+  N_VDestroy(y_ursino);
+  SUNLinSolFree(LS);
+  SUNMatDestroy(A);
+  SUNNonlinSolFree(NLS);
   CVodeFree(&cvode_mem);
+  SUNContext_Free(&sunctx);
   free(data);
 	printf("done run %d\n",atoi(argv[1]));
 
