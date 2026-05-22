@@ -277,7 +277,7 @@ if (P1l == 0){
     P_PCA1l = (Y[24]/(R_PCA2s + R_dpl/2.0))/(1.0/(R_PCA2s + R_dpl/2.0));
   }
 }
-double P_PCA1r;
+double P_PCA1r = 0.0;
 if (PCoAr == 0){
   P_PCA1r = (Y[29]/R_PCoAs + Y[30]/R_PCA1s + Y[27]/(R_PCA2s + R_dpr/2.0))/(1.0/R_PCoAs + 1.0/R_PCA1s + 1.0/(R_PCA2s + R_dpr/2.0));
 } else if (PCoAr == 1){

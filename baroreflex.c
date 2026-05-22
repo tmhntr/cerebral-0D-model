@@ -44,7 +44,7 @@ dY[49] = (-Y[49] + G_aff * (MAP))/tau_aff;
 
 
 //  Central Compartment
-double deltaMAP;
+double deltaMAP = 0.0;
 if ((Pbco2 > 40.0) && (Pbo2 < 104.0))
     deltaMAP = k1 + k2 * Pbco2 + k3 / Pbo2;
 else if ((Pbco2 <= 40.0) && (Pbo2 < 104.0))
