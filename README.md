@@ -1,32 +1,111 @@
-# Cerebral hemodynamic model.
+# Cerebral Hemodynamic Simulator
 
-A lumped parameter model and solver developed as part of my masters thesis. 
+A lumped-parameter model of coupled systemic and cerebral blood flow, developed as part of my Masters thesis. The model solves 57 coupled ODEs describing the cardiovascular system, cerebral vasculature (including the Circle of Willis), baroreflex control, and autoregulation.
 
-The model includes a description of detailed systemic and cerebral hemodynamics, as well as physiological control mechanisms. It is capable of simulating realistic hemodynamics in healthy conditions as well as atrial fibrillation.
-June 3, 2021
+An interactive web dashboard visualizes the simulation results, comparing healthy (normal sinus rhythm) and atrial fibrillation conditions across six Circle of Willis anatomical variants.
 
-## Usage.
+## Live Demo
 
-First create a clone of the repository.
-Then run the following commands.
-```sh
-cd cerebral-od-model 
+[View the interactive dashboard](#) *(deploy URL TBD)*
+
+## The Model
+
+The simulator combines three published models:
+
+- **Systemic circulation** (Heldt 2002) — Heart chambers, major arteries, venous return, and pulmonary circulation represented as lumped-parameter compartments
+- **Cerebral vasculature** (Ursino & Giannessi 2010) — Circle of Willis anatomy with six cortical territories (MCA, ACA, PCA, left and right), autoregulation, and CO2 reactivity
+- **Baroreflex** (Lin et al. 2012) — Autonomic control of heart rate, ventricular contractility, vascular tone, and venous volume
+
+Atrial fibrillation is modeled by eliminating atrial contraction and introducing beat-to-beat variability (Scarsoglio et al. 2014).
+
+### Circle of Willis Variants
+
+The model supports six anatomical configurations:
+
+| Code | Variant | Clinical Significance |
+|------|---------|----------------------|
+| 0 | Complete (normal) | All communicating arteries present |
+| 1 | Absent left PCoA | Reduced posterior collateral on left |
+| 2 | Absent bilateral PCoA | No posterior communication |
+| 3 | Absent left A1 (ACA) | Left anterior territory fed via ACoA |
+| 4 | Absent left P1 (PCA) | Left posterior territory fed via PCoA |
+| 5 | Absent right PCoA + left P1 | Combined variant |
+
+## Web Dashboard
+
+The dashboard pre-computes 36 scenarios (2 conditions x 6 CoW variants x 3 heart rates) and displays:
+
+- **Aortic pressure waveform** — Beat-to-beat pressure dynamics
+- **Circle of Willis diagram** — SVG schematic with flow-encoded vessel coloring
+- **Cerebral blood flow subplots** — Six territories showing regional perfusion differences
+
+A compare mode overlays two scenarios for side-by-side analysis.
+
+### Run Locally
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+Open http://localhost:5173.
+
+### Regenerate Simulation Data
+
+Requires SUNDIALS 7.x (`brew install sundials` on macOS):
+
+```bash
+make cbf
+python3 scripts/precompute.py
+```
+
+This runs 36 simulations (~1 hour) and writes `web/public/data/scenarios.json`.
+
+## C Simulator
+
+### Dependencies
+
+- C compiler (cc/gcc/clang)
+- [SUNDIALS](https://computing.llnl.gov/projects/sundials) 7.x (ODE solver suite)
+- Open MPI (linked by SUNDIALS)
+
+On macOS: `brew install sundials`
+
+### Build
+
+```bash
 make cbf
 ```
 
-The program requires a directory named "inputs" at in the same directory as the binary. Inputs should contain files pnkNoise{run_index}.dat and expNoise{run_index}.dat
+### Run
 
-run the program as follows: 
-```sh
-./cbf run_index is_af cow_var hr_0
+```bash
+./cbf <run_index> <is_af> <cow_var> <hr_0>
 ```
 
-the arguments are as follows:
+Arguments:
+- `run_index` — Simulation instance index (selects row from input files)
+- `is_af` — 0 = normal sinus rhythm, 1 = atrial fibrillation
+- `cow_var` — Circle of Willis variant (0-5)
+- `hr_0` — Intrinsic heart rate (bpm)
 
-- run_index: the index of the simulation instance. Determines the name of input files used and output files generated. Accepted values are positive integers.
-- is_af: determines whether simulation is run with healthy or af conditions. Accepted values are 0 or 1.
-- cow_var: determines which cow variant is represented in the model. Accepted values are 0 - 5.
-- hr_0: Intrinsic heart rate of the simulation. Accepted values are positive integers. Note: model may behave unusually if values are out of physiological range.
+Requires `input/` directory with `randomPars.dat`, `pinkNoise.dat`, and `expNoise.dat`.
 
+### Deploy
 
-The code is originally developed in matlab by Tim Hunter and SRK, based on the Ursino and Heldt models, the code for which is openly available.
+```bash
+docker build -t cerebral-sim .
+docker run -p 8080:80 cerebral-sim
+```
+
+## License
+
+GPL v3 — see [LICENSE](LICENSE).
+
+## References
+
+1. Heldt T. (2002). *Computational Models of Cardiovascular Response to Orthostatic Stress*. Journal of Applied Physiology.
+2. Ursino M, Giannessi M. (2010). *A Model of Cerebrovascular Reactivity Including the Circle of Willis and Cortical Anastomoses*. Annals of Biomedical Engineering.
+3. Lin J, et al. (2012). *A baroreflex model*. Proceedings of the Institution of Mechanical Engineers, Part H.
+4. Scarsoglio S, et al. (2014). *Impact of atrial fibrillation on cerebral hemodynamics*.
