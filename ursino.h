@@ -25,7 +25,7 @@
 
 // a check to choose if we want to output all or few state variables
 // 1 means all, 0 means only important pressures.
-#define numBeats 	6000 // this is total number of beats in a simulation run
+#define numBeats 	500 // this is total number of beats in a simulation run
 
 typedef struct {
 /* Model parameters, some of which are time dependent. */

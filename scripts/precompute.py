@@ -38,7 +38,7 @@ COW_NAMES = {
 HEART_RATES = [60, 75, 90]
 
 NUM_RANDOM_PARS = 95
-NUM_BEATS = 6000
+NUM_BEATS = 500
 BEAT_START = 100  # first beat to extract (0-indexed)
 BEAT_END = 109    # last beat to extract (inclusive, 0-indexed)
 
