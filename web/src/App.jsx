@@ -22,7 +22,7 @@ export default function App() {
   const [compareEnabled, setCompareEnabled] = useState(false)
 
   useEffect(() => {
-    fetch('/data/scenarios.json')
+    fetch(`${import.meta.env.BASE_URL}data/scenarios.json`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()
