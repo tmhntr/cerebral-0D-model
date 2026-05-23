@@ -1,24 +1,27 @@
-# makefile.
-# customized for TH/pm3
-# change all DRIVER instances to whatever it needs to be.
-whoisthis=${USER}
-#
-#
-CC       	= mpicc
-CFLAGS   	= -g -O2
-INCLUDE  	= /home/pm3user/software/sundials/instdir/include
-MY_APP	 	= cbf
-LIB	 			= -L/home/pm3user/software/sundials/instdir/lib
+# Makefile for cerebral-0D-model
+# Requires SUNDIALS (brew install sundials)
 
-cbf:	ursino.c
+CC       = cc
+CFLAGS   = -g -O2
+SUNDIALS = $(shell brew --prefix sundials)
+OPENMPI  = $(shell brew --prefix open-mpi)
+INCLUDE  = $(SUNDIALS)/include
+MY_APP   = cbf
+LIB      = -L$(SUNDIALS)/lib -L$(OPENMPI)/lib
+
+LIBS     = -lsundials_cvodes -lsundials_nvecserial -lsundials_sunlinsoldense \
+           -lsundials_sunmatrixdense -lsundials_sunnonlinsolnewton \
+           -lsundials_core -lmpi -lm
+
+cbf: ursino.c ursino.h f_ursino.c cerebral.c baroreflex.c pumpingfxn.c p_ursino.c
 	${CC} ${CFLAGS} -I${INCLUDE} -c ursino.c -o ursino.o
-	${CC} ${CFLAGS} ursino.o -I${INCLUDE} -lm ${LIB} -lsundials_cvodes -lsundials_nvecserial -o ${MY_APP}
+	${CC} ${CFLAGS} ursino.o ${LIB} ${LIBS} -o ${MY_APP}
 
 run:
 	./${MY_APP}
 
 clean:
-	rm  ${MY_APP}
+	rm -f ${MY_APP} *.o
 
 veryclean:
-	rm -r *.dat ${MY_APP} ${MY_APPI} *.o *~ *.txt *.out
+	rm -f *.dat ${MY_APP} *.o *~ *.txt *.out

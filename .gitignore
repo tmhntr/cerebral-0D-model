@@ -1,6 +1,11 @@
 scripts/*
+!scripts/precompute.py
 *.o
 cbf
 .DS_Store
 extern
 build
+
+# Simulation output
+*.dat
+!input/*.dat
